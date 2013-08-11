@@ -128,6 +128,7 @@ class Post extends \Eloquent
 {
     protected $table    = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
+
     public $presenter = 'Example\Blog\PostPresenter';
 
     public function author()
