@@ -1,7 +1,114 @@
 # Laravel Auto Presenter
 
-[mccool/laravel-auto-presenter on Packagist](https://packagist.org/packages/mccool/laravel-auto-presenter)
+This package provides a system that automatically decorates classes with presenter objects as views are being rendered. When a view is rendered, the package will see if any classes that were bound to the view should be decorated. If so, it will decorate them automatically and update the view's data.
 
-## Installation
+## Quick-install
 
-Test
+    {
+        "require": {
+            "mccool/laravel-auto-presenter  ": "*"
+        }
+    }
+
+<a name="requirements"/>
+## Requirements
+
+- Any flavour of PHP 5.3+ should do
+- Laravel 4
+- [optional] PHPUnit to run the tests
+
+<a name="install-composer"/>
+## Composer
+
+Install this package with [Composer](http://getcomposer.org/).
+
+Add the following "require" to your `composer.json` file and run the `php composer.phar install` command to install it.
+
+    {
+        "require": {
+            "mccool/laravel-auto-presenter  ": "*"
+        }
+    }
+
+Then, in config/app.php add this line to your 'providers' array.
+
+    'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
+
+## Usage
+
+To show how it's used, we'll pretend that we have an Eloquent Post model. It doesn't have to be Eloquent, it could be any kind of class. But, this is a normal situation. The Post model represents a blog post.
+
+I'm using really basic code examples here, so just focus on how the auto-presenter is used and ignore the rest.
+
+    <?php namespace Example\Blog;
+
+    class Post extends \Eloquent
+    {
+        protected $table    = 'posts';
+        protected $fillable = ['author_id', 'title', 'content', 'published_at'];
+
+        public function author()
+        {
+            return $this->belongsTo('Example\Accounts\User', 'author_id');
+        }
+    }
+
+Also, we'll need a controller..
+
+    class PostsController extends \Controller
+    {
+        public function getIndex()
+        {
+            $posts = Post::all();
+
+            return View::make('posts.index', compact('posts'));
+        }
+    }
+
+and a view...
+
+    @foreach($posts as $post)
+        <li>{{ $post->title }} - {{ $post->published_at }}</li>
+    @endforeach
+
+In this example the published_at attribute is likely to be in the format: "Y-m-d H:i:s" or "2013-08-10 10:20:13". In the real world this is not what we want in our view. So, let's make a presenter that lets us change how the data from the Post class is rendered within the view.
+
+<?php namespace Example\Blog;
+
+use McCool\LaravelAutoPresenter\BasePresenter;
+
+    class PostPresenter extends BasePresenter
+    {
+        public function __construct(Post $post)
+        {
+            $this->resource = $post;
+        }
+
+        public function published_at()
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->resource->published_at, 'Europe/Berlin')
+                         ->toFormattedDateString();
+        }
+    }
+
+Here, the automatic presenter decorator is injecting the Post model that is to be decorated. We just need to add 1 line to the Post class.
+
+    public $presenter = 'Example\Blog\PostPresenter';
+
+To make it perfectly clear, here's the updated Post class..
+
+    <?php namespace Example\Blog;
+
+    class Post extends \Eloquent
+    {
+        protected $table    = 'posts';
+        protected $fillable = ['author_id', 'title', 'content', 'published_at'];
+        public $presenter = 'Example\Blog\PostPresenter';
+
+        public function author()
+        {
+            return $this->belongsTo('Example\Accounts\User', 'author_id');
+        }
+    }
+
+Now, with no additional changes our view will show the date in the desired format.
