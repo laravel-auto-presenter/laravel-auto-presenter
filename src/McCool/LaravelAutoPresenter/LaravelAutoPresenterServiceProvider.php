@@ -10,6 +10,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
 
     public function register()
     {
+    	// register as a singleton because we don't need to be instantiating a new one all the time
         $this->app->singleton('McCool\LaravelAutoPresenter\PresenterDecorator', 'McCool\LaravelAutoPresenter\PresenterDecorator');
     }
 
@@ -17,12 +18,14 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
     {
         $this->package('mccool/laravel-auto-presenter');
 
+        // every time a view is rendered, fire a new event
         View::composer('*', function($view) {
             if ($view instanceOf \Illuminate\View\View) {
                 Event::fire('content.rendering', array($view));
             }
         });
 
+        // every time that event fires, decorate the bound data
         Event::listen('content.rendering', function($view) {
             $viewData  = $view->getData();
 
