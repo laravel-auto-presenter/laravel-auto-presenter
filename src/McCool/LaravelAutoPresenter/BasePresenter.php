@@ -72,9 +72,9 @@ class BasePresenter implements \ArrayAccess
     {
         if (is_null($key)) {
             $this->resource[] = $value;
+        } else {
+            $this->resource[$key] = $value;
         }
-
-        $this->resource[$key] = $value;
     }
 
     public function offsetUnset($key)
