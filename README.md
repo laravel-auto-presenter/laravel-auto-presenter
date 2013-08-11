@@ -1,6 +1,7 @@
-mccool/laravel-auto-presenter
-======================
+# Laravel Auto Presenter
 
-A system for auto-decorating models with presenter objects.
+[mccool/laravel-auto-presenter on Packagist](https://packagist.org/packages/mccool/laravel-auto-presenter)
 
-More information to come...
+## Installation
+
+Test

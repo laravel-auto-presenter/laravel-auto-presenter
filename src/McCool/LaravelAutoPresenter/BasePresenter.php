@@ -20,9 +20,9 @@ class BasePresenter implements \ArrayAccess
     {
         if (method_exists($this, $key)) {
             return $this->{$key}();
-        } else {
-            return $this->resource->$key;
         }
+
+        return $this->resource->$key;
     }
 
     /**
@@ -33,9 +33,9 @@ class BasePresenter implements \ArrayAccess
     {
         if (method_exists($this->resource, $key)) {
             return call_user_func_array(array($this->resource, $key), $args);
-        } else {
-            throw new ResourceMethodNotFoundException('Presenter: '.get_called_class().'::'.$key.' method does not exist');
         }
+
+        throw new ResourceMethodNotFoundException('Presenter: '.get_called_class().'::'.$key.' method does not exist');
     }
 
     /**
@@ -72,9 +72,9 @@ class BasePresenter implements \ArrayAccess
     {
         if (is_null($key)) {
             $this->resource[] = $value;
-        } else {
-            $this->resource[$key] = $value;
         }
+
+        $this->resource[$key] = $value;
     }
 
     public function offsetUnset($key)
