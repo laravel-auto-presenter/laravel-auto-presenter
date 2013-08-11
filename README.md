@@ -16,7 +16,7 @@ This package automatically decorates objects bound to views during the view rend
 ## Requirements
 
 - any flavor of PHP 5.3+ should do
-- Laravel 4
+- Laravel 4.0
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
@@ -37,7 +37,7 @@ Add the following "require" to your `composer.json` file and run the `php compos
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter  ": "*"
+        "mccool/laravel-auto-presenter": "*"
     }
 }
 ```
