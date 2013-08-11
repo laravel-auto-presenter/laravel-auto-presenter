@@ -1,6 +1,6 @@
 # Laravel Auto Presenter
 
-This package provides a system that automatically decorates classes with presenter objects as views are being rendered. When a view is rendered, the package will see if any classes that were bound to the view should be decorated. If so, it will decorate them automatically and update the view's data.
+This package automatically decorates objects bound to views during the view render process.
 
 ## Quick-install
 
