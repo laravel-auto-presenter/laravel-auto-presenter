@@ -56,6 +56,18 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+    * @covers decorator::decorate
+    * @expectedException McCool\LaravelAutoPresenter\PresenterNotFoundException
+    */
+    public function testWronglyDecoratedAlassThrowsException()
+    {
+        $atom      = new \McCool\Tests\Stubs\WronglyDecoratedAtom;
+        $decorator = $this->getDecorator();
+
+        $decoratedAtom = $decorator->decorate($atom);
+    }
+
     private function getDecorator()
     {
         return new \McCool\LaravelAutoPresenter\PresenterDecorator;
