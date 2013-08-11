@@ -4,11 +4,13 @@ This package provides a system that automatically decorates classes with present
 
 ## Quick-install
 
+```json
     {
         "require": {
             "mccool/laravel-auto-presenter  ": "*"
         }
     }
+```
 
 <a name="requirements"/>
 ## Requirements
@@ -32,11 +34,13 @@ Install this package with [Composer](http://getcomposer.org/).
 
 Add the following "require" to your `composer.json` file and run the `php composer.phar install` command to install it.
 
+```json
     {
         "require": {
             "mccool/laravel-auto-presenter  ": "*"
         }
     }
+```
 
 Then, in config/app.php add this line to your 'providers' array.
 
@@ -81,9 +85,9 @@ and a view...
 
 In this example the published_at attribute is likely to be in the format: "Y-m-d H:i:s" or "2013-08-10 10:20:13". In the real world this is not what we want in our view. So, let's make a presenter that lets us change how the data from the Post class is rendered within the view.
 
-<?php namespace Example\Blog;
+    <?php namespace Example\Blog;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
+    use McCool\LaravelAutoPresenter\BasePresenter;
 
     class PostPresenter extends BasePresenter
     {
