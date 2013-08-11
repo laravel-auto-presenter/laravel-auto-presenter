@@ -16,7 +16,7 @@ This package automatically decorates objects bound to views during the view rend
 ## Requirements
 
 - any flavor of PHP 5.3+ should do
-- Laravel 4.0
+- Laravel 4.x
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
