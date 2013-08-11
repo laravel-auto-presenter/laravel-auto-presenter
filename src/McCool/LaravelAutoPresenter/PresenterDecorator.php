@@ -34,7 +34,7 @@ class PresenterDecorator
     */
     protected function decoratePaginator(Paginator $paginator)
     {
-        $newItems = [];
+        $newItems = array();
 
         foreach ($paginator->getIterator() as $atom) {
             $newItems[] = $this->decorateAtom($atom);
