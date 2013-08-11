@@ -13,9 +13,17 @@ This package provides a system that automatically decorates classes with present
 <a name="requirements"/>
 ## Requirements
 
-- Any flavour of PHP 5.3+ should do
+- any flavour of PHP 5.3+ should do
 - Laravel 4
 - [optional] PHPUnit to run the tests
+
+<a name="features"/>
+## Features
+
+- automatically decorate objects bound to views
+- automatically decorate objects within paginator instances
+- automatically decorate objects within collection objects
+- automatically decorate Eloquent relationships that are loaded at the time that the view begins being rendered
 
 <a name="install-composer"/>
 ## Composer
