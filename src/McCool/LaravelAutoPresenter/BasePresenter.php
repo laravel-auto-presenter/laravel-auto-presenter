@@ -1,7 +1,5 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-use App;
-
 class BasePresenter implements \ArrayAccess
 {
     /**
