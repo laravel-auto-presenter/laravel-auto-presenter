@@ -60,7 +60,7 @@ I'm using really basic code examples here, so just focus on how the auto-present
 class Post extends \Eloquent
 {
     protected $table    = 'posts';
-    protected $fillable = ['author_id', 'title', 'content', 'published_at'];
+    protected $fillable = array('author_id', 'title', 'content', 'published_at');
 
     public function author()
     {
@@ -127,7 +127,7 @@ To make it perfectly clear, here's the updated Post class..
 class Post extends \Eloquent
 {
     protected $table    = 'posts';
-    protected $fillable = ['author_id', 'title', 'content', 'published_at'];
+    protected $fillable = array('author_id', 'title', 'content', 'published_at');
     public $presenter = 'Example\Blog\PostPresenter';
 
     public function author()
