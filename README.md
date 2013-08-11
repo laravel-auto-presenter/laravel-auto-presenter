@@ -15,7 +15,7 @@ This package provides a system that automatically decorates classes with present
 <a name="requirements"/>
 ## Requirements
 
-- any flavour of PHP 5.3+ should do
+- any flavor of PHP 5.3+ should do
 - Laravel 4
 - [optional] PHPUnit to run the tests
 
