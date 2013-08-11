@@ -6,16 +6,16 @@ use Event, View;
 
 class LaravelAutoPresenterServiceProvider extends ServiceProvider
 {
-	protected $defer = false;
+    protected $defer = false;
 
     public function register()
     {
         $this->app->singleton('McCool\LaravelAutoPresenter\PresenterDecorator', 'McCool\LaravelAutoPresenter\PresenterDecorator');
     }
 
-	public function boot()
-	{
-		$this->package('mccool/laravel-auto-presenter');
+    public function boot()
+    {
+        $this->package('mccool/laravel-auto-presenter');
 
         View::composer('*', function($view) {
             if ($view instanceOf \Illuminate\View\View) {
@@ -27,7 +27,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
             $viewData  = $view->getData();
 
             if ( ! $viewData) {
-            	return;
+                return;
             }
 
             $decorator = $this->app->make('McCool\LaravelAutoPresenter\PresenterDecorator');
@@ -36,5 +36,5 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
                 $view[$key] = $decorator->decorate($value);
             }
         });
-	}
+    }
 }
