@@ -4,7 +4,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 
 /**
-* The class that decorates classes, paginators and collections.
+* The class that decorates model objects, paginators and collections.
 */
 class PresenterDecorator
 {
