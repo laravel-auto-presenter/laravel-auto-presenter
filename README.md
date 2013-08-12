@@ -27,8 +27,14 @@ This package automatically decorates objects bound to views during the view rend
 - automatically decorate objects within collection objects
 - automatically decorate Eloquent relationships that are loaded at the time that the view begins being rendered
 
+<a name="install-laravel-package-installer"/>
+## Install with Laravel 4 Package Installer
+
+1. Install [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
+2. Run `php artisan package:install mccool/laravel-auto-presenter`
+
 <a name="install-composer"/>
-## Composer
+## Install with Composer
 
 Install this package with [Composer](http://getcomposer.org/).
 
