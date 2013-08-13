@@ -26,14 +26,16 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
         });
 
         // every time that event fires, decorate the bound data
-        Event::listen('content.rendering', function($view) {
+        $app = $this->app;
+
+        Event::listen('content.rendering', function($view) use ($app) {
             $viewData  = $view->getData();
 
             if ( ! $viewData) {
                 return;
             }
 
-            $decorator = $this->app->make('McCool\LaravelAutoPresenter\PresenterDecorator');
+            $decorator = $app->make('McCool\LaravelAutoPresenter\PresenterDecorator');
 
             foreach ($viewData as $key => $value) {
                 $view[$key] = $decorator->decorate($value);
