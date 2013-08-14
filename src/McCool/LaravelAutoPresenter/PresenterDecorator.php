@@ -36,18 +36,13 @@ class PresenterDecorator
     {
         $newItems = array();
 
-        foreach ($paginator->getIterator() as $atom) {
+        foreach ($paginator->getItems() as $atom) {
             $newItems[] = $this->decorateAtom($atom);
         }
 
-        $paginator = new Paginator(
-            $paginator->getEnvironment(),
-            $newItems,
-            $paginator->getTotal(),
-            $paginator->getPerPage()
-        );
+        $paginator->setItems($newItems);
 
-        return $paginator->setupPaginationContext();
+        return $paginator;
     }
 
     /**
