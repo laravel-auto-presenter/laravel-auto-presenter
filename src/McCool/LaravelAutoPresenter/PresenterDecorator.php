@@ -2,6 +2,7 @@
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
 * The class that decorates model objects, paginators and collections.
@@ -82,7 +83,7 @@ class PresenterDecorator
             throw new PresenterNotFoundException($presenterClass);
         }
 
-        if ($atom instanceOf Eloquent) {
+        if ($atom instanceOf Model) {
             $atom = $this->decorateRelations($atom);
         }
 
