@@ -13,6 +13,14 @@ class BasePresenter implements \ArrayAccess
     }
 
     /**
+    * Public resource getter
+    */
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
+    /**
     * Magic Method access initially tries for local methods then, defers to
     * the decorated object.
     */
