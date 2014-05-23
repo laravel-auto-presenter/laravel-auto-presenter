@@ -69,6 +69,10 @@ class PresenterDecorator
     */
     protected function decorateAtom($atom)
     {
+        if ($atom instanceOf Model) {
+            $atom = $this->decorateRelations($atom);
+        }
+
         if ( ! isset($atom->presenter)) {
             return $atom;
         }
@@ -81,10 +85,6 @@ class PresenterDecorator
 
         if ( ! class_exists($presenterClass)) {
             throw new PresenterNotFoundException($presenterClass);
-        }
-
-        if ($atom instanceOf Model) {
-            $atom = $this->decorateRelations($atom);
         }
 
         return new $presenterClass($atom);
