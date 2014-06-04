@@ -73,7 +73,7 @@ class PresenterDecorator
             $atom = $this->decorateRelations($atom);
         }
 
-        if ( ! isset($atom->presenter)) {
+        if (!$atom instanceof PresenterInterface) {
             return $atom;
         }
 
@@ -81,7 +81,7 @@ class PresenterDecorator
             return $atom;
         }
 
-        $presenterClass = $atom->presenter;
+        $presenterClass = $atom->getPresenter();
 
         if ( ! class_exists($presenterClass)) {
             throw new PresenterNotFoundException($presenterClass);
