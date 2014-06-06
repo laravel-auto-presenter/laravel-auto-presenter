@@ -4,10 +4,22 @@ This package automatically decorates objects bound to views during the view rend
 
 ## Quick-install
 
+**For Laravel Versions 4.1 and below**
+
 ```json
 {
     "require": {
         "mccool/laravel-auto-presenter": "1.1.*"
+    }
+}
+```
+
+**For Laravel Versions 4.2 and above**
+
+```json
+{
+    "require": {
+        "mccool/laravel-auto-presenter": "2.*"
     }
 }
 ```
