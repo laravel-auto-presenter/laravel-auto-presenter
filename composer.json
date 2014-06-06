@@ -1,7 +1,7 @@
 {
     "name": "mccool/laravel-auto-presenter",
     "description": "A system for auto-decorating models with presenter objects.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "authors": [
         {
             "name": "Shawn McCool",

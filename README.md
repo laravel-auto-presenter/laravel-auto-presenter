@@ -131,27 +131,26 @@ class PostPresenter extends BasePresenter
 }
 ```
 
-Here, the automatic presenter decorator is injecting the Post model that is to be decorated. We just need to add 1 line to the Post class.
-
-```php
-public $presenter = 'Example\Blog\PostPresenter';
-```
+Here, the automatic presenter decorator is injecting the Post model that is to be decorated. We need the post class to implement the interface.
 
 To make it perfectly clear, here's the updated Post class..
 
 ```php
 <?php namespace Example\Blog;
 
-class Post extends \Eloquent
+class Post extends \Eloquent implements PresenterInterface
 {
     protected $table    = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
 
-    public $presenter = 'Example\Blog\PostPresenter';
-
     public function author()
     {
         return $this->belongsTo('Example\Accounts\User', 'author_id');
+    }
+
+    public function getPresenter()
+    {
+        return 'Example\Blog\PostPresenter';
     }
 }
 ```
