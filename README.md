@@ -9,7 +9,7 @@ This package automatically decorates objects bound to views during the view rend
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "1.1.*"
+        "mccool/laravel-auto-presenter": "1.*"
     }
 }
 ```
