@@ -133,10 +133,10 @@ class PostPresenter extends BasePresenter
 
 Here, the automatic presenter decorator is injecting the Post model that is to be decorated. We need the post class to implement the interface.
 
-To make it perfectly clear, here's the updated Post class..
-
 ```php
 <?php namespace Example\Blog;
+
+use McCool\LaravelAutoPresenter\PresenterInterface;
 
 class Post extends \Eloquent implements PresenterInterface
 {
