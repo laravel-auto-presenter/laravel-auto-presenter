@@ -29,7 +29,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
         $app = $this->app;
 
         Event::listen('content.rendering', function($view) use ($app) {
-            $sharedData = $view->getEnvironment()->getShared();
+            $sharedData = $view->getFactory()->getShared();
             $viewData = array_merge($sharedData, $view->getData());
 
             if ( ! $viewData) {
