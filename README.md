@@ -2,6 +2,11 @@
 
 This package automatically decorates objects bound to views during the view render process.
 
+## Upgrading from version 1 to 2
+
+* Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1 and below.
+* The PresenterInterface was added as the method for determining the correct presenter class. Read more on this in the instructions below.
+
 ## Quick-install
 
 **For Laravel Versions 4.1 and below**
