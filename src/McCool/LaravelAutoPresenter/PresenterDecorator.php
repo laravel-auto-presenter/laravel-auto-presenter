@@ -83,6 +83,10 @@ class PresenterDecorator
 
         $presenterClass = $atom->getPresenter();
 
+        if (empty($presenterClass)) {
+            return $atom;
+        }
+        
         if ( ! class_exists($presenterClass)) {
             throw new PresenterNotFoundException($presenterClass);
         }
