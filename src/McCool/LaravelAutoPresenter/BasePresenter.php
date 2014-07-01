@@ -1,6 +1,8 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-class BasePresenter implements \ArrayAccess, \JsonSerializable, \Illuminate\Support\Contracts\ArrayableInterface
+use \Illuminate\Support\Contracts\ArrayableInterface;
+
+class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterface
 {
     /**
     * The resource that is the object that was decorated.
