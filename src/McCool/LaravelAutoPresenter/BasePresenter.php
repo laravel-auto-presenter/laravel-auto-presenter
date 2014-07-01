@@ -1,6 +1,6 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-class BasePresenter implements \ArrayAccess
+class BasePresenter implements \ArrayAccess, \JsonSerializable, \Illuminate\Support\Contracts\ArrayableInterface
 {
     /**
     * The resource that is the object that was decorated.
@@ -63,6 +63,26 @@ class BasePresenter implements \ArrayAccess
         return $this->resource->__toString();
     }
 
+    /**
+    * Convert the object into something JSON serializable.
+    *
+    * @return array
+    */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
+    }
+
+    /**
+    * Get the instance as an array.
+    *
+    * @return array
+    */
+    public function toArray()
+    {
+        return $this->resource->toArray();
+    }
+    
     /**
     * ArrayAccess interface implementation;
     */
