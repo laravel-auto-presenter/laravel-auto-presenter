@@ -1,10 +1,15 @@
 {
     "name": "mccool/laravel-auto-presenter",
     "description": "A system for auto-decorating models with presenter objects.",
+    "license": "MIT",
     "authors": [
         {
             "name": "Shawn McCool",
             "email": "shawn@heybigname.com"
+        },
+        {
+            "name": "Graham Campbell",
+            "email": "graham@mineuk.com"
         }
     ],
     "keywords": [
@@ -14,7 +19,7 @@
         "presenter"
     ],
     "require": {
-        "php": ">=5.3.0",
+        "php": ">=5.4.0",
         "illuminate/support": "~4.2",
         "illuminate/events": "~4.2",
         "illuminate/view": "~4.2",
@@ -28,5 +33,9 @@
             "McCool\\LaravelAutoPresenter": "src/"
         }
     },
-    "license": "MIT"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev"
+        }
+    }
 }
