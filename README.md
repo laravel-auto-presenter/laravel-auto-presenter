@@ -1,4 +1,4 @@
-# Laravel Auto Presenter
+# Laravel Auto Presenter 2.1.0
 
 This package automatically decorates objects bound to views during the view render process.
 
