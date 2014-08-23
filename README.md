@@ -1,8 +1,3 @@
-# Attention
-
-This package is currently being handed off to new management. It is no longer supported by me. But, it is used somewhat widely. So, I am passing off maintenance of the package to someone who will give it the attention that users of the package deserve.
-
-
 # Laravel Auto Presenter
 
 This package automatically decorates objects bound to views during the view render process.
