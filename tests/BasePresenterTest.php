@@ -17,14 +17,12 @@ class BasePresenterTest extends TestCase
 	public function testResourceIsReturned()
 	{
 		$presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-
 		$this->assertEquals($this->decoratedAtom, $presenter->getResource());
 	}
 
 	public function testFieldsAreReturned()
 	{
 		$presenter = new DecoratedAtomFieldsPresenter($this->decoratedAtom);
-
 		$this->assertEquals(['name', 'address'], $presenter->getExposedFields());
 	}
 
@@ -32,8 +30,8 @@ class BasePresenterTest extends TestCase
 	{
 		$presenter = new DecoratedAtomFieldsPresenter($this->decoratedAtom);
 
-		$this->assertTrue($presenter->accessible('name'));
-		$this->assertFalse($presenter->accessible('somekeythatdoesntexist'));
+		$this->assertTrue($presenter->fieldIsExposed('name'));
+		$this->assertFalse($presenter->fieldIsExposed('somekeythatdoesntexist'));
 	}
 
 	public function testArrayConversionShouldRespectFieldLimitations()
@@ -49,32 +47,28 @@ class BasePresenterTest extends TestCase
 	public function testFieldsAreAccessibleWithEmptyFieldsArray()
 	{
 		$presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-
-		$this->assertTrue($presenter->accessible('name'));
+		$this->assertTrue($presenter->fieldIsExposed('name'));
 	}
 
     public function testResourceAttributeDeference()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-
-        $this->assertEquals('McCool\Tests\Stubs\DecoratedAtomPresenter', $presenter->getPresenter());
+        $this->assertEquals(DecoratedAtomPresenter::class, $presenter->getPresenterClass());
     }
 
     public function testPresenterMethodDeference()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-
         $this->assertEquals('Primer', $presenter->favorite_movie);
     }
 
     /**
      * @covers presenter::thisMethodDoesntExist
-     * @expectedException McCool\LaravelAutoPresenter\ResourceMethodNotFoundException
+     * @expectedException \McCool\LaravelAutoPresenter\ResourceMethodNotFound
      */
     public function testResourceMethodNotFoundThrowsException()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-
         $presenter->thisMethodDoesntExist();
     }
 }

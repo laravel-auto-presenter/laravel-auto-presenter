@@ -38,11 +38,9 @@ class PresenterDecorator
      */
     public function decorate($subject)
     {
-	    foreach ($this->decorators as $possibleDecorator) {
-		    if ($possibleDecorator->canDecorate($subject)) {
+	    foreach ($this->decorators as $possibleDecorator)
+		    if ($possibleDecorator->canDecorate($subject))
 			    return $possibleDecorator->decorate($subject);
-		    }
-	    }
 
 	    return $subject;
     }

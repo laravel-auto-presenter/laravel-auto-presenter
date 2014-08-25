@@ -1,21 +1,26 @@
 <?php namespace McCool\Tests\Stubs;
 
-use McCool\LaravelAutoPresenter\PresenterInterface;
+use McCool\LaravelAutoPresenter\HasPresenter;
+use McCool\Tests\Stubs\DecoratedAtomPresenter;
 
-class DecoratedAtom implements PresenterInterface
+class DecoratedAtom implements HasPresenter
 {
     public function favoriteLanguage()
     {
         return 'C#';
     }
 
-	public function getPresenter()
-	{
-		return 'McCool\Tests\Stubs\DecoratedAtomPresenter';
-	}
-
 	public function toArray()
 	{
 		return ['name' => 'Me', 'address' => 'Somewhere, over there!', 'random' => 'field value'];
 	}
+
+    /**
+     * Get the presenter class.
+     * @return string The class path to the presenter.
+     */
+    public function getPresenterClass()
+    {
+        return DecoratedAtomPresenter::class;
+    }
 }
