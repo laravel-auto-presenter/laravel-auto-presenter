@@ -10,6 +10,7 @@ abstract class BaseDecorator
 	 *
 	 * @param $class
 	 * @return mixed
+	 * @throws DecoratorNotFoundException
 	 */
 	public function createDecorator($class)
 	{
