@@ -33,7 +33,7 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
 
         $presenter = new DecoratedAtomPresenter($atom);
 
-        $this->assertEquals('McCool\Tests\Stubs\DecoratedAtomPresenter', $presenter->presenter);
+        $this->assertEquals('McCool\Tests\Stubs\DecoratedAtomPresenter', $presenter->getPresenter());
     }
 
     public function testPresenterMethodDeference()
