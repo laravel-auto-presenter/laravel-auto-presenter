@@ -30,7 +30,7 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
 	{
 		$presenter = new DecoratedAtomFieldsPresenter($this->decoratedAtom);
 
-		$this->assertEquals(['name', 'address'], $presenter->getFields());
+		$this->assertEquals(['name', 'address'], $presenter->getExposedFields());
 	}
 
 	public function testFieldsAreAccessible()

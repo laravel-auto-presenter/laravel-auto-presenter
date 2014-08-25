@@ -2,7 +2,7 @@
 
 class DecoratedAtomFieldsPresenter extends \McCool\LaravelAutoPresenter\BasePresenter
 {
-	protected $fields = [
+	protected $exposedFields = [
 		'name',
 		'address'
 	];

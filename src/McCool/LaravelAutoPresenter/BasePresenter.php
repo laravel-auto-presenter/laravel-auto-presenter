@@ -1,10 +1,8 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-use BadMethodCallException;
 use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
 
-class BasePresenter implements \JsonSerializable, ArrayableInterface, JsonableInterface
+class BasePresenter implements ArrayableInterface
 {
 	/**
 	 * The resource that is the object that was decorated.
@@ -18,7 +16,7 @@ class BasePresenter implements \JsonSerializable, ArrayableInterface, JsonableIn
 	 *
 	 * @var array
 	 */
-	protected $fields = [];
+	protected $exposedFields = [];
 
 	/**
 	 * Construct the presenter and provide the resource that the presenter will represent.
@@ -45,9 +43,9 @@ class BasePresenter implements \JsonSerializable, ArrayableInterface, JsonableIn
 	 *
 	 * @return array
 	 */
-	public function getFields()
+	public function getExposedFields()
 	{
-		return $this->fields;
+		return $this->exposedFields;
 	}
 
 	/**
@@ -59,7 +57,7 @@ class BasePresenter implements \JsonSerializable, ArrayableInterface, JsonableIn
 	 */
 	public function accessible($key)
 	{
-		$fields = $this->getFields();
+		$fields = $this->getExposedFields();
 
 		if (!$fields) return true;
 
@@ -132,27 +130,6 @@ class BasePresenter implements \JsonSerializable, ArrayableInterface, JsonableIn
     }
 
     /**
-     * Convert the object into something JSON serializable.
-     *
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return $this->toArray();
-    }
-
-	/**
-	 * Satisfies the JsonableInterface implementation, in short making presenters viable for api development.
-	 *
-	 * @param int $options
-	 * @return string
-	 */
-	public function toJson($options = 0)
-	{
-		return json_encode($this->jsonSerialize());
-	}
-
-    /**
      * Get the instance as an array.
      *
      * @return array
@@ -160,13 +137,13 @@ class BasePresenter implements \JsonSerializable, ArrayableInterface, JsonableIn
     public function toArray()
     {
         $attributes = $this->resource->toArray();
-		$fields = $this->getFields();
+		$fields = $this->getExposedFields();
 
 		if ($fields) {
 			$keys = array_flip($fields);
 			$attributes = array_intersect_key($attributes, $keys);
 		}
-
+		
 	    return $attributes;
     }
 }
