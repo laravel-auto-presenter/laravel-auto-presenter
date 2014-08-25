@@ -7,7 +7,7 @@ interface DecoratorInterface
 	/**
 	 * Determines whether or not a decorator is able to decorate a given subject.
 	 *
-	 * @param $subject
+	 * @param mixed $subject
 	 * @return boolean
 	 */
 	public function canDecorate($subject);
@@ -15,7 +15,7 @@ interface DecoratorInterface
 	/**
 	 * Decorate a given subject.
 	 *
-	 * @param $subject
+	 * @param mixed $subject
 	 * @return mixed
 	 */
 	public function decorate($subject);

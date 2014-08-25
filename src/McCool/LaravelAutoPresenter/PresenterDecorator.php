@@ -1,114 +1,35 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
+use McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException;
 
 /**
-* The class that decorates model objects, paginators and collections.
-*/
+ * The class that decorates model objects, paginators and collections.
+ */
 class PresenterDecorator
 {
+	private $decorators = [
+		'McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator',
+		'McCool\LaravelAutoPresenter\Decorators\CollectionDecorator',
+		'McCool\LaravelAutoPresenter\Decorators\AtomDecorator'
+	];
+
     /**
      * things go in, get decorated (or not) and are returned
      *
      * @param mixed $subject
      * @return mixed
+     * @throws DecoratorNotFoundException
      */
     public function decorate($subject)
     {
-        if ($subject instanceOf Paginator) {
-            return $this->decoratePaginator($subject);
-        }
+	    foreach ($this->decorators as $possibleDecorator) {
+		    $decorator = new $possibleDecorator;
 
-        if ($subject instanceOf Collection) {
-            return $this->decorateCollection($subject);
-        }
+		    if ($decorator->canDecorate($subject)) {
+			    return $decorator->decorate($subject);
+		    }
+	    }
 
-        return $this->decorateAtom($subject);
-    }
-
-    /**
-     * decorate the objects within a paginator
-     *
-     * @param \Illuminate\Pagination\Paginator $paginator
-     * @return \Illuminate\Pagination\Paginator
-     */
-    protected function decoratePaginator(Paginator $paginator)
-    {
-        $newItems = array();
-
-        foreach ($paginator->getItems() as $atom) {
-            $newItems[] = $this->decorateAtom($atom);
-        }
-
-        $paginator->setItems($newItems);
-
-        return $paginator;
-    }
-
-    /**
-     * Decorate the objects within a collection
-     *
-     * @param \Illuminate\Support\Collection $collection
-     * @return \Illuminate\Support\Collection
-     */
-    protected function decorateCollection(Collection $collection)
-    {
-        foreach ($collection as $key => $atom) {
-            $collection->put($key, $this->decorateAtom($atom));
-        }
-
-        return $collection;
-    }
-
-    /**
-     * Decorate an individual class.
-     *
-     * @param mixed $atom
-     * @return mixed
-     * @throws PresenterNotFoundException
-     */
-    protected function decorateAtom($atom)
-    {
-        if ($atom instanceOf Model) {
-            $atom = $this->decorateRelations($atom);
-        }
-
-        if (!$atom instanceof PresenterInterface) {
-            return $atom;
-        }
-
-        if ($atom instanceOf BasePresenter) {
-            return $atom;
-        }
-
-        $presenterClass = $atom->getPresenter();
-
-        if (!class_exists($presenterClass)) {
-            throw new PresenterNotFoundException($presenterClass);
-        }
-
-        return new $presenterClass($atom);
-    }
-
-    /**
-     * decorate the relationships of an Eloquent object
-     *
-     * @param \Illuminate\Database\Eloquent\Model $atom
-     * @return mixed
-     */
-    protected function decorateRelations(Model $atom)
-    {
-        foreach ($atom->getRelations() as $relationName => $model) {
-            if ($model instanceOf Collection) {
-                $model = $this->decorateCollection($model);
-                $atom->setRelation($relationName, $model);
-            } else {
-                $atom->setRelation($relationName, $this->decorateAtom($model));
-            }
-        }
-
-        return $atom;
+	    return $subject;
     }
 }
