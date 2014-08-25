@@ -33,10 +33,5 @@
         "psr-0": {
             "McCool\\LaravelAutoPresenter": "src/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.2-dev"
-        }
     }
 }
