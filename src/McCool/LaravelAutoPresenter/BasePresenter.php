@@ -1,9 +1,10 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-use \Illuminate\Support\Contracts\ArrayableInterface;
+use BadMethodCallException;
+use Illuminate\Support\Contracts\ArrayableInterface;
 use Illuminate\Support\Contracts\JsonableInterface;
 
-class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterface, JsonableInterface
+class BasePresenter implements \JsonSerializable, ArrayableInterface, JsonableInterface
 {
 	/**
 	 * The resource that is the object that was decorated.
@@ -22,9 +23,9 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
 	/**
 	 * Construct the presenter and provide the resource that the presenter will represent.
 	 *
-	 * @param null $resource
+	 * @param object $resource
 	 */
-	public function __construct($resource = null)
+	public function __construct($resource)
 	{
 		$this->resource = $resource;
 	}
@@ -84,12 +85,12 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
 	}
 
     /**
-    * Magic Method access initially tries for local methods then, defers to
-    * the decorated object.
+     * Magic Method access initially tries for local methods then, defers to
+     * the decorated object.
      *
      * @param string $key
      * @return mixed
-    */
+     */
     public function __get($key)
     {
         return $this->getField($key);
@@ -123,18 +124,18 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
     }
 
     /**
-    * Magic Method toString is deferred to the resource.
-    */
+     * Magic Method toString is deferred to the resource.
+     */
     public function __toString()
     {
         return $this->resource->__toString();
     }
 
     /**
-    * Convert the object into something JSON serializable.
-    *
-    * @return array
-    */
+     * Convert the object into something JSON serializable.
+     *
+     * @return array
+     */
     public function jsonSerialize()
     {
         return $this->toArray();
@@ -152,10 +153,10 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
 	}
 
     /**
-    * Get the instance as an array.
-    *
-    * @return array
-    */
+     * Get the instance as an array.
+     *
+     * @return array
+     */
     public function toArray()
     {
         $attributes = $this->resource->toArray();
@@ -167,32 +168,5 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
 		}
 
 	    return $attributes;
-    }
-    
-    /**
-    * ArrayAccess interface implementation;
-    */
-    public function offsetExists($key)
-    {
-        return isset($this->resource[$key]);
-    }
-
-    public function offsetGet($key)
-    {
-        return $this->resource[$key];
-    }
-
-    public function offsetSet($key, $value)
-    {
-        if (is_null($key)) {
-            $this->resource[] = $value;
-        } else {
-            $this->resource[$key] = $value;
-        }
-    }
-
-    public function offsetUnset($key)
-    {
-        unset($this->resource[$key]);
     }
 }

@@ -73,9 +73,9 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers presenter::thisMethodDoesntExist
-    * @expectedException McCool\LaravelAutoPresenter\ResourceMethodNotFoundException
-    */
+     * @covers presenter::thisMethodDoesntExist
+     * @expectedException McCool\LaravelAutoPresenter\ResourceMethodNotFoundException
+     */
     public function testResourceMethodNotFoundThrowsException()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
