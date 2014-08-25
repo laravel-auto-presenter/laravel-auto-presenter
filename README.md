@@ -1,8 +1,12 @@
-# Laravel Auto Presenter 1
+# Laravel Auto Presenter 2
+
+[![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=1.2)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
 This package automatically decorates objects bound to views during the view render process.
 
 ## Quick-install
+
+**For Laravel 4.1**
 
 ```json
 {
@@ -16,7 +20,7 @@ This package automatically decorates objects bound to views during the view rend
 ## Requirements
 
 - any flavor of PHP 5.3+ should do
-- Laravel 4.x
+- Laravel 4.1.x
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
