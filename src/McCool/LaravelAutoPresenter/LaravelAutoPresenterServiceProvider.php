@@ -10,7 +10,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
 
     public function register()
     {
-    	// register as a singleton because we don't need to be instantiating a new one all the time
+        // register as a singleton because we don't need to be instantiating a new one all the time
         $this->app->singleton('McCool\LaravelAutoPresenter\PresenterDecorator', 'McCool\LaravelAutoPresenter\PresenterDecorator');
     }
 
