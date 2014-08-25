@@ -4,7 +4,7 @@ class DecoratedAtom
 {
     public function getPresenter()
     {
-    	return 'McCool\Tests\Stubs\DecoratedAtomPresenter';
+        return 'McCool\Tests\Stubs\DecoratedAtomPresenter';
     }
 
     public function favoriteLanguage()

@@ -84,7 +84,7 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
     {
         return $this->resource->toArray();
     }
-    
+
     /**
     * ArrayAccess interface implementation;
     */

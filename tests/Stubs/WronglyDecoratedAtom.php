@@ -4,6 +4,6 @@ class WronglyDecoratedAtom
 {
     public function getPresenter()
     {
-    	return 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+        return 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
     }
 }
