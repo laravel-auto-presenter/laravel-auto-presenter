@@ -1,8 +1,9 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
 use \Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Support\Contracts\JsonableInterface;
 
-class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterface
+class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterface, JsonableInterface
 {
 	/**
 	 * The resource that is the object that was decorated.
@@ -139,6 +140,17 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
         return $this->toArray();
     }
 
+	/**
+	 * Satisfies the JsonableInterface implementation, in short making presenters viable for api development.
+	 *
+	 * @param int $options
+	 * @return string
+	 */
+	public function toJson($options = 0)
+	{
+		return json_encode($this->jsonSerialize());
+	}
+
     /**
     * Get the instance as an array.
     *
@@ -146,7 +158,15 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
     */
     public function toArray()
     {
-        return $this->resource->toArray();
+        $attributes = $this->resource->toArray();
+		$fields = $this->getFields();
+
+		if ($fields) {
+			$keys = array_flip($fields);
+			$attributes = array_intersect_key($attributes, $keys);
+		}
+
+	    return $attributes;
     }
     
     /**

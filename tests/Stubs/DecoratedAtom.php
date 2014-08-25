@@ -13,4 +13,9 @@ class DecoratedAtom implements PresenterInterface
 	{
 		return 'McCool\Tests\Stubs\DecoratedAtomPresenter';
 	}
+
+	public function toArray()
+	{
+		return ['name' => 'Me', 'address' => 'Somewhere, over there!', 'random' => 'field value'];
+	}
 }
