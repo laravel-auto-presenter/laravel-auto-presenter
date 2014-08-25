@@ -86,7 +86,7 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
             $items[] = $this->getDecoratedAtom();
         }
 
-        $environment = m::mock('Illuminate\Pagination\Environment');
+        $environment = m::mock('Illuminate\Pagination\Factory');
         $environment->shouldReceive('getCurrentPage')->andReturn(1);
 
         $paginator = new Paginator(
