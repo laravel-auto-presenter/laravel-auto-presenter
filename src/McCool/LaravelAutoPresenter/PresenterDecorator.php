@@ -88,7 +88,7 @@ class PresenterDecorator
         if (!class_exists($presenterClass)) {
             throw new PresenterNotFoundException($presenterClass);
         }
-		
+
         return new $presenterClass($atom);
     }
 
