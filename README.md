@@ -34,26 +34,26 @@ This package automatically decorates objects bound to views during the view rend
 <a name="requirements"/>
 ## Requirements
 
-- any flavor of PHP 5.4+ should do
+- PHP 5.4+
 - Laravel 4.2+
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
 ## Features
 
-- automatically decorate objects bound to views
-- automatically decorate objects within paginator instances
-- automatically decorate objects within collection objects
-- automatically decorate Eloquent relationships that are loaded at the time that the view begins being rendered
+- Automatically decorate objects bound to views
+- Automatically decorate objects within paginator instances
+- Automatically decorate objects within collection objects
+- Automatically decorate Eloquent relationships that are loaded at the time that the view begins being rendered
 
 <a name="install-laravel-package-installer"/>
-## Install with Laravel 4 Package Installer
+## Installing With The Laravel 4 Package Installer
 
 1. Install [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
 2. Run `php artisan package:install mccool/laravel-auto-presenter`
 
 <a name="install-composer"/>
-## Install with Composer
+## Installing With Composer
 
 Install this package with [Composer](http://getcomposer.org/).
 
@@ -62,7 +62,7 @@ Add the following "require" to your `composer.json` file and run the `php compos
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "*"
+        "mccool/laravel-auto-presenter": "~2.2"
     }
 }
 ```
@@ -84,7 +84,7 @@ I'm using really basic code examples here, so just focus on how the auto-present
 
 class Post extends \Eloquent
 {
-    protected $table    = 'posts';
+    protected $table = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
 
     public function author()
@@ -133,7 +133,7 @@ class PostPresenter extends BasePresenter
     public function published_at()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->resource->published_at, 'Europe/Berlin')
-                     ->toFormattedDateString();
+            ->toFormattedDateString();
     }
 }
 ```
@@ -147,7 +147,7 @@ use McCool\LaravelAutoPresenter\PresenterInterface;
 
 class Post extends \Eloquent implements PresenterInterface
 {
-    protected $table    = 'posts';
+    protected $table = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
 
     public function author()
