@@ -13,4 +13,13 @@ class BaseDecoratorTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals('McCool\LaravelAutoPresenter\Decorators\AtomDecorator', $class);
 	}
+
+	/**
+	 * @expectedException McCool\LaravelAutoPresenter\ResourceMethodNotFoundException
+	 */
+	public function testCreationOfANonExistentDecorator()
+	{
+		$decorator = new BaseDecoratorStub;
+		$decorator->createDecorator('bulbous');
+	}
 }
