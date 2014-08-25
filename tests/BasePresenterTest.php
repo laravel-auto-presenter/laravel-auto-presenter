@@ -1,6 +1,7 @@
 <?php namespace McCool\Tests;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
+use McCool\Tests\Stubs\DecoratedAtomPresenter;
+use McCool\Tests\Stubs\DecoratedAtomFieldsPresenter;
 use Mockery as m;
 
 class BasePresenterTest extends \PHPUnit_Framework_TestCase
@@ -13,7 +14,7 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
 	public function testResourceIsReturned()
 	{
 		$atom = $this->getDecoratedAtom();
-		$presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
+		$presenter = new DecoratedAtomPresenter($atom);
 
 		$this->assertEquals($atom, $presenter->getResource());
 	}
@@ -21,7 +22,7 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
 	public function testFieldsAreReturned()
 	{
 		$atom = $this->getDecoratedAtom();
-		$presenter = new \McCool\Tests\Stubs\DecoratedAtomFieldsPresenter($atom);
+		$presenter = new DecoratedAtomFieldsPresenter($atom);
 
 		$this->assertEquals(['name', 'address'], $presenter->getFields());
 	}
@@ -30,7 +31,7 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
     {
         $atom = $this->getDecoratedAtom();
 
-        $presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
+        $presenter = new DecoratedAtomPresenter($atom);
 
         $this->assertEquals('McCool\Tests\Stubs\DecoratedAtomPresenter', $presenter->presenter);
     }
@@ -39,7 +40,7 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
     {
         $atom = $this->getDecoratedAtom();
 
-        $presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
+        $presenter = new DecoratedAtomPresenter($atom);
 
         $this->assertEquals('Primer', $presenter->favorite_movie);
     }
@@ -52,7 +53,7 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
     {
         $atom = $this->getDecoratedAtom();
 
-        $presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
+        $presenter = new DecoratedAtomPresenter($atom);
 
         $presenter->thisMethodDoesntExist();
     }

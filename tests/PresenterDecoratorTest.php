@@ -2,6 +2,10 @@
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\Tests\Stubs\DecoratedAtom;
+use McCool\Tests\Stubs\UndecoratedAtom;
+use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
 use Mockery as m;
 
@@ -12,12 +16,15 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
         m::close();
     }
 
+	public function setUp()
+	{
+		$this->decorator = new PresenterDecorator;
+	}
+
     public function testWontDecorateOtherObjects()
     {
-        $atom = new \McCool\Tests\Stubs\UndecoratedAtom;
-        $decorator = $this->getDecorator();
-
-        $decoratedAtom = $decorator->decorate($atom);
+        $atom = new UndecoratedAtom;
+        $decoratedAtom = $this->decorator->decorate($atom);
 
         $this->assertInstanceOf('McCool\Tests\Stubs\UndecoratedAtom', $decoratedAtom);
     }
@@ -25,9 +32,7 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
     public function testDecoratesAtom()
     {
         $atom = $this->getDecoratedAtom();
-        $decorator = $this->getDecorator();
-
-        $decoratedAtom = $decorator->decorate($atom);
+        $decoratedAtom = $this->decorator->decorate($atom);
 
         $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
     }
@@ -35,9 +40,7 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
     public function testDecoratesPaginator()
     {
         $paginator = $this->getFilledPaginator();
-        $decorator = $this->getDecorator();
-
-        $decoratedPaginator = $decorator->decorate($paginator);
+        $decoratedPaginator = $this->decorator->decorate($paginator);
 
         foreach ($decoratedPaginator as $decoratedAtom) {
             $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
@@ -47,9 +50,7 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
     public function testDecorateCollection()
     {
         $collection = $this->getFilledCollection();
-        $decorator = $this->getDecorator();
-
-        $decoratedCollection = $decorator->decorate($collection);
+        $decoratedCollection = $this->decorator->decorate($collection);
 
         foreach ($decoratedCollection as $decoratedAtom) {
             $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
@@ -62,20 +63,14 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
     */
     public function testWronglyDecoratedAlassThrowsException()
     {
-        $atom      = new \McCool\Tests\Stubs\WronglyDecoratedAtom;
-        $decorator = $this->getDecorator();
+        $atom      = new WronglyDecoratedAtom;
 
-        $decoratedAtom = $decorator->decorate($atom);
-    }
-
-    private function getDecorator()
-    {
-        return new \McCool\LaravelAutoPresenter\PresenterDecorator;
+        $decoratedAtom = $this->decorator->decorate($atom);
     }
 
     private function getDecoratedAtom()
     {
-        return new \McCool\Tests\Stubs\DecoratedAtom;
+        return new DecoratedAtom;
     }
 
     private function getFilledPaginator()

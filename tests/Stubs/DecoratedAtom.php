@@ -1,11 +1,16 @@
 <?php namespace McCool\Tests\Stubs;
 
-class DecoratedAtom
-{
-    public $presenter = 'McCool\Tests\Stubs\DecoratedAtomPresenter';
+use McCool\LaravelAutoPresenter\PresenterInterface;
 
+class DecoratedAtom implements PresenterInterface
+{
     public function favoriteLanguage()
     {
         return 'C#';
     }
+
+	public function getPresenter()
+	{
+		return 'McCool\Tests\Stubs\DecoratedAtomPresenter';
+	}
 }

@@ -15,7 +15,8 @@ class PresenterDecorator
     * @param mixed $subject
     * @return mixed
     */
-    public function decorate($subject) {
+    public function decorate($subject)
+    {
         if ($subject instanceOf Paginator) {
             return $this->decoratePaginator($subject);
         }
@@ -47,7 +48,7 @@ class PresenterDecorator
     }
 
     /**
-    * decorate the objects within a collection
+    * Decorate the objects within a collection
     *
     * @param \Illuminate\Support\Collection $collection
     * @return \Illuminate\Support\Collection
@@ -62,11 +63,12 @@ class PresenterDecorator
     }
 
     /**
-    * decorate an individual class
-    *
-    * @param mixed $atom
-    * @return mixed
-    */
+     * Decorate an individual class.
+     *
+     * @param mixed $atom
+     * @return mixed
+     * @throws PresenterNotFoundException
+     */
     protected function decorateAtom($atom)
     {
         if ($atom instanceOf Model) {
