@@ -27,6 +27,15 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(['name', 'address'], $presenter->getFields());
 	}
 
+	public function testFieldsAreAccessible()
+	{
+		$atom = $this->getDecoratedAtom();
+		$presenter = new DecoratedAtomFieldsPresenter($atom);
+
+		$this->assertTrue($presenter->accessible('name'));
+		$this->assertFalse($presenter->accessible('somekeythatdoesntexist'));
+	}
+
     public function testResourceAttributeDeference()
     {
         $atom = $this->getDecoratedAtom();

@@ -48,26 +48,64 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
 		return $this->fields;
 	}
 
+	/**
+	 * Not all fields may be accessible, for a number of reasons. Any fields
+	 * that are not accessible, simply will not be usable in a view.
+	 *
+	 * @param $key
+	 * @return boolean
+	 */
+	public function accessible($key)
+	{
+		$fields = $this->getFields();
+
+		if (!$fields) return true;
+
+		return array_search($key, $fields) !== false;
+	}
+
+	/**
+	 * Return the value for a given field.
+	 *
+	 * @param $key
+	 * @return mixed
+	 */
+	public function getField($key)
+	{
+		if ($this->accessible($key))
+		{
+			if (method_exists($this, $key)) {
+				return $this->{$key}();
+			}
+
+			return $this->resource->$key;
+		}
+	}
+
     /**
     * Magic Method access initially tries for local methods then, defers to
     * the decorated object.
+     *
+     * @param string $key
+     * @return mixed
     */
     public function __get($key)
     {
-        if (method_exists($this, $key)) {
-            return $this->{$key}();
-        }
-
-        return $this->resource->$key;
+        return $this->getField($key);
     }
 
     /**
-    * Magic Method access for methods called against the presenter looks for
-    * a method on the resource, or throws an exception if none is found.
-    */
+     * Magic Method access for methods called against the presenter looks for
+     * a method on the resource, or throws an exception if none is found.
+     *
+     * @param string $key
+     * @param array $args
+     * @throws ResourceMethodNotFoundException
+     * @return mixed
+     */
     public function __call($key, $args)
     {
-        if (method_exists($this->resource, $key)) {
+        if ($this->accessible($key) && method_exists($this->resource, $key)) {
             return call_user_func_array(array($this->resource, $key), $args);
         }
 
@@ -75,9 +113,9 @@ class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterfa
     }
 
     /**
-    * Magic Method isset access measures the existence of a property on the
-    * resource using ArrayAccess.
-    */
+     * Magic Method isset access measures the existence of a property on the
+     * resource using ArrayAccess.
+     */
     public function __isset($key)
     {
         return isset($this->resource[$key]);
