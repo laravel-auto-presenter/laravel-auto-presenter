@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 class PresenterDecorator
 {
     /**
-    * things go in, get decorated (or not) and are returned
-    *
-    * @param mixed $subject
-    * @return mixed
-    */
+     * things go in, get decorated (or not) and are returned
+     *
+     * @param mixed $subject
+     * @return mixed
+     */
     public function decorate($subject)
     {
         if ($subject instanceOf Paginator) {
@@ -29,11 +29,11 @@ class PresenterDecorator
     }
 
     /**
-    * decorate the objects within a paginator
-    *
-    * @param \Illuminate\Pagination\Paginator $paginator
-    * @return \Illuminate\Pagination\Paginator
-    */
+     * decorate the objects within a paginator
+     *
+     * @param \Illuminate\Pagination\Paginator $paginator
+     * @return \Illuminate\Pagination\Paginator
+     */
     protected function decoratePaginator(Paginator $paginator)
     {
         $newItems = array();
@@ -48,11 +48,11 @@ class PresenterDecorator
     }
 
     /**
-    * Decorate the objects within a collection
-    *
-    * @param \Illuminate\Support\Collection $collection
-    * @return \Illuminate\Support\Collection
-    */
+     * Decorate the objects within a collection
+     *
+     * @param \Illuminate\Support\Collection $collection
+     * @return \Illuminate\Support\Collection
+     */
     protected function decorateCollection(Collection $collection)
     {
         foreach ($collection as $key => $atom) {
@@ -85,19 +85,19 @@ class PresenterDecorator
 
         $presenterClass = $atom->getPresenter();
 
-        if ( ! class_exists($presenterClass)) {
+        if (!class_exists($presenterClass)) {
             throw new PresenterNotFoundException($presenterClass);
         }
-
+		
         return new $presenterClass($atom);
     }
 
     /**
-    * decorate the relationships of an Eloquent object
-    *
-    * @param \Illuminate\Database\Eloquent\Model $atom
-    * @return mixed
-    */
+     * decorate the relationships of an Eloquent object
+     *
+     * @param \Illuminate\Database\Eloquent\Model $atom
+     * @return mixed
+     */
     protected function decorateRelations(Model $atom)
     {
         foreach ($atom->getRelations() as $relationName => $model) {

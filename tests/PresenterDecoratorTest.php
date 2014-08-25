@@ -11,6 +11,8 @@ use Mockery as m;
 
 class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
 {
+	private $decorator;
+
     public function tearDown()
     {
         m::close();
@@ -61,11 +63,11 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
     * @covers decorator::decorate
     * @expectedException McCool\LaravelAutoPresenter\PresenterNotFoundException
     */
-    public function testWronglyDecoratedAlassThrowsException()
+    public function testWronglyDecoratedClassThrowsException()
     {
-        $atom      = new WronglyDecoratedAtom;
+        $atom = new WronglyDecoratedAtom;
 
-        $decoratedAtom = $this->decorator->decorate($atom);
+        $this->decorator->decorate($atom);
     }
 
     private function getDecoratedAtom()
