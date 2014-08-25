@@ -45,4 +45,14 @@ class AtomDecoratorTest extends \PHPUnit_Framework_TestCase
 
 		$this->atomDecorator->decorate($model);
 	}
+
+	public function testShouldHandleRelationsWhenSubjectIsAModelWithACollection()
+	{
+		$model = m::mock('Illuminate\Database\Eloquent\Model');
+		$collection = m::mock('Illuminate\Support\Collection')->makePartial();
+
+		$model->shouldReceive('getRelations')->andReturn($collection);
+		
+		$this->atomDecorator->decorate($model);
+	}
 }
