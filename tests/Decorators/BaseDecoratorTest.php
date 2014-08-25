@@ -3,8 +3,9 @@
 namespace McCool\Tests\Decorators;
 
 use McCool\Tests\Stubs\BaseDecoratorStub;
+use McCool\Tests\TestCase;
 
-class BaseDecoratorTest extends \PHPUnit_Framework_TestCase
+class BaseDecoratorTest extends TestCase
 {
 	public function testObjectCreationShouldReturnAppropriateDecorator()
 	{

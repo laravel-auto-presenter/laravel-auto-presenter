@@ -12,14 +12,9 @@ use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
 use Mockery as m;
 
-class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
+class PresenterDecoratorTest extends TestCase
 {
 	private $decorator;
-
-    public function tearDown()
-    {
-        m::close();
-    }
 
 	public function setUp()
 	{

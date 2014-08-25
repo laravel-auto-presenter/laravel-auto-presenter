@@ -3,10 +3,10 @@
 namespace McCool\Tests\Decorators;
 
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
-
+use McCool\Tests\TestCase;
 use Mockery as m;
 
-class AtomDecoratorTest extends \PHPUnit_Framework_TestCase
+class AtomDecoratorTest extends TestCase
 {
 	private $atomDecorator;
 
@@ -52,7 +52,7 @@ class AtomDecoratorTest extends \PHPUnit_Framework_TestCase
 		$collection = m::mock('Illuminate\Support\Collection')->makePartial();
 
 		$model->shouldReceive('getRelations')->andReturn($collection);
-		
+
 		$this->atomDecorator->decorate($model);
 	}
 }

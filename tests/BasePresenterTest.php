@@ -5,14 +5,9 @@ use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use McCool\Tests\Stubs\DecoratedAtomFieldsPresenter;
 use Mockery as m;
 
-class BasePresenterTest extends \PHPUnit_Framework_TestCase
+class BasePresenterTest extends TestCase
 {
 	private $decoratedAtom;
-
-    public function tearDown()
-    {
-        m::close();
-    }
 
 	public function setUp()
 	{
