@@ -15,7 +15,7 @@ class BaseDecoratorTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException McCool\LaravelAutoPresenter\ResourceMethodNotFoundException
+	 * @expectedException McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException
 	 */
 	public function testCreationOfANonExistentDecorator()
 	{

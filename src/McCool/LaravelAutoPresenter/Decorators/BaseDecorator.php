@@ -15,6 +15,10 @@ abstract class BaseDecorator
 	{
 		$decoratorClass = implode('\\', [__NAMESPACE__, $class.'Decorator']);
 
+		if (!class_exists($decoratorClass)) {
+			throw new DecoratorNotFoundException($decoratorClass);
+		}
+
 		return new $decoratorClass;
 	}
 } 
