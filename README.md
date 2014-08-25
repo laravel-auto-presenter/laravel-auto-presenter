@@ -1,32 +1,32 @@
-[![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=master)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
-
 # Laravel Auto Presenter 2
+
+[![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=2.2)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
 This package automatically decorates objects bound to views during the view render process.
 
 ## Upgrading from version 1 to 2
 
-* Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1 and below.
+* Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1.
 * The PresenterInterface was added as the method for determining the correct presenter class. Read more on this in the instructions below.
 
 ## Quick-install
 
-**For Laravel Versions 4.1 and below**
+**For Laravel 4.1**
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "1.*"
+        "mccool/laravel-auto-presenter": "~1.2"
     }
 }
 ```
 
-**For Laravel Versions 4.2 and above**
+**For Laravel 4.2+**
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "2.*"
+        "mccool/laravel-auto-presenter": "~2.2"
     }
 }
 ```
@@ -34,8 +34,8 @@ This package automatically decorates objects bound to views during the view rend
 <a name="requirements"/>
 ## Requirements
 
-- any flavor of PHP 5.3+ should do
-- Laravel 4.x
+- any flavor of PHP 5.4+ should do
+- Laravel 4.2+
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
