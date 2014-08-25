@@ -2,6 +2,9 @@
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
+use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\UndecoratedAtom;
@@ -20,7 +23,11 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->decorator = new PresenterDecorator;
+		$this->decorator = new PresenterDecorator(
+			new AtomDecorator,
+			new CollectionDecorator,
+			new PaginatorDecorator
+		);
 	}
 
     public function testWontDecorateOtherObjects()

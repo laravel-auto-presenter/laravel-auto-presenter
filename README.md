@@ -1,8 +1,12 @@
 [![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=master)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
-# Laravel Auto Presenter 2.1.0
+# Laravel Auto Presenter 3.0.0
 
 This package automatically decorates objects bound to views during the view render process.
+
+## Upgrading from version 2 to 3
+
+Version 3 now properly supports and requires Laravel 4.2.x.
 
 ## Upgrading from version 1 to 2
 

@@ -59,7 +59,6 @@ class AtomDecorator implements DecoratorInterface
 		foreach ($atom->getRelations() as $relationName => $model) {
 			if ($model instanceOf Collection) {
 				$model = $this->createDecorator('Collection')->decorate($model);
-
 				$atom->setRelation($relationName, $model);
 			} else {
 				$atom->setRelation($relationName, $this->decorate($model));
@@ -68,4 +67,4 @@ class AtomDecorator implements DecoratorInterface
 
 		return $atom;
 	}
-} 
+}

@@ -1,17 +1,33 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
+use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+
+use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException;
+use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 
 /**
  * The class that decorates model objects, paginators and collections.
  */
 class PresenterDecorator
 {
-	private $decorators = [
-		'McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator',
-		'McCool\LaravelAutoPresenter\Decorators\CollectionDecorator',
-		'McCool\LaravelAutoPresenter\Decorators\AtomDecorator'
-	];
+	/**
+	 * Setup the presenter decorator with the possible decorators to be used for subjects.
+	 *
+	 * @param AtomDecorator $atomDecorator
+	 * @param CollectionDecorator $collectionDecorator
+	 * @param PaginatorDecorator $paginationDecorator
+	 */
+	public function __construct(
+		AtomDecorator $atomDecorator,
+		CollectionDecorator $collectionDecorator,
+		PaginatorDecorator $paginationDecorator
+	)
+	{
+		$this->decorators[] = $atomDecorator;
+		$this->decorators[] = $collectionDecorator;
+		$this->decorators[] = $paginationDecorator;
+	}
 
     /**
      * things go in, get decorated (or not) and are returned
@@ -23,10 +39,8 @@ class PresenterDecorator
     public function decorate($subject)
     {
 	    foreach ($this->decorators as $possibleDecorator) {
-		    $decorator = new $possibleDecorator;
-
-		    if ($decorator->canDecorate($subject)) {
-			    return $decorator->decorate($subject);
+		    if ($possibleDecorator->canDecorate($subject)) {
+			    return $possibleDecorator->decorate($subject);
 		    }
 	    }
 
