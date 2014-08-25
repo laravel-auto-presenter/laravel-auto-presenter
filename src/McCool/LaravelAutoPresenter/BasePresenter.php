@@ -143,7 +143,7 @@ class BasePresenter implements ArrayableInterface
 			$keys = array_flip($fields);
 			$attributes = array_intersect_key($attributes, $keys);
 		}
-		
+
 	    return $attributes;
     }
 }
