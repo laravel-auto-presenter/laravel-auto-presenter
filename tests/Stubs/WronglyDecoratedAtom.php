@@ -1,6 +1,8 @@
 <?php namespace McCool\Tests\Stubs;
 
-class WronglyDecoratedAtom
+use McCool\LaravelAutoPresenter\PresenterInterface;
+
+class WronglyDecoratedAtom implements PresenterInterface
 {
     public function getPresenter()
     {
