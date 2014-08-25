@@ -2,7 +2,10 @@
 
 class DecoratedAtom
 {
-    public $presenter = 'McCool\Tests\Stubs\DecoratedAtomPresenter';
+    public function getPresenter()
+    {
+    	return 'McCool\Tests\Stubs\DecoratedAtomPresenter';
+    }
 
     public function favoriteLanguage()
     {

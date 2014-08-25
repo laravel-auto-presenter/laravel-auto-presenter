@@ -2,5 +2,8 @@
 
 class WronglyDecoratedAtom
 {
-    public $presenter = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+    public function getPresenter()
+    {
+    	return 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+    }
 }
