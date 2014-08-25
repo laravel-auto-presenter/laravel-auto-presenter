@@ -30,7 +30,7 @@ Version 3 now properly supports and requires Laravel 4.2.x. This was recently ca
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "2.*"
+        "mccool/laravel-auto-presenter": "3.*"
     }
 }
 ```
@@ -38,7 +38,7 @@ Version 3 now properly supports and requires Laravel 4.2.x. This was recently ca
 <a name="requirements"/>
 ## Requirements
 
-- any flavor of PHP 5.4+ should do
+- PHP 5.5+
 - Laravel 4.2.x
 - [optional] PHPUnit to run the tests
 
