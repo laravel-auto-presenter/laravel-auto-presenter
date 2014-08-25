@@ -10,6 +10,22 @@ class BasePresenterTest extends \PHPUnit_Framework_TestCase
         m::close();
     }
 
+	public function testResourceIsReturned()
+	{
+		$atom = $this->getDecoratedAtom();
+		$presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
+
+		$this->assertEquals($atom, $presenter->getResource());
+	}
+
+	public function testFieldsAreReturned()
+	{
+		$atom = $this->getDecoratedAtom();
+		$presenter = new \McCool\Tests\Stubs\DecoratedAtomFieldsPresenter($atom);
+
+		$this->assertEquals(['name', 'address'], $presenter->getFields());
+	}
+
     public function testResourceAttributeDeference()
     {
         $atom = $this->getDecoratedAtom();
