@@ -3,6 +3,7 @@
 namespace McCool\Tests\Decorators;
 
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\HasPresenter;
 use McCool\Tests\TestCase;
 use Mockery as m;
 
@@ -18,14 +19,12 @@ class AtomDecoratorTest extends TestCase
 	public function testCanDecorateModel()
 	{
 		$model = m::mock('Illuminate\Database\Eloquent\Model');
-
 		$this->assertTrue($this->atomDecorator->canDecorate($model));
 	}
 
 	public function testCanDecoratePresenterInterface()
 	{
-		$subject = m::mock('McCool\LaravelAutoPresenter\PresenterInterface');
-
+		$subject = m::mock(HasPresenter::class);
 		$this->assertTrue($this->atomDecorator->canDecorate($subject));
 	}
 

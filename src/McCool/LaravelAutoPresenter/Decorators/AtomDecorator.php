@@ -3,8 +3,8 @@
 namespace McCool\LaravelAutoPresenter\Decorators;
 
 use Illuminate\Database\Eloquent\Model;
-use McCool\LaravelAutoPresenter\PresenterInterface;
-use McCool\LaravelAutoPresenter\PresenterNotFoundException;
+use McCool\LaravelAutoPresenter\HasPresenter;
+use McCool\LaravelAutoPresenter\PresenterNotFound;
 
 class AtomDecorator implements DecoratorInterface
 {
@@ -17,7 +17,7 @@ class AtomDecorator implements DecoratorInterface
 	public function canDecorate($subject)
 	{
 		return (
-			$subject instanceof PresenterInterface or
+			$subject instanceof HasPresenter or
 			$subject instanceof Model
 		);
 	}
@@ -27,7 +27,7 @@ class AtomDecorator implements DecoratorInterface
 	 *
 	 * @param Model $subject
 	 * @return mixed
-	 * @throws PresenterNotFoundException
+	 * @throws PresenterNotFound
 	 */
 	public function decorate($subject)
 	{
@@ -35,14 +35,14 @@ class AtomDecorator implements DecoratorInterface
 			$subject = $this->decorateRelations($subject);
 		}
 
-		if (!$subject instanceof PresenterInterface) {
+		if (!$subject instanceof HasPresenter) {
 			return $subject;
 		}
 
-		$presenterClass = $subject->getPresenter();
+		$presenterClass = $subject->getPresenterClass();
 
 		if (!class_exists($presenterClass)) {
-			throw new PresenterNotFoundException($presenterClass);
+			throw new PresenterNotFound($presenterClass);
 		}
 
 		return new $presenterClass($subject);

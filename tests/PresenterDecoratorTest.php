@@ -7,6 +7,7 @@ use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
 use McCool\Tests\Stubs\DecoratedAtom;
+use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use McCool\Tests\Stubs\UndecoratedAtom;
 use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
@@ -30,7 +31,7 @@ class PresenterDecoratorTest extends TestCase
         $atom = new UndecoratedAtom;
         $decoratedAtom = $this->decorator->decorate($atom);
 
-        $this->assertInstanceOf('McCool\Tests\Stubs\UndecoratedAtom', $decoratedAtom);
+        $this->assertInstanceOf(UndecoratedAtom::class, $decoratedAtom);
     }
 
     public function testDecoratesAtom()
@@ -38,7 +39,7 @@ class PresenterDecoratorTest extends TestCase
         $atom = $this->getDecoratedAtom();
         $decoratedAtom = $this->decorator->decorate($atom);
 
-        $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
+        $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
     }
 
     public function testDecoratesPaginator()
@@ -47,7 +48,7 @@ class PresenterDecoratorTest extends TestCase
         $decoratedPaginator = $this->decorator->decorate($paginator);
 
         foreach ($decoratedPaginator as $decoratedAtom) {
-            $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
+            $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
         }
     }
 
@@ -57,18 +58,17 @@ class PresenterDecoratorTest extends TestCase
         $decoratedCollection = $this->decorator->decorate($collection);
 
         foreach ($decoratedCollection as $decoratedAtom) {
-            $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
+            $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
         }
     }
 
     /**
     * @covers decorator::decorate
-    * @expectedException McCool\LaravelAutoPresenter\PresenterNotFoundException
+    * @expectedException \McCool\LaravelAutoPresenter\PresenterNotFound
     */
     public function testWronglyDecoratedClassThrowsException()
     {
         $atom = new WronglyDecoratedAtom;
-
         $this->decorator->decorate($atom);
     }
 

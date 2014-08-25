@@ -1,10 +1,10 @@
 <?php namespace McCool\Tests\Stubs;
 
-use McCool\LaravelAutoPresenter\PresenterInterface;
+use McCool\LaravelAutoPresenter\HasPresenter;
 
-class WronglyDecoratedAtom implements PresenterInterface
+class WronglyDecoratedAtom implements HasPresenter
 {
-    public function getPresenter()
+    public function getPresenterClass()
     {
 	    return 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
     }
