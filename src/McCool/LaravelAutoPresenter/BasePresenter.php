@@ -4,23 +4,49 @@ use \Illuminate\Support\Contracts\ArrayableInterface;
 
 class BasePresenter implements \ArrayAccess, \JsonSerializable, ArrayableInterface
 {
-    /**
-    * The resource that is the object that was decorated.
-    */
-    public $resource = null;
+	/**
+	 * The resource that is the object that was decorated.
+	 */
+	public $resource = null;
 
-    public function __construct($resource = null)
-    {
-        $this->resource = $resource;
-    }
+	/**
+	 * Fields to restrict the returned result by. Same for example, you may want password
+	 * removed, or to add additional fields. If this array is left empty, it will not affect
+	 * the presenter. The presenter takes a white list approach.
+	 *
+	 * @var array
+	 */
+	protected $fields = [];
 
-    /**
-    * Public resource getter
-    */
-    public function getResource()
-    {
-        return $this->resource;
-    }
+	/**
+	 * Construct the presenter and provide the resource that the presenter will represent.
+	 *
+	 * @param null $resource
+	 */
+	public function __construct($resource = null)
+	{
+		$this->resource = $resource;
+	}
+
+	/**
+	 * Public resource getter.
+	 *
+	 * @return mixed
+	 */
+	public function getResource()
+	{
+		return $this->resource;
+	}
+
+	/**
+	 * Returns the array of fields that the presenter wishes to actually provide.
+	 *
+	 * @return array
+	 */
+	public function getFields()
+	{
+		return $this->fields;
+	}
 
     /**
     * Magic Method access initially tries for local methods then, defers to
