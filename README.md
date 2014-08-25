@@ -1,6 +1,6 @@
-# Laravel Auto Presenter 2
+# Laravel Auto Presenter 3
 
-[![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=2.2)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
+[![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=master)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
 This package automatically decorates objects bound to views during the view render process.
 
