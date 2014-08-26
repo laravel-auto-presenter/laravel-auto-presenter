@@ -12,16 +12,15 @@ The purpose of the 3.0 major version was to drop a lot of the functionality of e
 
 Please chime in on the issues if you have a strong opinions.
 
-## Upgrading from version 2 to 3
+## Upgrading From Version 2 To 3
 
 First of all, we recommend not doing this until it's out of beta.
 
-* Version 3 now properly supports and requires Laravel 4.2.x. This was recently causing builds to fail.
 * PHP 5.5 is now a requirement for version 3
 
-## Upgrading from version 1 to 2
+## Upgrading From Version 1 To 2
 
-* Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1.
+* Version 2 is now Laravel 4.2 only.
 * The HasPresenter was added as the method for determining the correct presenter class. Read more on this in the instructions below.
 
 <a name="features"/>
@@ -34,7 +33,7 @@ First of all, we recommend not doing this until it's out of beta.
 <a name="install-laravel-package-installer"/>
 ## Installing With The Laravel 4 Package Installer
 
-1. Install [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
+1. Install the [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
 2. Run `php artisan package:install mccool/laravel-auto-presenter`
 
 <a name="requirements"/>
@@ -48,7 +47,7 @@ Beta Version 3
 
 Version 2
 
-- PHP 5.3+
+- PHP 5.4+
 - Laravel 4.2.x
 - [optional] PHPUnit to run the tests
 
@@ -75,22 +74,22 @@ Add the following "require" to your `composer.json` file and run the `composer i
 }
 ```
 
-**For Laravel 4.2+**
+**For Laravel 4.2 (Stable)**
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "2.*"
+        "mccool/laravel-auto-presenter": "~2.2"
     }
 }
 ```
 
-**For Beta Version 3**
+**For Laravel 4.2 (Beta)**
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "3.*"
+        "mccool/laravel-auto-presenter": "~3.0@beta"
     }
 }
 ```
