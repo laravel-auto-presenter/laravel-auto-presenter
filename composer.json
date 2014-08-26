@@ -31,10 +31,8 @@
         "mockery/mockery": "~0.8"
     },
     "autoload": {
-        "psr-0": {
-            "McCool\\LaravelAutoPresenter": "src/"
-        },
 	    "psr-4": {
+            "McCool\\LaravelAutoPresenter\\": "src/",
 		    "McCool\\Tests\\": "tests/"
 	    }
     },
