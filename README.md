@@ -1,8 +1,12 @@
 [![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=master)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
-# Laravel Auto Presenter 3.0.0
+# Laravel Auto Presenter 3.0.0 beta
 
 This package automatically decorates objects bound to views during the view render process.
+
+## Beta Concerns
+
+Currently, we're trying to decide if there's a reason at all to implement ArrayAccess. Please chime in on the issues if you have a strong opinion.
 
 ## Upgrading from version 2 to 3
 
@@ -10,27 +14,27 @@ Version 3 now properly supports and requires Laravel 4.2.x. This was recently ca
 
 ## Upgrading from version 1 to 2
 
-* Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1 and below.
-* The PresenterInterface was added as the method for determining the correct presenter class. Read more on this in the instructions below.
+* Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1.
+* The HasPresenter was added as the method for determining the correct presenter class. Read more on this in the instructions below.
 
 ## Quick-install
 
-**For Laravel Versions 4.1 and below**
+**For Laravel 4.1**
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "1.*"
+        "mccool/laravel-auto-presenter": "~1.2"
     }
 }
 ```
 
-**For Laravel Versions 4.2 and above**
+**For Laravel 4.2+**
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "3.*"
+        "mccool/laravel-auto-presenter": "3.0.*"
     }
 }
 ```
@@ -45,20 +49,18 @@ Version 3 now properly supports and requires Laravel 4.2.x. This was recently ca
 <a name="features"/>
 ## Features
 
-- automatically decorate objects bound to views
-- automatically decorate objects within paginator instances
-- automatically decorate objects within collection objects
-- automatically decorate Eloquent relationships that are loaded at the time that the view begins being rendered
-- restrict fields included as part of presentation layer
+- Automatically decorate objects bound to views
+- Automatically decorate objects within paginator instances
+- Automatically decorate objects within collection objects
 
 <a name="install-laravel-package-installer"/>
-## Install with Laravel 4 Package Installer
+## Installing With The Laravel 4 Package Installer
 
 1. Install [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
 2. Run `php artisan package:install mccool/laravel-auto-presenter`
 
 <a name="install-composer"/>
-## Install with Composer
+## Installing With Composer
 
 Install this package with [Composer](http://getcomposer.org/).
 
@@ -87,14 +89,16 @@ I'm using really basic code examples here, so just focus on how the auto-present
 ```php
 <?php namespace Example\Blog;
 
+use Example\Accounts\User;
+
 class Post extends \Eloquent
 {
-    protected $table    = 'posts';
+    protected $table = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
 
     public function author()
     {
-        return $this->belongsTo('Example\Accounts\User', 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 }
 ```
@@ -107,7 +111,6 @@ class PostsController extends \Controller
     public function getIndex()
     {
         $posts = Post::all();
-
         return View::make('posts.index', compact('posts'));
     }
 }
@@ -132,13 +135,13 @@ class PostPresenter extends BasePresenter
 {
     public function __construct(Post $post)
     {
-        $this->wrapped object = $post;
+        $this->wrappedObject = $post;
     }
 
     public function published_at()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->wrapped object->published_at, 'Europe/Berlin')
-                     ->toFormattedDateString();
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->wrappedObject->published_at, 'Europe/Berlin')
+            ->toFormattedDateString();
     }
 }
 ```
@@ -148,42 +151,27 @@ Here, the automatic presenter decorator is injecting the Post model that is to b
 ```php
 <?php namespace Example\Blog;
 
-use McCool\LaravelAutoPresenter\PresenterInterface;
+use McCool\LaravelAutoPresenter\HasPresenter;
+use Example\Accounts\User;
 
-class Post extends \Eloquent implements PresenterInterface
+class Post extends \Eloquent implements HasPresenter
 {
-    protected $table    = 'posts';
+    protected $table = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
 
     public function author()
     {
-        return $this->belongsTo('Example\Accounts\User', 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function getPresenter()
+    public function getPresenterClass()
     {
-        return 'Example\Blog\PostPresenter';
+        return \Example\Blog\PostPresenter::class;
     }
 }
 ```
 
 Now, with no additional changes our view will show the date in the desired format.
-
-## Field restriction
-
-You can restrict the fields available on the presenter to be a smaller, limited set that was originally available on the wrapped object your presenter is managing. To do this, define the $exposedFields protect variable on your presenter class:
-
-```php
-class PostPresenter extends BasePresenter
-{
-	protected $exposedFields = [
-		'title',
-		'createdAt'
-	];
-}
-```
-
-The exposed fields act as a white list array. If you do not provide any fields, then it will be ignored. If however, you do - then only fields that defined within the $exposedFields array and exist on the wrapped object will be returned as part of the presenter.
 
 ## Troubleshooting
 

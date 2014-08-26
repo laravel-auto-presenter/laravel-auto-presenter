@@ -1,6 +1,7 @@
 {
     "name": "mccool/laravel-auto-presenter",
     "description": "A system for auto-decorating models with presenter objects.",
+    "version": "3.0.0",
     "license": "MIT",
     "authors": [
         {
@@ -39,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev"
+            "dev-master": "3.0-dev"
         }
     }
 }
