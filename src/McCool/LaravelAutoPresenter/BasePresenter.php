@@ -1,6 +1,6 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-class BasePresenter
+abstract class BasePresenter
 {
     /**
      * The resource that is the object that was decorated.
