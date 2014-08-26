@@ -24,37 +24,18 @@ First of all, we recommend not doing this until it's out of beta.
 * Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1.
 * The HasPresenter was added as the method for determining the correct presenter class. Read more on this in the instructions below.
 
-## Quick-install
+<a name="features"/>
+## Features
 
-**For Laravel 4.1**
+- Automatically decorate objects bound to views
+- Automatically decorate objects within paginator instances
+- Automatically decorate objects within collection objects
 
-```json
-{
-    "require": {
-        "mccool/laravel-auto-presenter": "~1.2"
-    }
-}
-```
+<a name="install-laravel-package-installer"/>
+## Installing With The Laravel 4 Package Installer
 
-**For Laravel 4.2+**
-
-```json
-{
-    "require": {
-        "mccool/laravel-auto-presenter": "2.*"
-    }
-}
-```
-
-**For Beta Version 3+**
-
-```json
-{
-    "require": {
-        "mccool/laravel-auto-presenter": "3.*"
-    }
-}
-```
+1. Install [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
+2. Run `php artisan package:install mccool/laravel-auto-presenter`
 
 <a name="requirements"/>
 ## Requirements
@@ -77,30 +58,39 @@ Version 1
 - Laravel 4.1.x
 - [optional] PHPUnit to run the tests
 
-<a name="features"/>
-## Features
-
-- Automatically decorate objects bound to views
-- Automatically decorate objects within paginator instances
-- Automatically decorate objects within collection objects
-
-<a name="install-laravel-package-installer"/>
-## Installing With The Laravel 4 Package Installer
-
-1. Install [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
-2. Run `php artisan package:install mccool/laravel-auto-presenter`
-
 <a name="install-composer"/>
 ## Installing With Composer
 
 Install this package with [Composer](http://getcomposer.org/).
 
-Add the following "require" to your `composer.json` file and run the `php composer.phar install` command to install it.
+Add the following "require" to your `composer.json` file and run the `composer install` command to install it.
+
+**For Laravel 4.1**
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "3.0.*"
+        "mccool/laravel-auto-presenter": "~1.2"
+    }
+}
+```
+
+**For Laravel 4.2+**
+
+```json
+{
+    "require": {
+        "mccool/laravel-auto-presenter": "2.*"
+    }
+}
+```
+
+**For Beta Version 3**
+
+```json
+{
+    "require": {
+        "mccool/laravel-auto-presenter": "3.*"
     }
 }
 ```
