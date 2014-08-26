@@ -1,7 +1,6 @@
 <?php namespace McCool\Tests\Stubs;
 
 use McCool\LaravelAutoPresenter\HasPresenter;
-use McCool\Tests\Stubs\DecoratedAtomPresenter;
 
 class DecoratedAtom implements HasPresenter
 {

@@ -17,37 +17,7 @@ class BasePresenterTest extends TestCase
 	public function testResourceIsReturned()
 	{
 		$presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-		$this->assertEquals($this->decoratedAtom, $presenter->getResource());
-	}
-
-	public function testFieldsAreReturned()
-	{
-		$presenter = new DecoratedAtomFieldsPresenter($this->decoratedAtom);
-		$this->assertEquals(['name', 'address'], $presenter->getExposedFields());
-	}
-
-	public function testFieldsAreAccessible()
-	{
-		$presenter = new DecoratedAtomFieldsPresenter($this->decoratedAtom);
-
-		$this->assertTrue($presenter->fieldIsExposed('name'));
-		$this->assertFalse($presenter->fieldIsExposed('somekeythatdoesntexist'));
-	}
-
-	public function testArrayConversionShouldRespectFieldLimitations()
-	{
-		$presenter = new DecoratedAtomFieldsPresenter($this->decoratedAtom);
-		$presentedArray = $presenter->toArray();
-
-		$this->assertArrayHasKey('name', $presentedArray);
-		$this->assertArrayHasKey('address', $presentedArray);
-		$this->assertArrayNotHasKey('random', $presentedArray);
-	}
-
-	public function testFieldsAreAccessibleWithEmptyFieldsArray()
-	{
-		$presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-		$this->assertTrue($presenter->fieldIsExposed('name'));
+		$this->assertEquals($this->decoratedAtom, $presenter->getWrappedObject());
 	}
 
     public function testResourceAttributeDeference()
@@ -59,12 +29,12 @@ class BasePresenterTest extends TestCase
     public function testPresenterMethodDeference()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertEquals('Primer', $presenter->favorite_movie);
+        $this->assertEquals('Primer', $presenter->favoriteMovie);
     }
 
     /**
      * @covers presenter::thisMethodDoesntExist
-     * @expectedException \McCool\LaravelAutoPresenter\ResourceMethodNotFound
+     * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
      */
     public function testResourceMethodNotFoundThrowsException()
     {

@@ -1,8 +1,10 @@
 <?php namespace McCool\Tests\Stubs;
 
-class DecoratedAtomPresenter extends \McCool\LaravelAutoPresenter\BasePresenter
+use McCool\LaravelAutoPresenter\BasePresenter;
+
+class DecoratedAtomPresenter extends BasePresenter
 {
-    public function favorite_movie()
+    public function favoriteMovie()
     {
         return 'Primer';
     }
