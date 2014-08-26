@@ -3,4 +3,4 @@
 /**
 * This exception is thrown when a model references a presenter that can't be found.
 */
-class PresenterNotFoundException extends \Exception {}
+class PresenterNotFound extends \Exception implements LaravelAutoPresenterException {}

@@ -1,48 +1,44 @@
 <?php namespace McCool\Tests;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
+use McCool\Tests\Stubs\DecoratedAtom;
+use McCool\Tests\Stubs\DecoratedAtomPresenter;
+use McCool\Tests\Stubs\DecoratedAtomFieldsPresenter;
 use Mockery as m;
 
-class BasePresenterTest extends \PHPUnit_Framework_TestCase
+class BasePresenterTest extends TestCase
 {
-    public function tearDown()
-    {
-        m::close();
-    }
+	private $decoratedAtom;
+
+	public function setUp()
+	{
+		$this->decoratedAtom = new DecoratedAtom;
+	}
+
+	public function testResourceIsReturned()
+	{
+		$presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+		$this->assertEquals($this->decoratedAtom, $presenter->getWrappedObject());
+	}
 
     public function testResourceAttributeDeference()
     {
-        $atom = $this->getDecoratedAtom();
-
-        $presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
-
-        $this->assertEquals('McCool\Tests\Stubs\DecoratedAtomPresenter', $presenter->presenter);
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertEquals(DecoratedAtomPresenter::class, $presenter->getPresenterClass());
     }
 
     public function testPresenterMethodDeference()
     {
-        $atom = $this->getDecoratedAtom();
-
-        $presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
-
-        $this->assertEquals('Primer', $presenter->favorite_movie);
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertEquals('Primer', $presenter->favoriteMovie);
     }
 
     /**
-    * @covers presenter::thisMethodDoesntExist
-    * @expectedException McCool\LaravelAutoPresenter\ResourceMethodNotFoundException
-    */
+     * @covers presenter::thisMethodDoesntExist
+     * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
+     */
     public function testResourceMethodNotFoundThrowsException()
     {
-        $atom = $this->getDecoratedAtom();
-
-        $presenter = new \McCool\Tests\Stubs\DecoratedAtomPresenter($atom);
-
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
         $presenter->thisMethodDoesntExist();
-    }
-
-    private function getDecoratedAtom()
-    {
-        return new \McCool\Tests\Stubs\DecoratedAtom;
     }
 }

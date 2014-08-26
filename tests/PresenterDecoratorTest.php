@@ -2,80 +2,79 @@
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
+use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
+use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\Tests\Stubs\DecoratedAtom;
+use McCool\Tests\Stubs\DecoratedAtomPresenter;
+use McCool\Tests\Stubs\UndecoratedAtom;
+use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
 use Mockery as m;
 
-class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
+class PresenterDecoratorTest extends TestCase
 {
-    public function tearDown()
-    {
-        m::close();
-    }
+	private $decorator;
+
+	public function setUp()
+	{
+		$this->decorator = new PresenterDecorator(
+			new AtomDecorator,
+			new CollectionDecorator,
+			new PaginatorDecorator
+		);
+	}
 
     public function testWontDecorateOtherObjects()
     {
-        $atom = new \McCool\Tests\Stubs\UndecoratedAtom;
-        $decorator = $this->getDecorator();
+        $atom = new UndecoratedAtom;
+        $decoratedAtom = $this->decorator->decorate($atom);
 
-        $decoratedAtom = $decorator->decorate($atom);
-
-        $this->assertInstanceOf('McCool\Tests\Stubs\UndecoratedAtom', $decoratedAtom);
+        $this->assertInstanceOf(UndecoratedAtom::class, $decoratedAtom);
     }
 
     public function testDecoratesAtom()
     {
         $atom = $this->getDecoratedAtom();
-        $decorator = $this->getDecorator();
+        $decoratedAtom = $this->decorator->decorate($atom);
 
-        $decoratedAtom = $decorator->decorate($atom);
-
-        $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
+        $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
     }
 
     public function testDecoratesPaginator()
     {
         $paginator = $this->getFilledPaginator();
-        $decorator = $this->getDecorator();
-
-        $decoratedPaginator = $decorator->decorate($paginator);
+        $decoratedPaginator = $this->decorator->decorate($paginator);
 
         foreach ($decoratedPaginator as $decoratedAtom) {
-            $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
+            $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
         }
     }
 
     public function testDecorateCollection()
     {
         $collection = $this->getFilledCollection();
-        $decorator = $this->getDecorator();
-
-        $decoratedCollection = $decorator->decorate($collection);
+        $decoratedCollection = $this->decorator->decorate($collection);
 
         foreach ($decoratedCollection as $decoratedAtom) {
-            $this->assertInstanceOf('McCool\Tests\Stubs\DecoratedAtomPresenter', $decoratedAtom);
+            $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
         }
     }
 
     /**
     * @covers decorator::decorate
-    * @expectedException McCool\LaravelAutoPresenter\PresenterNotFoundException
+    * @expectedException \McCool\LaravelAutoPresenter\PresenterNotFound
     */
-    public function testWronglyDecoratedAlassThrowsException()
+    public function testWronglyDecoratedClassThrowsException()
     {
-        $atom      = new \McCool\Tests\Stubs\WronglyDecoratedAtom;
-        $decorator = $this->getDecorator();
-
-        $decoratedAtom = $decorator->decorate($atom);
-    }
-
-    private function getDecorator()
-    {
-        return new \McCool\LaravelAutoPresenter\PresenterDecorator;
+        $atom = new WronglyDecoratedAtom;
+        $this->decorator->decorate($atom);
     }
 
     private function getDecoratedAtom()
     {
-        return new \McCool\Tests\Stubs\DecoratedAtom;
+        return new DecoratedAtom;
     }
 
     private function getFilledPaginator()
@@ -86,11 +85,11 @@ class PresenterDecoratorTest extends \PHPUnit_Framework_TestCase
             $items[] = $this->getDecoratedAtom();
         }
 
-        $environment = m::mock('Illuminate\Pagination\Environment');
-        $environment->shouldReceive('getCurrentPage')->andReturn(1);
+        $factory = m::mock('Illuminate\Pagination\Factory');
+        $factory->shouldReceive('getCurrentPage')->andReturn(1);
 
         $paginator = new Paginator(
-            $environment,
+            $factory,
             $items,
             10,
             5

@@ -1,112 +1,47 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
+use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+
+use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
+use McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException;
+use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 
 /**
-* The class that decorates model objects, paginators and collections.
-*/
+ * The class that decorates model objects, paginators and collections.
+ */
 class PresenterDecorator
 {
+	/**
+	 * Setup the presenter decorator with the possible decorators to be used for subjects.
+	 *
+	 * @param AtomDecorator $atomDecorator
+	 * @param CollectionDecorator $collectionDecorator
+	 * @param PaginatorDecorator $paginationDecorator
+	 */
+	public function __construct(
+		AtomDecorator $atomDecorator,
+		CollectionDecorator $collectionDecorator,
+		PaginatorDecorator $paginationDecorator
+	)
+	{
+		$this->decorators[] = $atomDecorator;
+		$this->decorators[] = $collectionDecorator;
+		$this->decorators[] = $paginationDecorator;
+	}
+
     /**
-    * things go in, get decorated (or not) and are returned
-    *
-    * @param mixed $subject
-    * @return mixed
-    */
-    public function decorate($subject) {
-        if ($subject instanceOf Paginator) {
-            return $this->decoratePaginator($subject);
-        }
-
-        if ($subject instanceOf Collection) {
-            return $this->decorateCollection($subject);
-        }
-
-        return $this->decorateAtom($subject);
-    }
-
-    /**
-    * decorate the objects within a paginator
-    *
-    * @param \Illuminate\Pagination\Paginator $paginator
-    * @return \Illuminate\Pagination\Paginator
-    */
-    protected function decoratePaginator(Paginator $paginator)
+     * things go in, get decorated (or not) and are returned
+     *
+     * @param mixed $subject
+     * @return mixed
+     * @throws DecoratorNotFoundException
+     */
+    public function decorate($subject)
     {
-        $newItems = array();
+	    foreach ($this->decorators as $possibleDecorator)
+		    if ($possibleDecorator->canDecorate($subject))
+			    return $possibleDecorator->decorate($subject);
 
-        foreach ($paginator->getItems() as $atom) {
-            $newItems[] = $this->decorateAtom($atom);
-        }
-
-        $paginator->setItems($newItems);
-
-        return $paginator;
-    }
-
-    /**
-    * decorate the objects within a collection
-    *
-    * @param \Illuminate\Support\Collection $collection
-    * @return \Illuminate\Support\Collection
-    */
-    protected function decorateCollection(Collection $collection)
-    {
-        foreach ($collection as $key => $atom) {
-            $collection->put($key, $this->decorateAtom($atom));
-        }
-
-        return $collection;
-    }
-
-    /**
-    * decorate an individual class
-    *
-    * @param mixed $atom
-    * @return mixed
-    */
-    protected function decorateAtom($atom)
-    {
-        if ($atom instanceOf Model) {
-            $atom = $this->decorateRelations($atom);
-        }
-
-        if (!$atom instanceof PresenterInterface) {
-            return $atom;
-        }
-
-        if ($atom instanceOf BasePresenter) {
-            return $atom;
-        }
-
-        $presenterClass = $atom->getPresenter();
-
-        if ( ! class_exists($presenterClass)) {
-            throw new PresenterNotFoundException($presenterClass);
-        }
-
-        return new $presenterClass($atom);
-    }
-
-    /**
-    * decorate the relationships of an Eloquent object
-    *
-    * @param \Illuminate\Database\Eloquent\Model $atom
-    * @return mixed
-    */
-    protected function decorateRelations(Model $atom)
-    {
-        foreach ($atom->getRelations() as $relationName => $model) {
-            if ($model instanceOf Collection) {
-                $model = $this->decorateCollection($model);
-                $atom->setRelation($relationName, $model);
-            } else {
-                $atom->setRelation($relationName, $this->decorateAtom($model));
-            }
-        }
-
-        return $atom;
+	    return $subject;
     }
 }

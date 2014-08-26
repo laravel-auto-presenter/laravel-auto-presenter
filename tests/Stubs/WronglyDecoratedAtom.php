@@ -1,6 +1,11 @@
 <?php namespace McCool\Tests\Stubs;
 
-class WronglyDecoratedAtom
+use McCool\LaravelAutoPresenter\HasPresenter;
+
+class WronglyDecoratedAtom implements HasPresenter
 {
-    public $presenter = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+    public function getPresenterClass()
+    {
+	    return 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+    }
 }

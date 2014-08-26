@@ -20,9 +20,8 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
 
         // every time a view is rendered, fire a new event
         View::composer('*', function($view) {
-            if ($view instanceOf \Illuminate\View\View) {
+            if ($view instanceOf \Illuminate\View\View)
                 Event::fire('content.rendering', array($view));
-            }
         });
 
         // every time that event fires, decorate the bound data
@@ -32,15 +31,13 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
             $sharedData = $view->getFactory()->getShared();
             $viewData = array_merge($sharedData, $view->getData());
 
-            if ( ! $viewData) {
+            if ( ! $viewData)
                 return;
-            }
 
             $decorator = $app->make('McCool\LaravelAutoPresenter\PresenterDecorator');
 
-            foreach ($viewData as $key => $value) {
+            foreach ($viewData as $key => $value)
                 $view[$key] = $decorator->decorate($value);
-            }
         });
     }
 }

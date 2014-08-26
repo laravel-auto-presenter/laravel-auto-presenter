@@ -1,8 +1,12 @@
 [![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=master)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
-# Laravel Auto Presenter 2.1.0
+# Laravel Auto Presenter 3.0.0
 
 This package automatically decorates objects bound to views during the view render process.
+
+## Upgrading from version 2 to 3
+
+Version 3 now properly supports and requires Laravel 4.2.x. This was recently causing builds to fail.
 
 ## Upgrading from version 1 to 2
 
@@ -26,7 +30,7 @@ This package automatically decorates objects bound to views during the view rend
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "2.*"
+        "mccool/laravel-auto-presenter": "3.*"
     }
 }
 ```
@@ -34,8 +38,8 @@ This package automatically decorates objects bound to views during the view rend
 <a name="requirements"/>
 ## Requirements
 
-- any flavor of PHP 5.3+ should do
-- Laravel 4.x
+- PHP 5.5+
+- Laravel 4.2.x
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
@@ -45,6 +49,7 @@ This package automatically decorates objects bound to views during the view rend
 - automatically decorate objects within paginator instances
 - automatically decorate objects within collection objects
 - automatically decorate Eloquent relationships that are loaded at the time that the view begins being rendered
+- restrict fields included as part of presentation layer
 
 <a name="install-laravel-package-installer"/>
 ## Install with Laravel 4 Package Installer
@@ -62,7 +67,7 @@ Add the following "require" to your `composer.json` file and run the `php compos
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "*"
+        "mccool/laravel-auto-presenter": "3.0.*"
     }
 }
 ```
@@ -127,12 +132,12 @@ class PostPresenter extends BasePresenter
 {
     public function __construct(Post $post)
     {
-        $this->resource = $post;
+        $this->wrapped object = $post;
     }
 
     public function published_at()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->resource->published_at, 'Europe/Berlin')
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->wrapped object->published_at, 'Europe/Berlin')
                      ->toFormattedDateString();
     }
 }
@@ -163,6 +168,22 @@ class Post extends \Eloquent implements PresenterInterface
 ```
 
 Now, with no additional changes our view will show the date in the desired format.
+
+## Field restriction
+
+You can restrict the fields available on the presenter to be a smaller, limited set that was originally available on the wrapped object your presenter is managing. To do this, define the $exposedFields protect variable on your presenter class:
+
+```php
+class PostPresenter extends BasePresenter
+{
+	protected $exposedFields = [
+		'title',
+		'createdAt'
+	];
+}
+```
+
+The exposed fields act as a white list array. If you do not provide any fields, then it will be ignored. If however, you do - then only fields that defined within the $exposedFields array and exist on the wrapped object will be returned as part of the presenter.
 
 ## Troubleshooting
 

@@ -1,11 +1,10 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-interface PresenterInterface
+interface HasPresenter
 {
     /**
      * Get the presenter class.
-     *
      * @return string The class path to the presenter.
      */
-    public function getPresenter();
+    public function getPresenterClass();
 }
