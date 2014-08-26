@@ -132,12 +132,12 @@ class PostPresenter extends BasePresenter
 {
     public function __construct(Post $post)
     {
-        $this->resource = $post;
+        $this->wrapped object = $post;
     }
 
     public function published_at()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->resource->published_at, 'Europe/Berlin')
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->wrapped object->published_at, 'Europe/Berlin')
                      ->toFormattedDateString();
     }
 }
@@ -171,7 +171,7 @@ Now, with no additional changes our view will show the date in the desired forma
 
 ## Field restriction
 
-You can restrict the fields available on the presenter to be a smaller, limited set that was originally available on the resource object your presenter is managing. To do this, define the $exposedFields protect variable on your presenter class:
+You can restrict the fields available on the presenter to be a smaller, limited set that was originally available on the wrapped object your presenter is managing. To do this, define the $exposedFields protect variable on your presenter class:
 
 ```php
 class PostPresenter extends BasePresenter
@@ -183,7 +183,7 @@ class PostPresenter extends BasePresenter
 }
 ```
 
-The exposed fields act as a white list array. If you do not provide any fields, then it will be ignored. If however, you do - then only fields that defined within the $exposedFields array and exist on the resource will be returned as part of the presenter.
+The exposed fields act as a white list array. If you do not provide any fields, then it will be ignored. If however, you do - then only fields that defined within the $exposedFields array and exist on the wrapped object will be returned as part of the presenter.
 
 ## Troubleshooting
 
