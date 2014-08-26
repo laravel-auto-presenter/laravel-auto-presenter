@@ -4,12 +4,12 @@
 
 This package automatically decorates objects bound to views during the view render process.
 
-## Upgrading from version 1 to 2
+## Upgrading From Version 1 To 2
 
-* Version 2 is now Laravel 4.2+ only. It is not compatible with Laravel 4.1.
+* Version 2 is now Laravel 4.2 only.
 * The PresenterInterface was added as the method for determining the correct presenter class. Read more on this in the instructions below.
 
-## Quick-install
+## Quick-Install
 
 **For Laravel 4.1**
 
@@ -21,7 +21,7 @@ This package automatically decorates objects bound to views during the view rend
 }
 ```
 
-**For Laravel 4.2+**
+**For Laravel 4.2**
 
 ```json
 {
@@ -35,7 +35,7 @@ This package automatically decorates objects bound to views during the view rend
 ## Requirements
 
 - PHP 5.4+
-- Laravel 4.2+
+- Laravel 4.2.x
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
@@ -49,7 +49,7 @@ This package automatically decorates objects bound to views during the view rend
 <a name="install-laravel-package-installer"/>
 ## Installing With The Laravel 4 Package Installer
 
-1. Install [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
+1. Install the [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
 2. Run `php artisan package:install mccool/laravel-auto-presenter`
 
 <a name="install-composer"/>
