@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use McCool\LaravelAutoPresenter\PresenterNotFound;
 
-class AtomDecorator implements DecoratorInterface
+class AtomDecorator extends BaseDecorator implements DecoratorInterface
 {
 	/**
 	 * The only valid $subject for this decorator, is one of a Collection instance.
