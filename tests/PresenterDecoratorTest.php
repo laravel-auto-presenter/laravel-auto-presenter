@@ -88,6 +88,7 @@ class PresenterDecoratorTest extends TestCase
         $factory = m::mock('Illuminate\Pagination\Factory');
         $factory->shouldReceive('getCurrentPage')->andReturn(1);
 
+        /** @var TYPE_NAME $factory */
         $paginator = new Paginator(
             $factory,
             $items,
