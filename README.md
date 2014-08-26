@@ -1,16 +1,23 @@
 [![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=master)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
-# Laravel Auto Presenter 3.0.0 beta
+# Laravel Auto Presenter
 
 This package automatically decorates objects bound to views during the view render process.
 
-## Beta Concerns
+## Version 3 Beta Concerns
 
-Currently, we're trying to decide if there's a reason at all to implement ArrayAccess. Please chime in on the issues if you have a strong opinion.
+The purpose of the 3.0 major version was to drop a lot of the functionality of earlier versions. Then, incrementally we'll solve each problem as they come up. All-in-all we believe that the solutions for most presentation concerns are very rudimentary. If new concerns are raised, we'd like a chance to architect a solution that supports a solid separation of concerns.
+
+- Currently, we're trying to decide if there's a reason at all to implement ArrayAccess.
+
+Please chime in on the issues if you have a strong opinions.
 
 ## Upgrading from version 2 to 3
 
-Version 3 now properly supports and requires Laravel 4.2.x. This was recently causing builds to fail.
+First of all, we recommend not doing this until it's out of beta.
+
+* Version 3 now properly supports and requires Laravel 4.2.x. This was recently causing builds to fail.
+* PHP 5.5 is now a requirement for version 3
 
 ## Upgrading from version 1 to 2
 
@@ -34,7 +41,17 @@ Version 3 now properly supports and requires Laravel 4.2.x. This was recently ca
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "3.0.*"
+        "mccool/laravel-auto-presenter": "2.*"
+    }
+}
+```
+
+**For Beta Version 3+**
+
+```json
+{
+    "require": {
+        "mccool/laravel-auto-presenter": "3.*"
     }
 }
 ```
@@ -42,8 +59,22 @@ Version 3 now properly supports and requires Laravel 4.2.x. This was recently ca
 <a name="requirements"/>
 ## Requirements
 
+Beta Version 3
+
 - PHP 5.5+
 - Laravel 4.2.x
+- [optional] PHPUnit to run the tests
+
+Version 2
+
+- PHP 5.3+
+- Laravel 4.2.x
+- [optional] PHPUnit to run the tests
+
+Version 1
+
+- PHP 5.3+
+- Laravel 4.1.x
 - [optional] PHPUnit to run the tests
 
 <a name="features"/>
