@@ -11,37 +11,42 @@ use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
  */
 class PresenterDecorator
 {
-	/**
-	 * Setup the presenter decorator with the possible decorators to be used for subjects.
-	 *
-	 * @param AtomDecorator $atomDecorator
-	 * @param CollectionDecorator $collectionDecorator
-	 * @param PaginatorDecorator $paginationDecorator
-	 */
-	public function __construct(
-		AtomDecorator $atomDecorator,
-		CollectionDecorator $collectionDecorator,
-		PaginatorDecorator $paginationDecorator
-	)
-	{
-		$this->decorators[] = $atomDecorator;
-		$this->decorators[] = $collectionDecorator;
-		$this->decorators[] = $paginationDecorator;
-	}
+    /**
+     * Setup the presenter decorator with the possible decorators to be used for subjects.
+     *
+     * @param AtomDecorator       $atomDecorator
+     * @param CollectionDecorator $collectionDecorator
+     * @param PaginatorDecorator  $paginationDecorator
+     *
+     * @return void
+     */
+    public function __construct(
+        AtomDecorator $atomDecorator,
+        CollectionDecorator $collectionDecorator,
+        PaginatorDecorator $paginationDecorator
+    ) {
+        $this->decorators[] = $atomDecorator;
+        $this->decorators[] = $collectionDecorator;
+        $this->decorators[] = $paginationDecorator;
+    }
 
     /**
-     * things go in, get decorated (or not) and are returned
+     * Things go in, get decorated (or not) and are returned.
      *
      * @param mixed $subject
-     * @return mixed
+     *
      * @throws DecoratorNotFoundException
+     *
+     * @return mixed
      */
     public function decorate($subject)
     {
-	    foreach ($this->decorators as $possibleDecorator)
-		    if ($possibleDecorator->canDecorate($subject))
-			    return $possibleDecorator->decorate($subject);
+        foreach ($this->decorators as $possibleDecorator) {
+            if ($possibleDecorator->canDecorate($subject)) {
+                return $possibleDecorator->decorate($subject);
+            }
+        }
 
-	    return $subject;
+        return $subject;
     }
 }

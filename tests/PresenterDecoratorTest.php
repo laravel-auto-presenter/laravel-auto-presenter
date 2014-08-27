@@ -15,20 +15,20 @@ use Mockery as m;
 
 class PresenterDecoratorTest extends TestCase
 {
-	private $decorator;
+    private $decorator;
 
-	public function setUp()
-	{
-		$this->decorator = new PresenterDecorator(
-			new AtomDecorator,
-			new CollectionDecorator,
-			new PaginatorDecorator
-		);
-	}
+    public function setUp()
+    {
+        $atom = new AtomDecorator();
+        $collection = new CollectionDecorator();
+        $paginator = new PaginatorDecorator();
+
+        $this->decorator = new PresenterDecorator($atom, $collection, $paginator);
+    }
 
     public function testWontDecorateOtherObjects()
     {
-        $atom = new UndecoratedAtom;
+        $atom = new UndecoratedAtom();
         $decoratedAtom = $this->decorator->decorate($atom);
 
         $this->assertInstanceOf(UndecoratedAtom::class, $decoratedAtom);
@@ -63,18 +63,18 @@ class PresenterDecoratorTest extends TestCase
     }
 
     /**
-    * @covers decorator::decorate
-    * @expectedException \McCool\LaravelAutoPresenter\PresenterNotFound
-    */
+     * @covers decorator::decorate
+     * @expectedException \McCool\LaravelAutoPresenter\PresenterNotFound
+     */
     public function testWronglyDecoratedClassThrowsException()
     {
-        $atom = new WronglyDecoratedAtom;
+        $atom = new WronglyDecoratedAtom();
         $this->decorator->decorate($atom);
     }
 
     private function getDecoratedAtom()
     {
-        return new DecoratedAtom;
+        return new DecoratedAtom();
     }
 
     private function getFilledPaginator()

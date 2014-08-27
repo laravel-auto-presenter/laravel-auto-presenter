@@ -4,7 +4,8 @@ interface HasPresenter
 {
     /**
      * Get the presenter class.
-     * @return string The class path to the presenter.
+     *
+     * @return string
      */
     public function getPresenterClass();
 }

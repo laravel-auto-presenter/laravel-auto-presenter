@@ -1,8 +1,9 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-use Illuminate\Support\ServiceProvider;
+use Event;
+use View;
 
-use Event, View;
+use Illuminate\Support\ServiceProvider;
 
 class LaravelAutoPresenterServiceProvider extends ServiceProvider
 {
@@ -19,20 +20,21 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
         $this->package('mccool/laravel-auto-presenter');
 
         // every time a view is rendered, fire a new event
-        View::composer('*', function($view) {
-            if ($view instanceOf \Illuminate\View\View)
+        View::composer('*', function ($view) {
+            if ($view instanceof \Illuminate\View\View)
                 Event::fire('content.rendering', array($view));
         });
 
         // every time that event fires, decorate the bound data
         $app = $this->app;
 
-        Event::listen('content.rendering', function($view) use ($app) {
+        Event::listen('content.rendering', function ($view) use ($app) {
             $sharedData = $view->getFactory()->getShared();
             $viewData = array_merge($sharedData, $view->getData());
 
-            if ( ! $viewData)
+            if (!$viewData) {
                 return;
+            }
 
             $decorator = $app->make('McCool\LaravelAutoPresenter\PresenterDecorator');
 

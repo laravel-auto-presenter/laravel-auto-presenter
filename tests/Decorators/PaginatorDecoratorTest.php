@@ -8,28 +8,28 @@ use Mockery as m;
 
 class PaginatorDecoratorTest extends TestCase
 {
-	private $paginatorDecorator;
+    private $paginatorDecorator;
 
-	public function setUp()
-	{
-		$this->paginatorDecorator = new PaginatorDecorator;
-	}
+    public function setUp()
+    {
+        $this->paginatorDecorator = new PaginatorDecorator();
+    }
 
-	public function testCanDecoratePaginator()
-	{
-		$paginator = m::mock('Illuminate\Pagination\Paginator');
+    public function testCanDecoratePaginator()
+    {
+        $paginator = m::mock('Illuminate\Pagination\Paginator');
 
-		$this->assertTrue($this->paginatorDecorator->canDecorate($paginator));
-		$this->assertFalse($this->paginatorDecorator->canDecorate('garbage stuff yo'));
-	}
+        $this->assertTrue($this->paginatorDecorator->canDecorate($paginator));
+        $this->assertFalse($this->paginatorDecorator->canDecorate('garbage stuff yo'));
+    }
 
-	public function testDecorationOfPaginator()
-	{
-		$paginator = m::mock('Illuminate\Pagination\Paginator');
+    public function testDecorationOfPaginator()
+    {
+        $paginator = m::mock('Illuminate\Pagination\Paginator');
 
-		$paginator->shouldReceive('getItems')->andReturn(['an item']);
-		$paginator->shouldReceive('setItems')->with(['an item']);
+        $paginator->shouldReceive('getItems')->andReturn(['an item']);
+        $paginator->shouldReceive('setItems')->with(['an item']);
 
-		$this->paginatorDecorator->decorate($paginator);
-	}
+        $this->paginatorDecorator->decorate($paginator);
+    }
 }

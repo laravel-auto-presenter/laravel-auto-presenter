@@ -8,8 +8,12 @@ abstract class BasePresenter
     private $wrappedObject = null;
 
     /**
-     * Construct the presenter and provide the resource that the presenter will represent.
+     * Construct the presenter and provide the resource that the presenter will
+     * represent.
+     *
      * @param object $resource
+     *
+     * @return void
      */
     public function __construct($resource)
     {
@@ -18,6 +22,7 @@ abstract class BasePresenter
 
     /**
      * Public resource getter.
+     *
      * @return mixed
      */
     public function getWrappedObject()
@@ -26,10 +31,11 @@ abstract class BasePresenter
     }
 
     /**
-     * Magic Method access initially tries for local fields
-     * then, defers to the decorated object.
+     * Magic method access initially tries for local fields, then defers to the
+     * decorated object.
      *
      * @param string $key
+     *
      * @return mixed
      */
     public function __get($key)
@@ -42,12 +48,14 @@ abstract class BasePresenter
     }
 
     /**
-     * Magic Method access for methods called against the presenter looks for
-     * a method on the resource, or throws an exception if none is found.
+     * Magic Method access for methods called against the presenter looks for a
+     * method on the resource, or throws an exception if none is found.
      *
      * @param string $key
-     * @param array $args
+     * @param array  $args
+     *
      * @throws MethodNotFound
+     *
      * @return mixed
      */
     public function __call($key, $args)
@@ -55,13 +63,15 @@ abstract class BasePresenter
         if (method_exists($this->wrappedObject, $key))
             return call_user_func_array(array($this->wrappedObject, $key), $args);
 
-        throw new MethodNotFound('Presenter: ' . get_called_class() . '::' . $key . ' method does not exist');
+        throw new MethodNotFound('Presenter: '.get_called_class().'::'.$key.' method does not exist');
     }
 
     /**
-     * Magic Method isset access measures the existence of a
-     * property on the resource using ArrayAccess.
-     * @param $key
+     * Magic Method isset access measures the existence of a property on the
+     * resource using ArrayAccess.
+     *
+     * @param string $key
+     *
      * @return bool
      */
     public function __isset($key)

@@ -1,24 +1,24 @@
 <?php namespace McCool\Tests;
 
 use McCool\Tests\Stubs\DecoratedAtom;
-use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use McCool\Tests\Stubs\DecoratedAtomFieldsPresenter;
+use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use Mockery as m;
 
 class BasePresenterTest extends TestCase
 {
-	private $decoratedAtom;
+    private $decoratedAtom;
 
-	public function setUp()
-	{
-		$this->decoratedAtom = new DecoratedAtom;
-	}
+    public function setUp()
+    {
+        $this->decoratedAtom = new DecoratedAtom();
+    }
 
-	public function testResourceIsReturned()
-	{
-		$presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-		$this->assertEquals($this->decoratedAtom, $presenter->getWrappedObject());
-	}
+    public function testResourceIsReturned()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertEquals($this->decoratedAtom, $presenter->getWrappedObject());
+    }
 
     public function testResourceAttributeDeference()
     {

@@ -31,10 +31,10 @@
         "mockery/mockery": "~0.8"
     },
     "autoload": {
-	    "psr-4": {
+        "psr-4": {
             "McCool\\LaravelAutoPresenter\\": "src/",
-		    "McCool\\Tests\\": "tests/"
-	    }
+            "McCool\\Tests\\": "tests/"
+        }
     },
     "extra": {
         "branch-alias": {

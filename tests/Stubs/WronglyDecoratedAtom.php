@@ -6,6 +6,6 @@ class WronglyDecoratedAtom implements HasPresenter
 {
     public function getPresenterClass()
     {
-	    return 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+        return 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
     }
 }
