@@ -32,7 +32,11 @@
     },
     "autoload": {
         "psr-4": {
-            "McCool\\LaravelAutoPresenter\\": "src/",
+            "McCool\\LaravelAutoPresenter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "McCool\\Tests\\": "tests/"
         }
     },
