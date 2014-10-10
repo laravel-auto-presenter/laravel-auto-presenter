@@ -32,6 +32,22 @@ class BasePresenterTest extends TestCase
         $this->assertEquals('Primer', $presenter->favoriteMovie);
     }
 
+    public function testResourcePropertyViaMagicMethod()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertEquals('bazinga', $presenter->myProperty);
+    }
+
+    /**
+     * @covers presenter::thisMethodDoesntExist
+     * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
+     */
+    public function testResourcePropertyNotFoundThrowsException()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $presenter->thisPropertyDoesntExist;
+    }
+
     /**
      * @covers presenter::thisMethodDoesntExist
      * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
