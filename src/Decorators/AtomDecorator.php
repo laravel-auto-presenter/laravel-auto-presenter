@@ -3,6 +3,7 @@
 namespace McCool\LaravelAutoPresenter\Decorators;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use McCool\LaravelAutoPresenter\PresenterNotFound;
 
