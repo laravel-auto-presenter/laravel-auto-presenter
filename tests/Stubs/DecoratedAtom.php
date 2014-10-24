@@ -14,4 +14,20 @@ class DecoratedAtom implements HasPresenter
     {
         return DecoratedAtomPresenter::class;
     }
+
+    /**
+     * __get properties should work too
+     */
+    public function __get($key)
+    {
+        if ($key == 'testProperty')
+            return 'woop';
+        else
+            return $this->$key;
+    }
+
+    public function __isset($key)
+    {
+        return ( $key == 'testProperty' || !is_null($this->$key) );
+    }
 }
