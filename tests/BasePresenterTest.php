@@ -38,6 +38,12 @@ class BasePresenterTest extends TestCase
         $this->assertEquals('bazinga', $presenter->myProperty);
     }
 
+    public function testMagicMethodProperty()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertEquals('woop', $presenter->testProperty);
+    }
+
     /**
      * @covers presenter::thisMethodDoesntExist
      * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
