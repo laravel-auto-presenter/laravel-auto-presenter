@@ -47,6 +47,8 @@ class PresenterDecoratorTest extends TestCase
         $paginator = $this->getFilledPaginator();
         $decoratedPaginator = $this->decorator->decorate($paginator);
 
+        $this->assertCount(5, $decoratedPaginator);
+
         foreach ($decoratedPaginator as $decoratedAtom) {
             $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
         }
@@ -56,6 +58,8 @@ class PresenterDecoratorTest extends TestCase
     {
         $collection = $this->getFilledCollection();
         $decoratedCollection = $this->decorator->decorate($collection);
+
+        $this->assertCount(5, $decoratedCollection);
 
         foreach ($decoratedCollection as $decoratedAtom) {
             $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
@@ -85,18 +89,7 @@ class PresenterDecoratorTest extends TestCase
             $items[] = $this->getDecoratedAtom();
         }
 
-        $factory = m::mock('Illuminate\Pagination\Factory');
-        $factory->shouldReceive('getCurrentPage')->andReturn(1);
-
-        /** @var TYPE_NAME $factory */
-        $paginator = new Paginator(
-            $factory,
-            $items,
-            10,
-            5
-        );
-
-        return $paginator->setupPaginationContext();
+        return new Paginator($items, 5);
     }
 
     private function getFilledCollection()

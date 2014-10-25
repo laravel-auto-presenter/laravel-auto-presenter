@@ -16,6 +16,7 @@ Please chime in on the issues if you have a strong opinions.
 
 First of all, we recommend not doing this until it's out of beta.
 
+* Version 3 is now Laravel 5 only.
 * PHP 5.5 is now a requirement for version 3
 
 ## Upgrading From Version 1 To 2
@@ -42,7 +43,7 @@ First of all, we recommend not doing this until it's out of beta.
 Beta Version 3
 
 - PHP 5.5+
-- Laravel 4.2.x
+- Laravel 5.x
 - [optional] PHPUnit to run the tests
 
 Version 2
@@ -74,7 +75,7 @@ Add the following "require" to your `composer.json` file and run the `composer i
 }
 ```
 
-**For Laravel 4.2 (Stable)**
+**For Laravel 4.2**
 
 ```json
 {
@@ -84,7 +85,7 @@ Add the following "require" to your `composer.json` file and run the `composer i
 }
 ```
 
-**For Laravel 4.2 (Beta)**
+**For Laravel 5**
 
 ```json
 {

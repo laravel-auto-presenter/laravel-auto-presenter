@@ -2,6 +2,7 @@
 
 namespace McCool\Tests\Decorators;
 
+use Illuminate\Pagination\Paginator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 use McCool\Tests\TestCase;
 use Mockery as m;
@@ -25,10 +26,7 @@ class PaginatorDecoratorTest extends TestCase
 
     public function testDecorationOfPaginator()
     {
-        $paginator = m::mock('Illuminate\Pagination\Paginator');
-
-        $paginator->shouldReceive('getItems')->andReturn(['an item']);
-        $paginator->shouldReceive('setItems')->with(['an item']);
+        $paginator = new Paginator(['an item'], 2);
 
         $this->paginatorDecorator->decorate($paginator);
     }
