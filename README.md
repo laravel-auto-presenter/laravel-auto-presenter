@@ -1,28 +1,9 @@
-# Laravel Auto Presenter 3
+Laravel Auto Presenter 3
+========================
 
 [![Build Status](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter.svg?branch=master)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 
 This package automatically decorates objects bound to views during the view render process.
-
-## Version 3 Beta Concerns
-
-The purpose of the 3.0 major version was to drop a lot of the functionality of earlier versions. Then, incrementally we'll solve each problem as they come up. All-in-all we believe that the solutions for most presentation concerns are very rudimentary. If new concerns are raised, we'd like a chance to architect a solution that supports a solid separation of concerns.
-
-- Currently, we're trying to decide if there's a reason at all to implement ArrayAccess.
-
-Please chime in on the issues if you have a strong opinions.
-
-## Upgrading From Version 2 To 3
-
-First of all, we recommend not doing this until it's out of beta.
-
-* Version 3 is now Laravel 5 only.
-* PHP 5.5 is now a requirement for version 3
-
-## Upgrading From Version 1 To 2
-
-* Version 2 is now Laravel 4.2 only.
-* The HasPresenter was added as the method for determining the correct presenter class. Read more on this in the instructions below.
 
 <a name="features"/>
 ## Features
@@ -31,16 +12,10 @@ First of all, we recommend not doing this until it's out of beta.
 - Automatically decorate objects within paginator instances
 - Automatically decorate objects within collection objects
 
-<a name="install-laravel-package-installer"/>
-## Installing With The Laravel 4 Package Installer
-
-1. Install the [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
-2. Run `php artisan package:install mccool/laravel-auto-presenter`
-
 <a name="requirements"/>
 ## Requirements
 
-Beta Version 3
+Version 3
 
 - PHP 5.5+
 - Laravel 5.x
@@ -57,6 +32,12 @@ Version 1
 - PHP 5.3+
 - Laravel 4.1.x
 - [optional] PHPUnit to run the tests
+
+<a name="install-laravel-package-installer"/>
+## Installing With The Laravel 4 Package Installer
+
+1. Install the [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
+2. Run `php artisan package:install mccool/laravel-auto-presenter`
 
 <a name="install-composer"/>
 ## Installing With Composer
