@@ -40,7 +40,7 @@ abstract class BasePresenter
      */
     public function __get($key)
     {
-        if (property_exists($this->wrappedObject, $key) || isset($this->wrappedObject->$key)) {
+        if (property_exists($this->wrappedObject, $key)) {
             return $this->wrappedObject->$key;
         }
 
