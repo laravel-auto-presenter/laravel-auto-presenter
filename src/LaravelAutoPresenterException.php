@@ -1,3 +1,6 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-interface LaravelAutoPresenterException {}
+interface LaravelAutoPresenterException
+{
+	//
+}

@@ -60,8 +60,9 @@ abstract class BasePresenter
      */
     public function __call($key, $args)
     {
-        if (method_exists($this->wrappedObject, $key))
+        if (method_exists($this->wrappedObject, $key)) {
             return call_user_func_array(array($this->wrappedObject, $key), $args);
+        }
 
         throw new MethodNotFound('Presenter: '.get_called_class().'::'.$key.' method does not exist');
     }

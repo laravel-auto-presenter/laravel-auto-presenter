@@ -1,9 +1,8 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
 use Event;
-use View;
-
 use Illuminate\Support\ServiceProvider;
+use View;
 
 class LaravelAutoPresenterServiceProvider extends ServiceProvider
 {
@@ -12,7 +11,10 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
     public function register()
     {
         // register as a singleton because we don't need to be instantiating a new one all the time
-        $this->app->singleton('McCool\LaravelAutoPresenter\PresenterDecorator', 'McCool\LaravelAutoPresenter\PresenterDecorator');
+        $this->app->singleton(
+            'McCool\LaravelAutoPresenter\PresenterDecorator',
+            'McCool\LaravelAutoPresenter\PresenterDecorator'
+        );
     }
 
     public function boot()
@@ -21,8 +23,9 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
 
         // every time a view is rendered, fire a new event
         View::composer('*', function ($view) {
-            if ($view instanceof \Illuminate\View\View)
+            if ($view instanceof \Illuminate\View\View) {
                 Event::fire('content.rendering', array($view));
+            }
         });
 
         // every time that event fires, decorate the bound data
@@ -38,8 +41,9 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
 
             $decorator = $app->make('McCool\LaravelAutoPresenter\PresenterDecorator');
 
-            foreach ($viewData as $key => $value)
+            foreach ($viewData as $key => $value) {
                 $view[$key] = $decorator->decorate($value);
+            }
         });
     }
 }

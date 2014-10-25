@@ -1,7 +1,6 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
-
 use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
