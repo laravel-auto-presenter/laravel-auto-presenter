@@ -31,6 +31,20 @@ abstract class BasePresenter
     }
 
     /**
+     * Throws a method not found exception.
+     *
+     * @param string $key
+     *
+     * @throws MethodNotFound
+     *
+     * @return void
+     */
+    protected function throwException($key)
+    {
+        throw new MethodNotFound('Presenter: '.get_called_class().'::'.$key.' method does not exist');
+    }
+
+    /**
      * Magic method access initially tries for local fields, then defers to the
      * decorated object.
      *
@@ -40,11 +54,15 @@ abstract class BasePresenter
      */
     public function __get($key)
     {
+        if (method_exists($this, $key)) {
+            return $this->{$key}();
+        }
+
         if (property_exists($this->wrappedObject, $key) || isset($this->wrappedObject->$key)) {
             return $this->wrappedObject->$key;
         }
 
-        return $this->{$key}();
+        $this->throwException($key);
     }
 
     /**
@@ -64,7 +82,7 @@ abstract class BasePresenter
             return call_user_func_array(array($this->wrappedObject, $key), $args);
         }
 
-        throw new MethodNotFound('Presenter: '.get_called_class().'::'.$key.' method does not exist');
+        $this->throwException($key);
     }
 
     /**
