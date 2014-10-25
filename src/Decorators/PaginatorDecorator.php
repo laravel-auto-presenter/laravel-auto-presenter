@@ -3,6 +3,7 @@
 namespace McCool\LaravelAutoPresenter\Decorators;
 
 use Illuminate\Pagination\Paginator;
+use ReflectionObject;
 
 class PaginatorDecorator extends BaseDecorator implements DecoratorInterface
 {
@@ -28,14 +29,24 @@ class PaginatorDecorator extends BaseDecorator implements DecoratorInterface
      */
     public function decorate($subject)
     {
-        $newItems = array();
+        $items = $this->getItems($subject);
 
-        foreach ($subject->getItems() as $atom) {
-            $newItems[] = $this->createDecorator('Atom')->decorate($atom);
+        foreach ($items->keys() as $key) {
+            $item = $items->get($key);
+            $decorated = $this->createDecorator('Atom')->decorate($item);
+            $items->put($key, $decorated);
         }
 
-        $subject->setItems($newItems);
-
         return $subject;
+    }
+
+    protected function getItems($subject)
+    {
+        $object = new ReflectionObject($subject);
+
+        $items = $object->getProperty('items');
+        $items->setAccessible(true);
+
+        return $items->getValue($subject);
     }
 }
