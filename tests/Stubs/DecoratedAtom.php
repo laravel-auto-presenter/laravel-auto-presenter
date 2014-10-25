@@ -27,6 +27,6 @@ class DecoratedAtom implements HasPresenter
 
     public function __isset($key)
     {
-        return (!is_null($this->$key));
+        return (!is_null(@$this->$key));
     }
 }
