@@ -131,6 +131,7 @@ and a view...
 In this example the published_at attribute is likely to be in the format: "Y-m-d H:i:s" or "2013-08-10 10:20:13". In the real world this is not what we want in our view. So, let's make a presenter that lets us change how the data from the Post class is rendered within the view.
 
 ```php
+use Carbon\Carbon;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 class PostPresenter extends BasePresenter
@@ -142,7 +143,8 @@ class PostPresenter extends BasePresenter
 
     public function published_at()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->wrappedObject->published_at, 'Europe/Berlin')
+        $published = this->wrappedObject->published_at;
+        return Carbon::createFromFormat('Y-m-d H:i:s', $published)
             ->toFormattedDateString();
     }
 }
