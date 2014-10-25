@@ -5,5 +5,5 @@
  */
 class PresenterNotFound extends \Exception implements LaravelAutoPresenterException
 {
-	//
+    //
 }

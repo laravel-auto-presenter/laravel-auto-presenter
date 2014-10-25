@@ -2,5 +2,5 @@
 
 class MethodNotFound extends \Exception implements LaravelAutoPresenterException
 {
-	//
+    //
 }
