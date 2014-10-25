@@ -89,11 +89,10 @@ To show how it's used, we'll pretend that we have an Eloquent Post model. It doe
 I'm using really basic code examples here, so just focus on how the auto-presenter is used and ignore the rest.
 
 ```php
-<?php namespace Example\Blog;
-
 use Example\Accounts\User;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Post extends \Eloquent
+class Post extends Eloquent
 {
     protected $table = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
@@ -108,7 +107,10 @@ class Post extends \Eloquent
 Also, we'll need a controller..
 
 ```php
-class PostsController extends \Controller
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\View;
+
+class PostsController extends Controller
 {
     public function getIndex()
     {
@@ -129,8 +131,6 @@ and a view...
 In this example the published_at attribute is likely to be in the format: "Y-m-d H:i:s" or "2013-08-10 10:20:13". In the real world this is not what we want in our view. So, let's make a presenter that lets us change how the data from the Post class is rendered within the view.
 
 ```php
-<?php namespace Example\Blog;
-
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 class PostPresenter extends BasePresenter
@@ -151,12 +151,12 @@ class PostPresenter extends BasePresenter
 Here, the automatic presenter decorator is injecting the Post model that is to be decorated. We need the post class to implement the interface.
 
 ```php
-<?php namespace Example\Blog;
-
-use McCool\LaravelAutoPresenter\HasPresenter;
 use Example\Accounts\User;
+use Example\Blog\PostPresenter;
+use McCool\LaravelAutoPresenter\HasPresenter;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Post extends \Eloquent implements HasPresenter
+class Post extends Eloquent implements HasPresenter
 {
     protected $table = 'posts';
     protected $fillable = array('author_id', 'title', 'content', 'published_at');
@@ -168,7 +168,7 @@ class Post extends \Eloquent implements HasPresenter
 
     public function getPresenterClass()
     {
-        return \Example\Blog\PostPresenter::class;
+        return PostPresenter::class;
     }
 }
 ```
