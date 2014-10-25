@@ -8,6 +8,6 @@ class BaseDecoratorStub extends BaseDecorator
 {
     public function toArray()
     {
-
+    	//
     }
 }

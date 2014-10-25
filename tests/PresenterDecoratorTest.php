@@ -11,8 +11,6 @@ use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use McCool\Tests\Stubs\UndecoratedAtom;
 use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
-use Mockery as m;
-
 class PresenterDecoratorTest extends TestCase
 {
     private $decorator;

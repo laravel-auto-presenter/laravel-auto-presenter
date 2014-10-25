@@ -1,9 +1,7 @@
 <?php namespace McCool\Tests;
 
 use McCool\Tests\Stubs\DecoratedAtom;
-use McCool\Tests\Stubs\DecoratedAtomFieldsPresenter;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
-use Mockery as m;
 
 class BasePresenterTest extends TestCase
 {
