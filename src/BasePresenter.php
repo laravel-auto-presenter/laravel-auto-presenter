@@ -5,7 +5,7 @@ abstract class BasePresenter
     /**
      * The resource that is the object that was decorated.
      */
-    private $wrappedObject = null;
+    protected $wrappedObject = null;
 
     /**
      * Construct the presenter and provide the resource that the presenter will
