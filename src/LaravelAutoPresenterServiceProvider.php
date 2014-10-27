@@ -143,7 +143,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
         $app->singleton('autopresenter', function (Application $app) {
             $atom = $app['autopresenter.atom'];
             $collection = $app['autopresenter.collection'];
-            $pagination = $app['autopresenter.pagination'];
+            $pagination = $app['autopresenter.paginator'];
 
             return new PresenterDecorator($atom, $collection, $pagination);
         });
