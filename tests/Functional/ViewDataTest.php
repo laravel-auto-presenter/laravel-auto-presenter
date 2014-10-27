@@ -8,7 +8,6 @@ class ViewDataTest extends AbstractTestCase
 {
     protected function additionalSetup(Application $app)
     {
-        // setup a subs view namesapce
         $app['view']->addNamespace('stubs', realpath(__DIR__.'/stubs'));
     }
 
@@ -31,6 +30,13 @@ class ViewDataTest extends AbstractTestCase
         $view->render();
 
         // check that the model was decorated
+        $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->model);
+        $this->assertSame('hi there', $view->model->foo);
+
+        // render the view again
+        $view->render();
+
+        // check everything is still the same
         $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->model);
         $this->assertSame('hi there', $view->model->foo);
     }
