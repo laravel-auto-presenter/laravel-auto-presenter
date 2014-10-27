@@ -1,8 +1,7 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
-use Event;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
-use View;
 
 class LaravelAutoPresenterServiceProvider extends ServiceProvider
 {
@@ -10,7 +9,6 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
 
     public function register()
     {
-        // register as a singleton because we don't need to be instantiating a new one all the time
         $this->app->singleton(
             'McCool\LaravelAutoPresenter\PresenterDecorator',
             'McCool\LaravelAutoPresenter\PresenterDecorator'
@@ -21,17 +19,17 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
     {
         $this->package('mccool/laravel-auto-presenter');
 
+        $app = $this->app;
+
         // every time a view is rendered, fire a new event
-        View::composer('*', function ($view) {
-            if ($view instanceof \Illuminate\View\View) {
-                Event::fire('content.rendering', array($view));
+        $app['view']->composer('*', function ($view) use ($app) {
+            if ($view instanceof View) {
+                $app['events']->fire('content.rendering', array($view));
             }
         });
 
         // every time that event fires, decorate the bound data
-        $app = $this->app;
-
-        Event::listen('content.rendering', function ($view) use ($app) {
+        $app['events']->listen('content.rendering', function ($view) use ($app) {
             $sharedData = $view->getFactory()->getShared();
             $viewData = array_merge($sharedData, $view->getData());
 
