@@ -74,7 +74,7 @@ class PresenterDecoratorTest extends TestCase
     }
 
     /**
-     * @expectedException \McCool\LaravelAutoPresenter\PresenterNotFound
+     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\PresenterNotFoundException
      */
     public function testWronglyDecoratedClassThrowsException()
     {

@@ -45,7 +45,7 @@ class BasePresenterTest extends TestCase
     }
 
     /**
-     * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
+     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\PropertyNotFoundException
      */
     public function testResourcePropertyNotFoundThrowsException()
     {
@@ -54,7 +54,7 @@ class BasePresenterTest extends TestCase
     }
 
     /**
-     * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
+     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException
      */
     public function testResourceMethodNotFoundThrowsException()
     {

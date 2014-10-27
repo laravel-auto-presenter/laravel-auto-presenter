@@ -2,7 +2,6 @@
 
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
-use McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 
 class PresenterDecorator
@@ -29,8 +28,6 @@ class PresenterDecorator
      * Things go in, get decorated (or not) and are returned.
      *
      * @param mixed $subject
-     *
-     * @throws \McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException
      *
      * @return mixed
      */

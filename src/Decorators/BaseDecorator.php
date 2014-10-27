@@ -3,6 +3,7 @@
 namespace McCool\LaravelAutoPresenter\Decorators;
 
 use Illuminate\Contracts\Container\Container;
+use McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFoundException;
 
 abstract class BaseDecorator
 {
@@ -32,7 +33,7 @@ abstract class BaseDecorator
      *
      * @param string $class
      *
-     * @throws \McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException
+     * @throws \McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFoundException
      *
      * @return object
      */
