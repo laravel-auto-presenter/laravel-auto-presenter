@@ -78,8 +78,8 @@ class PresenterDecoratorTest extends AbstractTestCase
             $this->decorator->decorate($atom);
         } catch (PresenterNotFound $e) {
             $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
-            $this->assertEquals("The presenter class '$class' was not found.", $e->getMessage());
-            $this->assertEquals($class, $e->getClass());
+            $this->assertSame("The presenter class '$class' was not found.", $e->getMessage());
+            $this->assertSame($class, $e->getClass());
             throw $e;
         }
     }

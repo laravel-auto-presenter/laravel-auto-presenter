@@ -17,31 +17,31 @@ class BasePresenterTest extends AbstractTestCase
     public function testResourceIsReturned()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertEquals($this->decoratedAtom, $presenter->getWrappedObject());
+        $this->assertSame($this->decoratedAtom, $presenter->getWrappedObject());
     }
 
     public function testResourceAttributeDeference()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertEquals(DecoratedAtomPresenter::class, $presenter->getPresenterClass());
+        $this->assertSame(DecoratedAtomPresenter::class, $presenter->getPresenterClass());
     }
 
     public function testPresenterMethodDeference()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertEquals('Primer', $presenter->favoriteMovie);
+        $this->assertSame('Primer', $presenter->favoriteMovie);
     }
 
     public function testResourcePropertyViaMagicMethod()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertEquals('bazinga', $presenter->myProperty);
+        $this->assertSame('bazinga', $presenter->myProperty);
     }
 
     public function testMagicMethodProperty()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertEquals('woop', $presenter->testProperty);
+        $this->assertSame('woop', $presenter->testProperty);
     }
 
     /**
@@ -55,9 +55,9 @@ class BasePresenterTest extends AbstractTestCase
         } catch (PropertyNotFound $e) {
             $property = 'thisPropertyDoesntExist';
             $class = DecoratedAtomPresenter::class;
-            $this->assertEquals("The property '$property' was not found on the presenter class '$class'.", $e->getMessage());
-            $this->assertEquals($property, $e->getProperty());
-            $this->assertEquals($class, $e->getClass());
+            $this->assertSame("The property '$property' was not found on the presenter class '$class'.", $e->getMessage());
+            $this->assertSame($property, $e->getProperty());
+            $this->assertSame($class, $e->getClass());
             throw $e;
         }
     }
@@ -73,9 +73,9 @@ class BasePresenterTest extends AbstractTestCase
         } catch (MethodNotFound $e) {
             $method = 'thisMethodDoesntExist';
             $class = DecoratedAtomPresenter::class;
-            $this->assertEquals("The method '$method' was not found on the presenter class '$class'.", $e->getMessage());
-            $this->assertEquals($method, $e->getMethod());
-            $this->assertEquals($class, $e->getClass());
+            $this->assertSame("The method '$method' was not found on the presenter class '$class'.", $e->getMessage());
+            $this->assertSame($method, $e->getMethod());
+            $this->assertSame($class, $e->getClass());
             throw $e;
         }
     }
@@ -101,6 +101,6 @@ class BasePresenterTest extends AbstractTestCase
     public function testToString()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertEquals('hello there', (string) $presenter);
+        $this->assertSame('hello there', (string) $presenter);
     }
 }

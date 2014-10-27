@@ -25,7 +25,7 @@ class BaseDecoratorTest extends AbstractTestCase
 
         $class = get_class($this->baseDecorator->createDecorator('Atom'));
 
-        $this->assertEquals('McCool\LaravelAutoPresenter\Decorators\AtomDecorator', $class);
+        $this->assertSame('McCool\LaravelAutoPresenter\Decorators\AtomDecorator', $class);
     }
 
     /**
@@ -37,8 +37,8 @@ class BaseDecoratorTest extends AbstractTestCase
             $this->baseDecorator->createDecorator('Bulbous');
         } catch (DecoratorNotFound $e) {
             $class = 'McCool\LaravelAutoPresenter\Decorators\BulbousDecorator';
-            $this->assertEquals("The decorator class '$class' was not found.", $e->getMessage());
-            $this->assertEquals($class, $e->getClass());
+            $this->assertSame("The decorator class '$class' was not found.", $e->getMessage());
+            $this->assertSame($class, $e->getClass());
             throw $e;
         }
     }
