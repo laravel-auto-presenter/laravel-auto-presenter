@@ -40,7 +40,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
     {
         $app['view']->composer('*', function ($view) use ($app) {
             if ($view instanceof View) {
-                $app['events']->fire('content.rendering', array($view));
+                $app['events']->fire('content.rendering', [$view]);
             }
         });
     }

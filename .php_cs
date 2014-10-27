@@ -33,6 +33,7 @@ $fixers = array(
     'whitespacy_lines',
     'multiline_spaces_before_semicolon',
     'ordered_use',
+    'short_array_syntax',
     'remove_lines_between_uses',
 );
 

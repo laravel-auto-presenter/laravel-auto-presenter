@@ -18,7 +18,7 @@ class PresenterDecoratorTest extends TestCase
     public function setUp()
     {
         $container = new Container();
-        $container->bindShared('Illuminate\Contracts\Container\Container', function () use ($container) {
+        $container->singleton('Illuminate\Contracts\Container\Container', function () use ($container) {
             return $container;
         });
 
@@ -94,7 +94,7 @@ class PresenterDecoratorTest extends TestCase
 
     private function getFilledPaginator()
     {
-        $items = array();
+        $items = [];
 
         foreach (range(1, 5) as $i) {
             $items[] = $this->getDecoratedAtom();
@@ -105,7 +105,7 @@ class PresenterDecoratorTest extends TestCase
 
     private function getFilledCollection()
     {
-        $items = array();
+        $items = [];
 
         foreach (range(1, 5) as $i) {
             $items[] = $this->getDecoratedAtom();
