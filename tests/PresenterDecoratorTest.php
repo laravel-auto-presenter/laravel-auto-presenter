@@ -1,8 +1,8 @@
 <?php namespace McCool\Tests;
 
-use Illuminate\Container\Container;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
@@ -11,18 +11,13 @@ use McCool\Tests\Stubs\DependencyDecoratedAtomPresenter;
 use McCool\Tests\Stubs\UndecoratedAtom;
 use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
-class PresenterDecoratorTest extends TestCase
+class PresenterDecoratorTest extends AbstractTestCase
 {
     private $decorator;
 
-    public function setUp()
+    protected function start()
     {
-        $container = new Container();
-        $container->singleton('Illuminate\Contracts\Container\Container', function () use ($container) {
-            return $container;
-        });
-
-        $this->decorator = $container->make(PresenterDecorator::class);
+        $this->decorator = $this->app->make(PresenterDecorator::class);
     }
 
     public function testWontDecorateOtherObjects()
@@ -78,8 +73,15 @@ class PresenterDecoratorTest extends TestCase
      */
     public function testWronglyDecoratedClassThrowsException()
     {
-        $atom = new WronglyDecoratedAtom();
-        $this->decorator->decorate($atom);
+        try {
+            $atom = new WronglyDecoratedAtom();
+            $this->decorator->decorate($atom);
+        } catch (PresenterNotFound $e) {
+            $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+            $this->assertEquals("The presenter class '$class' was not found.", $e->getMessage());
+            $this->assertEquals($class, $e->getClass());
+            throw $e;
+        }
     }
 
     private function getDecoratedAtom()

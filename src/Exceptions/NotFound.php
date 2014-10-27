@@ -14,18 +14,14 @@ class NotFound extends Exception
     /**
      * Create a new not found exception.
      *
-     * @param string      $class
-     * @param string|null $message
+     * @param string $class
+     * @param string $message
      *
      * @return void
      */
-    public function __construct($class, $message = null)
+    public function __construct($class, $message)
     {
         $this->class = $class;
-
-        if (!$message) {
-            $message = "The class '$class' was not found.";
-        }
 
         parent::__construct($message);
     }

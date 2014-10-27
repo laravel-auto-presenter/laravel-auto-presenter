@@ -2,15 +2,15 @@
 
 namespace McCool\Tests\Decorators;
 
+use GrahamCampbell\TestBench\AbstractTestCase;
 use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
-use McCool\Tests\TestCase;
 use Mockery as m;
 
-class CollectionDecoratorTest extends TestCase
+class CollectionDecoratorTest extends AbstractTestCase
 {
     private $collectionDecorator;
 
-    public function setUp()
+    protected function start()
     {
         $container = m::mock('Illuminate\Contracts\Container\Container');
         $this->collectionDecorator = new CollectionDecorator($container);

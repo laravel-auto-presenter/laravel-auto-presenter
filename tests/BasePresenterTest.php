@@ -1,17 +1,17 @@
 <?php namespace McCool\Tests;
 
-use Illuminate\Container\Container;
+use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;
+use McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 
-class BasePresenterTest extends TestCase
+class BasePresenterTest extends AbstractTestCase
 {
     private $decoratedAtom;
 
-    public function setUp()
+    protected function start()
     {
-        $container = new Container();
-        $this->decoratedAtom = new DecoratedAtom($container);
+        $this->decoratedAtom = $this->app->make(DecoratedAtom::class);
     }
 
     public function testResourceIsReturned()
@@ -49,8 +49,17 @@ class BasePresenterTest extends TestCase
      */
     public function testResourcePropertyNotFoundThrowsException()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $presenter->thisPropertyDoesntExist;
+        try {
+            $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+            $presenter->thisPropertyDoesntExist;
+        } catch (PropertyNotFound $e) {
+            $property = 'thisPropertyDoesntExist';
+            $class = DecoratedAtomPresenter::class;
+            $this->assertEquals("The property '$property' was not found on the presenter class '$class'.", $e->getMessage());
+            $this->assertEquals($property, $e->getProperty());
+            $this->assertEquals($class, $e->getClass());
+            throw $e;
+        }
     }
 
     /**
@@ -58,7 +67,16 @@ class BasePresenterTest extends TestCase
      */
     public function testResourceMethodNotFoundThrowsException()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $presenter->thisMethodDoesntExist();
+        try {
+            $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+            $presenter->thisMethodDoesntExist();
+        } catch (MethodNotFound $e) {
+            $method = 'thisMethodDoesntExist';
+            $class = DecoratedAtomPresenter::class;
+            $this->assertEquals("The method '$method' was not found on the presenter class '$class'.", $e->getMessage());
+            $this->assertEquals($method, $e->getMethod());
+            $this->assertEquals($class, $e->getClass());
+            throw $e;
+        }
     }
 }

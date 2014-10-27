@@ -2,16 +2,17 @@
 
 namespace McCool\Tests\Decorators;
 
+use GrahamCampbell\TestBench\AbstractTestCase;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFound;
 use McCool\Tests\Stubs\BaseDecoratorStub;
-use McCool\Tests\TestCase;
 use Mockery as m;
 
-class BaseDecoratorTest extends TestCase
+class BaseDecoratorTest extends AbstractTestCase
 {
     private $baseDecorator;
 
-    public function setUp()
+    protected function start()
     {
         $container = m::mock('Illuminate\Contracts\Container\Container');
         $this->baseDecorator = new BaseDecoratorStub($container);
@@ -32,6 +33,13 @@ class BaseDecoratorTest extends TestCase
      */
     public function testCreationOfANonExistentDecorator()
     {
-        $this->baseDecorator->createDecorator('bulbous');
+        try {
+            $this->baseDecorator->createDecorator('Bulbous');
+        } catch (DecoratorNotFound $e) {
+            $class = 'McCool\LaravelAutoPresenter\Decorators\BulbousDecorator';
+            $this->assertEquals("The decorator class '$class' was not found.", $e->getMessage());
+            $this->assertEquals($class, $e->getClass());
+            throw $e;
+        }
     }
 }
