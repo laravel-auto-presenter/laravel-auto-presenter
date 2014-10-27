@@ -5,8 +5,7 @@ namespace McCool\LaravelAutoPresenter\Decorators;
 interface DecoratorInterface
 {
     /**
-     * Determines whether or not a decorator is able to decorate a given
-     * subject.
+     * Can the subject be decorated?
      *
      * @param mixed $subject
      *

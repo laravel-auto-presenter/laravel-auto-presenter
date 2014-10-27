@@ -1,5 +1,6 @@
 <?php namespace McCool\Tests;
 
+use Illuminate\Container\Container;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
@@ -17,11 +18,12 @@ class PresenterDecoratorTest extends TestCase
 
     public function setUp()
     {
-        $atom = new AtomDecorator();
-        $collection = new CollectionDecorator();
-        $paginator = new PaginatorDecorator();
+        $container = new Container();
+        $container->bindShared('Illuminate\Contracts\Container\Container', function() use ($container) {
+            return $container;
+        });
 
-        $this->decorator = new PresenterDecorator($atom, $collection, $paginator);
+        $this->decorator = $container->make(PresenterDecorator::class);
     }
 
     public function testWontDecorateOtherObjects()
@@ -65,7 +67,6 @@ class PresenterDecoratorTest extends TestCase
     }
 
     /**
-     * @covers decorator::decorate
      * @expectedException \McCool\LaravelAutoPresenter\PresenterNotFound
      */
     public function testWronglyDecoratedClassThrowsException()

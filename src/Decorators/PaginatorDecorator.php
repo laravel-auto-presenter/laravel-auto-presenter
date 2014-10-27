@@ -2,14 +2,15 @@
 
 namespace McCool\LaravelAutoPresenter\Decorators;
 
-use Illuminate\Pagination\Paginator;
+use Illuminate\Contracts\Pagination\Paginator;
 use ReflectionObject;
 
 class PaginatorDecorator extends BaseDecorator implements DecoratorInterface
 {
     /**
-     * The only valid $subject for this decorator, is one of a Paginator
-     * instance.
+     * Can the subject be decorated?
+     *
+     * If the subject is a paginator, then it can be decorated.
      *
      * @param mixed $subject
      *
