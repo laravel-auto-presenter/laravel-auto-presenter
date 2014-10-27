@@ -3,7 +3,7 @@
 namespace McCool\LaravelAutoPresenter\Decorators;
 
 use Illuminate\Contracts\Container\Container;
-use McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFoundException;
+use McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFound;
 
 abstract class BaseDecorator
 {
@@ -33,7 +33,7 @@ abstract class BaseDecorator
      *
      * @param string $class
      *
-     * @throws \McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFoundException
+     * @throws \McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFound
      *
      * @return object
      */
@@ -42,7 +42,7 @@ abstract class BaseDecorator
         $decoratorClass = implode('\\', [__NAMESPACE__, $class.'Decorator']);
 
         if (!class_exists($decoratorClass)) {
-            throw new DecoratorNotFoundException($decoratorClass);
+            throw new DecoratorNotFound($decoratorClass);
         }
 
         return $this->container->make($decoratorClass);

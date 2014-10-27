@@ -1,6 +1,6 @@
 <?php namespace McCool\LaravelAutoPresenter\Exceptions;
 
-class PropertyNotFoundException extends NotFoundException
+class PropertyNotFound extends NotFound
 {
     /**
      * The requested property.

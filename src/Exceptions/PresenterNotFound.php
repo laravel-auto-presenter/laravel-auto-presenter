@@ -1,9 +1,9 @@
 <?php namespace McCool\LaravelAutoPresenter\Exceptions;
 
-class DecoratorNotFoundException extends NotFoundException
+class PresenterNotFound extends NotFound
 {
     /**
-     * Create a new decorator not found exception.
+     * Create a new presenter not found exception.
      *
      * @param string      $class
      * @param string|null $message
@@ -13,7 +13,7 @@ class DecoratorNotFoundException extends NotFoundException
     public function __construct($class, $message = null)
     {
         if (!$message) {
-            $message = "The decorator class '$class' was not found.";
+            $message = "The presenter class '$class' was not found.";
         }
 
         parent::__construct($class, $message);

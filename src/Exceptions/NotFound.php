@@ -2,7 +2,7 @@
 
 use Exception;
 
-class NotFoundException extends Exception
+class NotFound extends Exception
 {
     /**
      * The class name.
