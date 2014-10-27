@@ -11,7 +11,7 @@ class PresenterDecorator
      *
      * @var array
      */
-    protected $decorators = array();
+    protected $decorators = [];
 
     /**
      * Create a new presenter decorator.
