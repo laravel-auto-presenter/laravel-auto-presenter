@@ -2,17 +2,17 @@
 
 namespace McCool\Tests\Decorators;
 
+use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Pagination\Paginator;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
-use McCool\Tests\TestCase;
 use Mockery as m;
 
-class PaginatorDecoratorTest extends TestCase
+class PaginatorDecoratorTest extends AbstractTestCase
 {
     private $paginatorDecorator;
 
-    public function setUp()
+    protected function start()
     {
         $container = m::mock('Illuminate\Contracts\Container\Container');
         $this->paginatorDecorator = new PaginatorDecorator($container);
@@ -28,11 +28,20 @@ class PaginatorDecoratorTest extends TestCase
 
     public function testDecorationOfPaginator()
     {
+        $this->resetPaginator();
+
         $paginator = new Paginator(['an item'], 2);
 
         $this->paginatorDecorator->getContainer()->shouldReceive('make')->once()
             ->with(AtomDecorator::class)->andReturn(new AtomDecorator($this->paginatorDecorator->getContainer()));
 
         $this->paginatorDecorator->decorate($paginator);
+    }
+
+    protected function resetPaginator()
+    {
+        Paginator::currentPageResolver(function () {
+            // do nothing
+        });
     }
 }

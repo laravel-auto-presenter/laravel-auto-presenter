@@ -2,16 +2,16 @@
 
 namespace McCool\Tests\Decorators;
 
+use GrahamCampbell\TestBench\AbstractTestCase;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use McCool\Tests\TestCase;
 use Mockery as m;
 
-class AtomDecoratorTest extends TestCase
+class AtomDecoratorTest extends AbstractTestCase
 {
     private $atomDecorator;
 
-    public function setUp()
+    protected function start()
     {
         $container = m::mock('Illuminate\Contracts\Container\Container');
         $this->atomDecorator = new AtomDecorator($container);

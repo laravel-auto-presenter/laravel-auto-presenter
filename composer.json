@@ -23,10 +23,7 @@
         "illuminate/view": "~5.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.3",
-        "mockery/mockery": "~0.9",
-        "fabpot/php-cs-fixer": "~1.0",
-        "squizlabs/php_codesniffer": "~1.5"
+        "graham-campbell/testbench": "~2.0"
     },
     "autoload": {
         "psr-4": {

@@ -1,17 +1,15 @@
 <?php namespace McCool\Tests;
 
-use Illuminate\Container\Container;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 
-class BasePresenterTest extends TestCase
+class BasePresenterTest extends AbstractTestCase
 {
     private $decoratedAtom;
 
-    public function setUp()
+    protected function start()
     {
-        $container = new Container();
-        $this->decoratedAtom = new DecoratedAtom($container);
+        $this->decoratedAtom = $this->app->make(DecoratedAtom::class);
     }
 
     public function testResourceIsReturned()

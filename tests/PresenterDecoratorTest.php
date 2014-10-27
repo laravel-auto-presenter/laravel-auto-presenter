@@ -1,6 +1,5 @@
 <?php namespace McCool\Tests;
 
-use Illuminate\Container\Container;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
@@ -11,18 +10,13 @@ use McCool\Tests\Stubs\DependencyDecoratedAtomPresenter;
 use McCool\Tests\Stubs\UndecoratedAtom;
 use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
-class PresenterDecoratorTest extends TestCase
+class PresenterDecoratorTest extends AbstractTestCase
 {
     private $decorator;
 
-    public function setUp()
+    protected function start()
     {
-        $container = new Container();
-        $container->singleton('Illuminate\Contracts\Container\Container', function () use ($container) {
-            return $container;
-        });
-
-        $this->decorator = $container->make(PresenterDecorator::class);
+        $this->decorator = $this->app->make(PresenterDecorator::class);
     }
 
     public function testWontDecorateOtherObjects()
