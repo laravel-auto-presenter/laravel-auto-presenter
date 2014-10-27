@@ -79,4 +79,28 @@ class BasePresenterTest extends AbstractTestCase
             throw $e;
         }
     }
+
+    public function testIsSet()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertTrue(isset($presenter->favoriteMovie));
+    }
+
+    public function testIsNotSet()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertFalse(isset($presenter->ohNoes));
+    }
+
+    public function testIsSetMagic()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertTrue(isset($presenter->myProperty));
+    }
+
+    public function testToString()
+    {
+        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
+        $this->assertEquals('hello there', (string) $presenter);
+    }
 }

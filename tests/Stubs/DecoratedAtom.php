@@ -24,4 +24,9 @@ class DecoratedAtom implements HasPresenter
     {
         return (!is_null(@$this->$key));
     }
+
+    public function __toString()
+    {
+        return 'hello there';
+    }
 }
