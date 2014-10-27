@@ -3,9 +3,6 @@
 use Illuminate\Container\Container;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
-use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
-use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
@@ -19,7 +16,7 @@ class PresenterDecoratorTest extends TestCase
     public function setUp()
     {
         $container = new Container();
-        $container->bindShared('Illuminate\Contracts\Container\Container', function() use ($container) {
+        $container->bindShared('Illuminate\Contracts\Container\Container', function () use ($container) {
             return $container;
         });
 
