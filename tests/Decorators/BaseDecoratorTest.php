@@ -28,7 +28,7 @@ class BaseDecoratorTest extends TestCase
     }
 
     /**
-     * @expectedException McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException
+     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFound
      */
     public function testCreationOfANonExistentDecorator()
     {

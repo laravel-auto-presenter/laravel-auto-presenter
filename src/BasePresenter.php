@@ -1,5 +1,8 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
+use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;
+use McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound;
+
 abstract class BasePresenter
 {
     /**
@@ -32,24 +35,12 @@ abstract class BasePresenter
     }
 
     /**
-     * Throws a method not found exception.
-     *
-     * @param string $key
-     *
-     * @throws MethodNotFound
-     *
-     * @return void
-     */
-    protected function throwException($key)
-    {
-        throw new MethodNotFound('Presenter: '.get_called_class().'::'.$key.' method does not exist');
-    }
-
-    /**
      * Magic method access initially tries for local fields, then defers to the
      * decorated object.
      *
      * @param string $key
+     *
+     * @throws \McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound
      *
      * @return mixed
      */
@@ -63,7 +54,7 @@ abstract class BasePresenter
             return $this->wrappedObject->$key;
         }
 
-        $this->throwException($key);
+        throw new PropertyNotFound(get_called_class(), $key);
     }
 
     /**
@@ -73,7 +64,7 @@ abstract class BasePresenter
      * @param string $key
      * @param array  $args
      *
-     * @throws MethodNotFound
+     * @throws \McCool\LaravelAutoPresenter\Exceptions\MethodNotFound
      *
      * @return mixed
      */
@@ -83,7 +74,7 @@ abstract class BasePresenter
             return call_user_func_array(array($this->wrappedObject, $key), $args);
         }
 
-        $this->throwException($key);
+        throw new MethodNotFound(get_called_class(), $key);
     }
 
     /**

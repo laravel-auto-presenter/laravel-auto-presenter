@@ -4,8 +4,8 @@ namespace McCool\LaravelAutoPresenter\Decorators;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use McCool\LaravelAutoPresenter\PresenterNotFound;
 
 class AtomDecorator extends BaseDecorator implements DecoratorInterface
 {
@@ -29,7 +29,7 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
      *
      * @param object $subject
      *
-     * @throws \McCool\LaravelAutoPresenter\PresenterNotFound
+     * @throws \McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound
      *
      * @return object
      */
