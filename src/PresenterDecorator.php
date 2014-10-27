@@ -7,6 +7,13 @@ use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 class PresenterDecorator
 {
     /**
+     * The decorators.
+     *
+     * @var array
+     */
+    protected $decorators = array();
+
+    /**
      * Create a new presenter decorator.
      *
      * This is the class that decorates models, paginators and collections.
@@ -19,9 +26,9 @@ class PresenterDecorator
      */
     public function __construct(AtomDecorator $atom, CollectionDecorator $collection, PaginatorDecorator $pagination)
     {
-        $this->decorators[] = $atom;
-        $this->decorators[] = $collection;
-        $this->decorators[] = $pagination;
+        $this->decorators['atom'] = $atom;
+        $this->decorators['collection'] = $collection;
+        $this->decorators['pagination'] = $pagination;
     }
 
     /**
@@ -33,9 +40,9 @@ class PresenterDecorator
      */
     public function decorate($subject)
     {
-        foreach ($this->decorators as $possibleDecorator) {
-            if ($possibleDecorator->canDecorate($subject)) {
-                return $possibleDecorator->decorate($subject);
+        foreach ($this->decorators as $decorator) {
+            if ($decorator->canDecorate($subject)) {
+                return $decorator->decorate($subject);
             }
         }
 
