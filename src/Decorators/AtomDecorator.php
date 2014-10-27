@@ -49,7 +49,7 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
             throw new PresenterNotFound($presenterClass);
         }
 
-        return $this->container->make($presenterClass, array($subject));
+        return $this->container->make($presenterClass, array('resource' => $subject));
     }
 
     /**
