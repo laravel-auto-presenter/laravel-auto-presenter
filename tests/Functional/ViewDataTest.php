@@ -1,6 +1,8 @@
 <?php namespace McCool\Tests\Functional;
 
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\Schema;
 use McCool\Tests\AbstractTestCase;
 use McCool\Tests\Stubs\ModelStub;
 
@@ -39,5 +41,67 @@ class ViewDataTest extends AbstractTestCase
         // check everything is still the same
         $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->model);
         $this->assertSame('hi there', $view->model->foo);
+    }
+
+    public function testSimpleCollection()
+    {
+        try {
+            $this->setupAndSeedDatabase();
+            $view = $this->app['view']->make('stubs::test')->withModels(ModelStub::all());
+            $view->render();
+            $this->assertCount(3, $view->models);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models[0]);
+            $this->assertSame('hello there', $view->models[0]->foo);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models[1]);
+            $this->assertSame('herro there', $view->models[1]->foo);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models[2]);
+            $this->assertSame('herro there', $view->models[2]->foo);
+        } catch (Exception $e) {
+            throw $e;
+        } finally {
+            Schema::drop('stubs');
+        }
+    }
+
+    public function testGroupedCollection()
+    {
+        try {
+            $this->setupAndSeedDatabase();
+            $view = $this->app['view']->make('stubs::test')->withModels(ModelStub::all()->groupBy('foo'));
+            $view->render();
+            $this->assertCount(2, $view->models);
+            $this->assertCount(1, $view->models['hello']);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['hello'][0]);
+            $this->assertSame('hello there', $view->models['hello'][0]->foo);
+            $this->assertCount(2, $view->models['herro']);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['herro'][0]);
+            $this->assertSame('herro there', $view->models['herro'][0]->foo);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['herro'][1]);
+            $this->assertSame('herro there', $view->models['herro'][1]->foo);
+        } catch (Exception $e) {
+            throw $e;
+        } finally {
+            Schema::drop('stubs');
+        }
+    }
+
+    protected function setupAndSeedDatabase()
+    {
+        Schema::create('stubs', function ($table) {
+            $table->string('foo');
+            $table->timestamps();
+        });
+
+        $model = new ModelStub();
+        $model->foo = 'hello';
+        $model->save();
+
+        $model = new ModelStub();
+        $model->foo = 'herro';
+        $model->save();
+
+        $model = new ModelStub();
+        $model->foo = 'herro';
+        $model->save();
     }
 }
