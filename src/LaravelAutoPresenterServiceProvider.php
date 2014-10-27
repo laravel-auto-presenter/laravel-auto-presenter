@@ -3,6 +3,9 @@
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
+use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
+use McCool\LaravelAutoPresenter\Decorators\PaginationDecorator;
 
 class LaravelAutoPresenterServiceProvider extends ServiceProvider
 {
