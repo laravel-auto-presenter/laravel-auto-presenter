@@ -4,6 +4,7 @@ namespace McCool\Tests\Decorators;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use Mockery as m;
 
@@ -38,10 +39,10 @@ class AtomDecoratorTest extends AbstractTestCase
     public function testShouldHandleRelationsWhenSubjectIsAModel()
     {
         $model = m::mock('Illuminate\Database\Eloquent\Model');
-        $collection = ['blah'];
+        $relations = ['blah'];
 
-        $model->shouldReceive('getRelations')->andReturn($collection);
-        $model->shouldReceive('setRelation')->with(0, $collection[0]);
+        $model->shouldReceive('getRelations')->andReturn($relations);
+        $model->shouldReceive('setRelation')->with(0, $relations[0]);
 
         $this->atomDecorator->decorate($model);
     }
@@ -49,9 +50,14 @@ class AtomDecoratorTest extends AbstractTestCase
     public function testShouldHandleRelationsWhenSubjectIsAModelWithACollection()
     {
         $model = m::mock('Illuminate\Database\Eloquent\Model');
-        $collection = m::mock('Illuminate\Support\Collection')->makePartial();
+        $relations = [m::mock('Illuminate\Support\Collection')->makePartial()];
 
-        $model->shouldReceive('getRelations')->andReturn($collection);
+        $model->shouldReceive('getRelations')->andReturn($relations);
+        $model->shouldReceive('setRelation')->with(0, $relations[0]);
+
+        $this->atomDecorator->getContainer()->shouldReceive('make')->once()
+            ->with('McCool\LaravelAutoPresenter\Decorators\CollectionDecorator')
+            ->andReturn(new CollectionDecorator($this->atomDecorator->getContainer()));
 
         $this->atomDecorator->decorate($model);
     }
