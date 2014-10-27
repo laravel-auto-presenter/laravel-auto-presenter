@@ -6,6 +6,8 @@ use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
+use McCool\Tests\Stubs\DependencyDecoratedAtom;
+use McCool\Tests\Stubs\DependencyDecoratedAtomPresenter;
 use McCool\Tests\Stubs\UndecoratedAtom;
 use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
@@ -37,6 +39,14 @@ class PresenterDecoratorTest extends TestCase
         $decoratedAtom = $this->decorator->decorate($atom);
 
         $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
+    }
+
+    public function testDecoratesAtomWithDependencies()
+    {
+        $atom = $this->getDependencyDecoratedAtom();
+        $decoratedAtom = $this->decorator->decorate($atom);
+
+        $this->assertInstanceOf(DependencyDecoratedAtomPresenter::class, $decoratedAtom);
     }
 
     public function testDecoratesPaginator()
@@ -75,6 +85,11 @@ class PresenterDecoratorTest extends TestCase
     private function getDecoratedAtom()
     {
         return new DecoratedAtom();
+    }
+
+    private function getDependencyDecoratedAtom()
+    {
+        return new DependencyDecoratedAtom();
     }
 
     private function getFilledPaginator()
