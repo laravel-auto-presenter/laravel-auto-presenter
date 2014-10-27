@@ -143,11 +143,26 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
         $app->singleton('autopresenter', function (Application $app) {
             $atom = $app['autopresenter.atom'];
             $collection = $app['autopresenter.collection'];
-            $pagination = $app['autopresenter.paginator'];
+            $paginator = $app['autopresenter.paginator'];
 
-            return new PresenterDecorator($atom, $collection, $pagination);
+            return new PresenterDecorator($atom, $collection, $paginator);
         });
 
         $app->alias('autopresenter', 'McCool\LaravelAutoPresenter\PresenterDecorator');
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return string[]
+     */
+    public function provides()
+    {
+        return [
+            'autopresenter',
+            'autopresenter.atom',
+            'autopresenter.collection',
+            'autopresenter.paginator',
+        ];
     }
 }
