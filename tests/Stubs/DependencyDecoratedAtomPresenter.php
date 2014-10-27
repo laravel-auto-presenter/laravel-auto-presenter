@@ -8,7 +8,7 @@ class DependencyDecoratedAtomPresenter extends BasePresenter
 
     public function __construct(InjectedStub $stub, $resource)
     {
-    	parent::__construct($resource);
+        parent::__construct($resource);
         $this->stub = $stub;
     }
 
