@@ -1,5 +1,6 @@
 <?php namespace McCool\LaravelAutoPresenter;
 
+use Exception;
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;
 use McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound;
 
@@ -86,7 +87,13 @@ abstract class BasePresenter
      */
     public function __isset($key)
     {
-        return isset($this->wrappedObject[$key]);
+        try {
+            $this->__get($key);
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
