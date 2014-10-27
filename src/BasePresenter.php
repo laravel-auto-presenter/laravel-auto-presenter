@@ -4,12 +4,13 @@ abstract class BasePresenter
 {
     /**
      * The resource that is the object that was decorated.
+     *
+     * @var object|null
      */
     protected $wrappedObject = null;
 
     /**
-     * Construct the presenter and provide the resource that the presenter will
-     * represent.
+     * Create a new presenter.
      *
      * @param object $resource
      *
@@ -21,7 +22,7 @@ abstract class BasePresenter
     }
 
     /**
-     * Public resource getter.
+     * Get the wrapped object.
      *
      * @return mixed
      */
@@ -86,8 +87,7 @@ abstract class BasePresenter
     }
 
     /**
-     * Magic Method isset access measures the existence of a property on the
-     * resource using ArrayAccess.
+     * Is the key set on the wrapped object?
      *
      * @param string $key
      *
@@ -99,7 +99,7 @@ abstract class BasePresenter
     }
 
     /**
-     * Magic Method toString is deferred to the resource.
+     * Get the wrapped object, cast to a string.
      */
     public function __toString()
     {

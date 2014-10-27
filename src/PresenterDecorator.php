@@ -5,28 +5,24 @@ use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 
-/**
- * The class that decorates model objects, paginators and collections.
- */
 class PresenterDecorator
 {
     /**
-     * Setup the presenter decorator with the possible decorators to be used for subjects.
+     * Create a new presenter decorator.
      *
-     * @param AtomDecorator       $atomDecorator
-     * @param CollectionDecorator $collectionDecorator
-     * @param PaginatorDecorator  $paginationDecorator
+     * This is the class that decorates models, paginators and collections.
+     *
+     * @param \McCool\LaravelAutoPresenter\Decorators\AtomDecorator       $atom
+     * @param \McCool\LaravelAutoPresenter\Decorators\CollectionDecorator $collection
+     * @param \McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator  $pagination
      *
      * @return void
      */
-    public function __construct(
-        AtomDecorator $atomDecorator,
-        CollectionDecorator $collectionDecorator,
-        PaginatorDecorator $paginationDecorator
-    ) {
-        $this->decorators[] = $atomDecorator;
-        $this->decorators[] = $collectionDecorator;
-        $this->decorators[] = $paginationDecorator;
+    public function __construct(AtomDecorator $atom, CollectionDecorator $collection, PaginatorDecorator $pagination)
+    {
+        $this->decorators[] = $atom;
+        $this->decorators[] = $collection;
+        $this->decorators[] = $pagination;
     }
 
     /**
@@ -34,7 +30,7 @@ class PresenterDecorator
      *
      * @param mixed $subject
      *
-     * @throws DecoratorNotFoundException
+     * @throws \McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException
      *
      * @return mixed
      */
