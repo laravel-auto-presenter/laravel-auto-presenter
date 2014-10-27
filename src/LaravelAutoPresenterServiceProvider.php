@@ -78,5 +78,4 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
             'McCool\LaravelAutoPresenter\PresenterDecorator'
         );
     }
-
 }

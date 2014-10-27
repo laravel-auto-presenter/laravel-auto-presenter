@@ -24,9 +24,9 @@ class PaginatorDecorator extends BaseDecorator implements DecoratorInterface
     /**
      * Decorate a paginator instance.
      *
-     * @param Paginator $subject
+     * @param \Illuminate\Contracts\Pagination\Paginator $subject
      *
-     * @return mixed
+     * @return \Illuminate\Contracts\Pagination\Paginator
      */
     public function decorate($subject)
     {
@@ -41,7 +41,16 @@ class PaginatorDecorator extends BaseDecorator implements DecoratorInterface
         return $subject;
     }
 
-    protected function getItems($subject)
+    /**
+     * Decorate a paginator instance.
+     *
+     * We're using hacky reflection for now because there is no public getter.
+     *
+     * @param \Illuminate\Contracts\Pagination\Paginator $subject
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected function getItems(Paginator $subject)
     {
         $object = new ReflectionObject($subject);
 

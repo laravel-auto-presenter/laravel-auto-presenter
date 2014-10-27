@@ -16,9 +16,9 @@ interface DecoratorInterface
     /**
      * Decorate a given subject.
      *
-     * @param mixed $subject
+     * @param object $subject
      *
-     * @return mixed
+     * @return object
      */
     public function decorate($subject);
 }

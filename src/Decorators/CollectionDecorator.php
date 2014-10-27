@@ -23,9 +23,9 @@ class CollectionDecorator extends BaseDecorator implements DecoratorInterface
     /**
      * Decorate a collection instance.
      *
-     * @param Collection $subject
+     * @param \Illuminate\Support\Collection $subject
      *
-     * @return mixed
+     * @return \Illuminate\Support\Collection
      */
     public function decorate($subject)
     {

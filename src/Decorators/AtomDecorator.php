@@ -31,7 +31,7 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
      *
      * @throws \McCool\LaravelAutoPresenter\PresenterNotFound
      *
-     * @return mixed
+     * @return object
      */
     public function decorate($subject)
     {
