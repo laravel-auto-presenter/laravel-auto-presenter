@@ -4,6 +4,7 @@ namespace McCool\Tests\Decorators;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Exceptions\DecoratorNotFound;
 use McCool\Tests\Stubs\BaseDecoratorStub;
 use Mockery as m;
 
@@ -32,6 +33,13 @@ class BaseDecoratorTest extends AbstractTestCase
      */
     public function testCreationOfANonExistentDecorator()
     {
-        $this->baseDecorator->createDecorator('bulbous');
+        try {
+            $this->baseDecorator->createDecorator('Bulbous');
+        } catch (DecoratorNotFound $e) {
+            $class = 'McCool\LaravelAutoPresenter\Decorators\BulbousDecorator';
+            $this->assertEquals("The decorator class '$class' was not found.", $e->getMessage());
+            $this->assertEquals($class, $e->getClass());
+            throw $e;
+        }
     }
 }

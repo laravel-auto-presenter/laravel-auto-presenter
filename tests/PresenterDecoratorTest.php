@@ -2,6 +2,7 @@
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
@@ -72,8 +73,15 @@ class PresenterDecoratorTest extends AbstractTestCase
      */
     public function testWronglyDecoratedClassThrowsException()
     {
-        $atom = new WronglyDecoratedAtom();
-        $this->decorator->decorate($atom);
+        try {
+            $atom = new WronglyDecoratedAtom();
+            $this->decorator->decorate($atom);
+        } catch (PresenterNotFound $e) {
+            $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+            $this->assertEquals("The presenter class '$class' was not found.", $e->getMessage());
+            $this->assertEquals($class, $e->getClass());
+            throw $e;
+        }
     }
 
     private function getDecoratedAtom()
