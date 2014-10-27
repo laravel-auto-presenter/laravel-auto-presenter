@@ -1,5 +1,6 @@
 <?php namespace McCool\Tests;
 
+use Illuminate\Container\Container;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 
@@ -9,7 +10,8 @@ class BasePresenterTest extends TestCase
 
     public function setUp()
     {
-        $this->decoratedAtom = new DecoratedAtom();
+        $container = new Container();
+        $this->decoratedAtom = new DecoratedAtom($container);
     }
 
     public function testResourceIsReturned()
@@ -43,7 +45,6 @@ class BasePresenterTest extends TestCase
     }
 
     /**
-     * @covers presenter::thisMethodDoesntExist
      * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
      */
     public function testResourcePropertyNotFoundThrowsException()
@@ -53,7 +54,6 @@ class BasePresenterTest extends TestCase
     }
 
     /**
-     * @covers presenter::thisMethodDoesntExist
      * @expectedException \McCool\LaravelAutoPresenter\MethodNotFound
      */
     public function testResourceMethodNotFoundThrowsException()

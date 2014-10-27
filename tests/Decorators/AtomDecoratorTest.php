@@ -13,7 +13,8 @@ class AtomDecoratorTest extends TestCase
 
     public function setUp()
     {
-        $this->atomDecorator = new AtomDecorator();
+        $container = m::mock('Illuminate\Contracts\Container\Container');
+        $this->atomDecorator = new AtomDecorator($container);
     }
 
     public function testCanDecorateModel()

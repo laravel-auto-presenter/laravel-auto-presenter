@@ -10,8 +10,10 @@ use McCool\LaravelAutoPresenter\PresenterNotFound;
 class AtomDecorator extends BaseDecorator implements DecoratorInterface
 {
     /**
-     * The only valid $subject for this decorator, is one of a Collection
-     * instance.
+     * Can the subject be decorated?
+     *
+     * If the subject is an eloquent model, or implements has presenter, then
+     * it can be decorated.
      *
      * @param mixed $subject
      *
@@ -27,7 +29,7 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
      *
      * @param object $subject
      *
-     * @throws PresenterNotFound
+     * @throws \McCool\LaravelAutoPresenter\PresenterNotFound
      *
      * @return mixed
      */
@@ -47,7 +49,7 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
             throw new PresenterNotFound($presenterClass);
         }
 
-        return new $presenterClass($subject);
+        return $this->container->make($presenterClass, array('resource' => $subject));
     }
 
     /**
@@ -55,7 +57,7 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
      *
      * @param \Illuminate\Database\Eloquent\Model $atom
      *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Model
      */
     protected function decorateRelations(Model $atom)
     {

@@ -7,8 +7,9 @@ use Illuminate\Support\Collection;
 class CollectionDecorator extends BaseDecorator implements DecoratorInterface
 {
     /**
-     * The only valid $subject for this decorator, is one of a Collection
-     * instance.
+     * Can the subject be decorated?
+     *
+     * If the subject is a collection, then it can be decorated.
      *
      * @param mixed $subject
      *

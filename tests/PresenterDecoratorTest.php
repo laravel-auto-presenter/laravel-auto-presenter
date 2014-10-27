@@ -1,13 +1,13 @@
 <?php namespace McCool\Tests;
 
+use Illuminate\Container\Container;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
-use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
-use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
+use McCool\Tests\Stubs\DependencyDecoratedAtom;
+use McCool\Tests\Stubs\DependencyDecoratedAtomPresenter;
 use McCool\Tests\Stubs\UndecoratedAtom;
 use McCool\Tests\Stubs\WronglyDecoratedAtom;
 
@@ -17,11 +17,12 @@ class PresenterDecoratorTest extends TestCase
 
     public function setUp()
     {
-        $atom = new AtomDecorator();
-        $collection = new CollectionDecorator();
-        $paginator = new PaginatorDecorator();
+        $container = new Container();
+        $container->bindShared('Illuminate\Contracts\Container\Container', function () use ($container) {
+            return $container;
+        });
 
-        $this->decorator = new PresenterDecorator($atom, $collection, $paginator);
+        $this->decorator = $container->make(PresenterDecorator::class);
     }
 
     public function testWontDecorateOtherObjects()
@@ -38,6 +39,14 @@ class PresenterDecoratorTest extends TestCase
         $decoratedAtom = $this->decorator->decorate($atom);
 
         $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
+    }
+
+    public function testDecoratesAtomWithDependencies()
+    {
+        $atom = $this->getDependencyDecoratedAtom();
+        $decoratedAtom = $this->decorator->decorate($atom);
+
+        $this->assertInstanceOf(DependencyDecoratedAtomPresenter::class, $decoratedAtom);
     }
 
     public function testDecoratesPaginator()
@@ -65,7 +74,6 @@ class PresenterDecoratorTest extends TestCase
     }
 
     /**
-     * @covers decorator::decorate
      * @expectedException \McCool\LaravelAutoPresenter\PresenterNotFound
      */
     public function testWronglyDecoratedClassThrowsException()
@@ -77,6 +85,11 @@ class PresenterDecoratorTest extends TestCase
     private function getDecoratedAtom()
     {
         return new DecoratedAtom();
+    }
+
+    private function getDependencyDecoratedAtom()
+    {
+        return new DependencyDecoratedAtom();
     }
 
     private function getFilledPaginator()

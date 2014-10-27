@@ -12,7 +12,8 @@ class CollectionDecoratorTest extends TestCase
 
     public function setUp()
     {
-        $this->collectionDecorator = new CollectionDecorator();
+        $container = m::mock('Illuminate\Contracts\Container\Container');
+        $this->collectionDecorator = new CollectionDecorator($container);
     }
 
     public function testCanDecorateCollection()

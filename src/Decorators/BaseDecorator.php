@@ -2,15 +2,37 @@
 
 namespace McCool\LaravelAutoPresenter\Decorators;
 
+use Illuminate\Contracts\Container\Container;
+
 abstract class BaseDecorator
 {
     /**
-     * Some decorators depend on others to complete their task. This is a
-     * helper method to easily create decorators that are available.
+     * The container instance.
+     *
+     * @var \Illuminate\Contracts\Container\Container
+     */
+    protected $container;
+
+    /**
+     * Create a new decorator instance.
+     *
+     * @param \Illuminate\Contracts\Container\Container $container
+     *
+     * @return void
+     */
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * Some decorators depend on others to complete their task.
+     *
+     * This is a helper method to easily create decorators that are available.
      *
      * @param string $class
      *
-     * @throws DecoratorNotFoundException
+     * @throws \McCool\LaravelAutoPresenter\Decorators\DecoratorNotFoundException
      *
      * @return object
      */
@@ -22,6 +44,16 @@ abstract class BaseDecorator
             throw new DecoratorNotFoundException($decoratorClass);
         }
 
-        return new $decoratorClass();
+        return $this->container->make($decoratorClass);
+    }
+
+    /**
+     * Get the container instance.
+     *
+     * @return mixed
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }
