@@ -58,7 +58,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
     {
         $app['events']->listen('content.rendering', function (View $view) use ($app) {
             if ($viewData = array_merge($view->getFactory()->getShared(), $view->getData())) {
-                $decorator = $app->make('McCool\LaravelAutoPresenter\PresenterDecorator');
+                $decorator = $app['autopresenter'];
                 foreach ($viewData as $key => $value) {
                     $view[$key] = $decorator->decorate($value);
                 }
