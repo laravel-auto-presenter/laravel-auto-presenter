@@ -45,24 +45,6 @@ class BasePresenterTest extends AbstractTestCase
     }
 
     /**
-     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound
-     */
-    public function testResourcePropertyNotFoundThrowsException()
-    {
-        try {
-            $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-            $presenter->thisPropertyDoesntExist;
-        } catch (PropertyNotFound $e) {
-            $property = 'thisPropertyDoesntExist';
-            $class = DecoratedAtomPresenter::class;
-            $this->assertSame("The property '$property' was not found on the presenter class '$class'.", $e->getMessage());
-            $this->assertSame($property, $e->getProperty());
-            $this->assertSame($class, $e->getClass());
-            throw $e;
-        }
-    }
-
-    /**
      * @expectedException \McCool\LaravelAutoPresenter\Exceptions\MethodNotFound
      */
     public function testResourceMethodNotFoundThrowsException()
@@ -81,18 +63,6 @@ class BasePresenterTest extends AbstractTestCase
     }
 
     public function testIsSet()
-    {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertTrue(isset($presenter->favoriteMovie));
-    }
-
-    public function testIsNotSet()
-    {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertFalse(isset($presenter->ohNoes));
-    }
-
-    public function testIsSetMagic()
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
         $this->assertTrue(isset($presenter->myProperty));

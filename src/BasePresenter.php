@@ -51,11 +51,7 @@ abstract class BasePresenter
             return $this->{$key}();
         }
 
-        if (property_exists($this->wrappedObject, $key) || isset($this->wrappedObject->$key)) {
-            return $this->wrappedObject->$key;
-        }
-
-        throw new PropertyNotFound(get_called_class(), $key);
+        return $this->wrappedObject->$key;
     }
 
     /**
@@ -87,13 +83,7 @@ abstract class BasePresenter
      */
     public function __isset($key)
     {
-        try {
-            $this->__get($key);
-        } catch (Exception $e) {
-            return false;
-        }
-
-        return true;
+        return isset($this->wrappedObject->$key);
     }
 
     /**

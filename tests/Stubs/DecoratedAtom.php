@@ -20,11 +20,6 @@ class DecoratedAtom implements HasPresenter
         return $this->$key;
     }
 
-    public function __isset($key)
-    {
-        return (!is_null(@$this->$key));
-    }
-
     public function __toString()
     {
         return 'hello there';
