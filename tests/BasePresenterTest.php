@@ -1,7 +1,6 @@
 <?php namespace McCool\Tests;
 
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;
-use McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 
