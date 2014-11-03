@@ -6,6 +6,6 @@ class ModelPresenter extends BasePresenter
 {
     public function foo()
     {
-        return $this->getWrappedObject()->foo . ' there';
+        return $this->getWrappedObject()->foo.' there';
     }
 }
