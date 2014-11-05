@@ -95,7 +95,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Post extends Eloquent
 {
     protected $table = 'posts';
-    protected $fillable = array('author_id', 'title', 'content', 'published_at');
+    protected $fillable = ['author_id', 'title', 'content', 'published_at'];
 
     public function author()
     {
@@ -161,7 +161,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Post extends Eloquent implements HasPresenter
 {
     protected $table = 'posts';
-    protected $fillable = array('author_id', 'title', 'content', 'published_at');
+    protected $fillable = ['author_id', 'title', 'content', 'published_at'];
 
     public function author()
     {
