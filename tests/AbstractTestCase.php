@@ -1,8 +1,8 @@
 <?php namespace McCool\Tests;
 
-use GrahamCampbell\TestBench\AbstractLaravelTestCase as TestCase;
+use GrahamCampbell\TestBench\AbstractPackageTestCase;
 
-abstract class AbstractTestCase extends TestCase
+abstract class AbstractTestCase extends AbstractPackageTestCase;
 {
     /**
      * Get the service provider class.
