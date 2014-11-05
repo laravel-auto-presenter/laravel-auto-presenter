@@ -1,4 +1,6 @@
-<?php namespace McCool\LaravelAutoPresenter;
+<?php
+
+namespace McCool\LaravelAutoPresenter;
 
 use Exception;
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;

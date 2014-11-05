@@ -1,4 +1,6 @@
-<?php namespace McCool\LaravelAutoPresenter;
+<?php
+
+namespace McCool\LaravelAutoPresenter;
 
 interface HasPresenter
 {

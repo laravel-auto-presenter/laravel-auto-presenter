@@ -1,4 +1,6 @@
-<?php namespace McCool\Tests\Facades;
+<?php
+
+namespace McCool\Tests\Facades;
 
 use GrahamCampbell\TestBench\Traits\FacadeTestCaseTrait;
 use McCool\Tests\AbstractTestCase;

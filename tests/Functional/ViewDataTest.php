@@ -1,4 +1,6 @@
-<?php namespace McCool\Tests\Functional;
+<?php
+
+namespace McCool\Tests\Functional;
 
 use Exception;
 use Illuminate\Contracts\Foundation\Application;

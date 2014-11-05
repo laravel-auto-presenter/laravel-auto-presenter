@@ -1,4 +1,6 @@
-<?php namespace McCool\Tests;
+<?php
+
+namespace McCool\Tests;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;

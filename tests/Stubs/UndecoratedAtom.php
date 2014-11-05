@@ -1,4 +1,6 @@
-<?php namespace McCool\Tests\Stubs;
+<?php
+
+namespace McCool\Tests\Stubs;
 
 class UndecoratedAtom
 {

@@ -1,4 +1,6 @@
-<?php namespace McCool\LaravelAutoPresenter\Exceptions;
+<?php
+
+namespace McCool\LaravelAutoPresenter\Exceptions;
 
 class PresenterNotFound extends NotFound
 {

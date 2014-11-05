@@ -1,4 +1,6 @@
-<?php namespace McCool\LaravelAutoPresenter;
+<?php
+
+namespace McCool\LaravelAutoPresenter;
 
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;

@@ -1,4 +1,6 @@
-<?php namespace McCool\LaravelAutoPresenter\Facades;
+<?php
+
+namespace McCool\LaravelAutoPresenter\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
