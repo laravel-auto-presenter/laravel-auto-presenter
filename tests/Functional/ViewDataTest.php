@@ -3,14 +3,13 @@
 namespace McCool\Tests\Functional;
 
 use Exception;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Schema;
 use McCool\Tests\AbstractTestCase;
 use McCool\Tests\Stubs\ModelStub;
 
 class ViewDataTest extends AbstractTestCase
 {
-    protected function additionalSetup(Application $app)
+    protected function additionalSetup($app)
     {
         $app['view']->addNamespace('stubs', realpath(__DIR__.'/stubs'));
     }
