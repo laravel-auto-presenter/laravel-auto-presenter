@@ -155,10 +155,10 @@ Here, the automatic presenter decorator is injecting the Post model that is to b
 ```php
 use Example\Accounts\User;
 use Example\Blog\PostPresenter;
-use McCool\LaravelAutoPresenter\HasPresenter;
+use McCool\LaravelAutoPresenter\PresenterInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Post extends Eloquent implements HasPresenter
+class Post extends Eloquent implements PresenterInterface
 {
     protected $table = 'posts';
     protected $fillable = ['author_id', 'title', 'content', 'published_at'];
@@ -168,9 +168,11 @@ class Post extends Eloquent implements HasPresenter
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function getPresenterClass()
+    public function getPresenter()
     {
         return PostPresenter::class;
+        // or
+        return 'Foo\Bar\BarPresenter';
     }
 }
 ```
