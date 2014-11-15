@@ -18,7 +18,7 @@ This package automatically decorates objects bound to views during the view rend
 
 You should install this package with [Composer](http://getcomposer.org/). Add the following "require" to your `composer.json` file and run the `composer install` command to install it.
 
-##### For Laravel 5
+##### Laravel 5
 
 ```json
 {
@@ -28,7 +28,7 @@ You should install this package with [Composer](http://getcomposer.org/). Add th
 }
 ```
 
-##### For Laravel 4.2
+##### Laravel 4.2
 
 ```json
 {
@@ -38,7 +38,7 @@ You should install this package with [Composer](http://getcomposer.org/). Add th
 }
 ```
 
-##### For Laravel 4.1
+##### Laravel 4.1
 
 ```json
 {
@@ -48,7 +48,7 @@ You should install this package with [Composer](http://getcomposer.org/). Add th
 }
 ```
 
-Then, in config/app.php add this line to your 'providers' array.
+Then, in your `config/app.php` add this line to your 'providers' array.
 
 ```php
 'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
