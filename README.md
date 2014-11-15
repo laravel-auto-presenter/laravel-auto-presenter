@@ -3,7 +3,7 @@ Laravel Auto Presenter 3
 
 [![Build Status](https://img.shields.io/travis/ShawnMcCool/laravel-auto-presenter/master.svg?style=flat-square)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Latest Version](https://img.shields.io/github/release/ShawnMcCool/laravel-auto-presenter.svg?style=flat-square)](https://github.com/ShawnMcCool/laravel-auto-presenter/releases)
+[![Latest Version](https://img.shields.io/github/release/mccool/laravel-auto-presenter.svg?style=flat-square)](https://github.com/ShawnMcCool/laravel-auto-presenter/releases)
 
 This package automatically decorates objects bound to views during the view render process.
 
@@ -35,16 +35,10 @@ Version 1
 - Laravel 4.1.x
 - [optional] PHPUnit to run the tests
 
-<a name="install-laravel-package-installer"/>
-## Installing With The Laravel 4 Package Installer
-
-1. Install the [Laravel 4 Package Installer](https://github.com/rtablada/package-installer)
-2. Run `php artisan package:install mccool/laravel-auto-presenter`
-
 <a name="install-composer"/>
-## Installing With Composer
+## Installing
 
-Install this package with [Composer](http://getcomposer.org/).
+You should install this package with [Composer](http://getcomposer.org/).
 
 Add the following "require" to your `composer.json` file and run the `composer install` command to install it.
 

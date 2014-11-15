@@ -1,7 +1,0 @@
-{
-  "providers": [
-        "McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider"
-    ],
-    "aliases": [
-    ]
-}
