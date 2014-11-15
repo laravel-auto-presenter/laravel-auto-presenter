@@ -3,7 +3,6 @@ Laravel Auto Presenter 3
 
 [![Build Status](https://img.shields.io/travis/ShawnMcCool/laravel-auto-presenter/master.svg?style=flat-square)](https://travis-ci.org/ShawnMcCool/laravel-auto-presenter)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Latest Version](https://img.shields.io/github/release/mccool/laravel-auto-presenter.svg?style=flat-square)](https://github.com/ShawnMcCool/laravel-auto-presenter/releases)
 
 This package automatically decorates objects bound to views during the view render process.
 
