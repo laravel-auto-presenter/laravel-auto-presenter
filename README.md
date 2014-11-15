@@ -14,37 +14,16 @@ This package automatically decorates objects bound to views during the view rend
 - Automatically decorate objects within collection objects
 
 
-## Requirements
-
-##### Version 3
-
-- PHP 5.5+
-- Laravel 5.x
-- [optional] PHPUnit to run the tests
-
-##### Version 2
-
-- PHP 5.4+
-- Laravel 4.2.x
-- [optional] PHPUnit to run the tests
-
-##### Version 1
-
-- PHP 5.3+
-- Laravel 4.1.x
-- [optional] PHPUnit to run the tests
-
-
 ## Installing
 
 You should install this package with [Composer](http://getcomposer.org/). Add the following "require" to your `composer.json` file and run the `composer install` command to install it.
 
-##### For Laravel 4.1
+##### For Laravel 5
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "~1.2"
+        "mccool/laravel-auto-presenter": "~3.0@beta"
     }
 }
 ```
@@ -59,12 +38,12 @@ You should install this package with [Composer](http://getcomposer.org/). Add th
 }
 ```
 
-##### For Laravel 5
+##### For Laravel 4.1
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "~3.0@beta"
+        "mccool/laravel-auto-presenter": "~1.2"
     }
 }
 ```
