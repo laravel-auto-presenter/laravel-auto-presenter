@@ -182,6 +182,7 @@ If an object isn't being decorated correctly in the view then there's a good cha
 The MIT License (MIT)
 
 Copyright (c) 2013-2014 Shawn McCool
+
 Copyright (c) 2014 Graham Campbell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
