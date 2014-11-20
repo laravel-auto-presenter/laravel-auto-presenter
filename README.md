@@ -109,9 +109,9 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 
 class PostPresenter extends BasePresenter
 {
-    public function __construct(Post $post)
+    public function __construct(Post $resource)
     {
-        $this->wrappedObject = $post;
+        $this->wrappedObject = $resource;
     }
 
     public function published_at()
@@ -123,7 +123,9 @@ class PostPresenter extends BasePresenter
 }
 ```
 
-Here, the automatic presenter decorator is injecting the Post model that is to be decorated. We need the post class to implement the interface.
+Here, the automatic presenter decorator is injecting the Post model that is to be decorated. Please be aware that the constructor parameter should always be named `$resource` to allow Laravel's IoC container to correctly resolve the dependency.
+
+We need the post class to implement the interface.
 
 ```php
 use Example\Accounts\User;
