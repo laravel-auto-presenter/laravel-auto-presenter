@@ -23,7 +23,8 @@
         "illuminate/view": "~5.0"
     },
     "require-dev": {
-        "graham-campbell/testbench": "~2.0"
+        "graham-campbell/testbench": "~2.0",
+        "fabpot/php-cs-fixer": "~1.2"
     },
     "autoload": {
         "psr-4": {
