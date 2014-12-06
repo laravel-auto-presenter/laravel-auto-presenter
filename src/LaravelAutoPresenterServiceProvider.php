@@ -25,8 +25,6 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('mccool/laravel-auto-presenter');
-
         $this->setupEventFiring($this->app);
 
         $this->setupEventListening($this->app);
