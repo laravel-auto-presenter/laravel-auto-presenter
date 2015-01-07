@@ -2,8 +2,6 @@
 
 use Illuminate\Support\ServiceProvider;
 
-use Event, View;
-
 class LaravelAutoPresenterServiceProvider extends ServiceProvider
 {
     protected $defer = false;
@@ -19,16 +17,16 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
         $this->package('mccool/laravel-auto-presenter');
 
         // every time a view is rendered, fire a new event
-        View::composer('*', function($view) {
+        $this->app['view']->composer('*', function($view) {
             if ($view instanceOf \Illuminate\View\View) {
-                Event::fire('content.rendering', array($view));
+                $this->app['events']->fire('content.rendering', array($view));
             }
         });
 
         // every time that event fires, decorate the bound data
         $app = $this->app;
 
-        Event::listen('content.rendering', function($view) use ($app) {
+        $this->app['events']->listen('content.rendering', function($view) use ($app) {
             $sharedData = $view->getFactory()->getShared();
             $viewData = array_merge($sharedData, $view->getData());
 
