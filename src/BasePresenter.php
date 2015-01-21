@@ -98,7 +98,6 @@ abstract class BasePresenter
         if (method_exists($this, $key)) {
             return true;
         }
-
         return isset($this->wrappedObject->$key);
     }
 
