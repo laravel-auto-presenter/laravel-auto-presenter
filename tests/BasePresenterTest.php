@@ -77,6 +77,7 @@ class BasePresenterTest extends AbstractTestCase
     {
         $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
         $this->assertTrue(isset($presenter->myProperty));
+        $this->assertTrue(isset($presenter->favoriteMovie));
     }
 
     public function testToString()
