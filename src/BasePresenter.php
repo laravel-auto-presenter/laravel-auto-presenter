@@ -87,7 +87,7 @@ abstract class BasePresenter
     }
 
     /**
-     * Is the key set on the wrapped object?
+     * Is the key set on either the presenter or the wrapped object?
      *
      * @param string $key
      *
@@ -95,6 +95,10 @@ abstract class BasePresenter
      */
     public function __isset($key)
     {
+        if (method_exists($this, $key)) {
+            return true;
+        }
+
         return isset($this->wrappedObject->$key);
     }
 
