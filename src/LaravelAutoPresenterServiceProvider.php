@@ -22,14 +22,7 @@ use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 class LaravelAutoPresenterServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
-     * Bootstrap the application events.
+     * Boot the service provider.
      *
      * @return void
      */
