@@ -119,6 +119,7 @@ class PostPresenter extends BasePresenter
     public function published_at()
     {
         $published = $this->wrappedObject->published_at;
+
         return Carbon::createFromFormat('Y-m-d H:i:s', $published)
             ->toFormattedDateString();
     }
