@@ -126,7 +126,7 @@ class PostPresenter extends BasePresenter
 }
 ```
 
-Here, the automatic presenter decorator is injecting the Post model that is to be decorated. Please be aware that the constructor parameter should always be named `$resource` to allow Laravel's IoC container to correctly resolve the dependency.
+Here, the automatic presenter decorator is injecting the Post model that is to be decorated. **Please be aware that the constructor parameter should always be named `$resource` to allow Laravel's IoC container to correctly resolve the dependency.**
 
 We need the post class to implement the interface.
 
