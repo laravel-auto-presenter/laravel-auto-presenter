@@ -96,35 +96,6 @@ class ViewDataTest extends AbstractTestCase
         }
     }
 
-    public function testArrayOfCollections()
-    {
-        try {
-            $this->setupAndSeedDatabase();
-            $models = ['firstModels' => ModelStub::all(), 'secondModels' => ModelStub::all()];
-            $view = $this->app['view']->make('stubs::test')->withModels($models);
-            $view->render();
-            $this->assertCount(2, $view->models);
-            $this->assertCount(3, $view->models['firstModels']);
-            $this->assertCount(3, $view->models['secondModels']);
-            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['firstModels'][0]);
-            $this->assertSame('hello there', $view->models['firstModels'][0]->foo);
-            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['firstModels'][1]);
-            $this->assertSame('herro there', $view->models['firstModels'][1]->foo);
-            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['firstModels'][2]);
-            $this->assertSame('herro there', $view->models['firstModels'][2]->foo);
-            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['secondModels'][0]);
-            $this->assertSame('hello there', $view->models['secondModels'][0]->foo);
-            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['secondModels'][1]);
-            $this->assertSame('herro there', $view->models['secondModels'][1]->foo);
-            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['secondModels'][2]);
-            $this->assertSame('herro there', $view->models['secondModels'][2]->foo);
-        } catch (Exception $e) {
-            throw $e;
-        } finally {
-            Schema::drop('stubs');
-        }
-    }
-
     protected function setupAndSeedDatabase()
     {
         Schema::create('stubs', function ($table) {
