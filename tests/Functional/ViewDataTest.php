@@ -108,8 +108,16 @@ class ViewDataTest extends AbstractTestCase
             $this->assertCount(3, $view->models['secondModels']);
             $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['firstModels'][0]);
             $this->assertSame('hello there', $view->models['firstModels'][0]->foo);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['firstModels'][1]);
+            $this->assertSame('herro there', $view->models['firstModels'][1]->foo);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['firstModels'][2]);
+            $this->assertSame('herro there', $view->models['firstModels'][2]->foo);
             $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['secondModels'][0]);
             $this->assertSame('hello there', $view->models['secondModels'][0]->foo);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['secondModels'][1]);
+            $this->assertSame('herro there', $view->models['secondModels'][1]->foo);
+            $this->assertInstanceOf('McCool\Tests\Stubs\ModelPresenter', $view->models['secondModels'][2]);
+            $this->assertSame('herro there', $view->models['secondModels'][2]->foo);
         } catch (Exception $e) {
             throw $e;
         } finally {
