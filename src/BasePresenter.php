@@ -60,7 +60,7 @@ abstract class BasePresenter
     public function __get($key)
     {
         if (method_exists($this, $key)) {
-            return $this->{$key}();
+            return $this->{$key}($this->wrappedObject->$key);
         }
 
         return $this->wrappedObject->$key;
