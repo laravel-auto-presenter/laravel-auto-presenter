@@ -14,7 +14,6 @@ namespace McCool\LaravelAutoPresenter;
 
 use Exception;
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;
-use McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound;
 
 abstract class BasePresenter
 {
@@ -52,8 +51,6 @@ abstract class BasePresenter
      * decorated object.
      *
      * @param string $key
-     *
-     * @throws \McCool\LaravelAutoPresenter\Exceptions\PropertyNotFound
      *
      * @return mixed
      */
