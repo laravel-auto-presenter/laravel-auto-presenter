@@ -98,10 +98,6 @@ class ViewDataTest extends AbstractTestCase
 
     protected function setupAndSeedDatabase()
     {
-        if (version_compare(PHP_VERSION, '7.0')) {
-            $this->markTestSkipped('Eloquent is broken on PHP 7.');
-        }
-        
         Schema::create('stubs', function ($table) {
             $table->string('foo');
             $table->timestamps();
