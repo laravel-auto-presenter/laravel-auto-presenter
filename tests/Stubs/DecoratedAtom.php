@@ -16,7 +16,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 
 class DecoratedAtom implements HasPresenter
 {
-    public $myProperty = "bazinga";
+    public $myProperty = 'bazinga';
 
     public function getPresenterClass()
     {
