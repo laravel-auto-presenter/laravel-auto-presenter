@@ -66,9 +66,7 @@ class LaravelAutoPresenterServiceProvider extends ServiceProvider
             if ($viewData = array_merge($view->getFactory()->getShared(), $view->getData())) {
                 $decorator = $app['autopresenter'];
                 foreach ($viewData as $key => $value) {
-                    if ($value instanceof HasPresenter) {
-                        $view[$key] = $decorator->decorate($value);
-                    }
+                    $view[$key] = $decorator->decorate($value);
                 }
             }
         });

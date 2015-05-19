@@ -76,7 +76,9 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
                 $model = $this->createDecorator('Collection')->decorate($model);
                 $atom->setRelation($relationName, $model);
             } else {
-                $atom->setRelation($relationName, $this->decorate($model));
+                if ($model instanceof HasPresenter) {
+                    $atom->setRelation($relationName, $this->decorate($model));
+                }
             }
         }
 
