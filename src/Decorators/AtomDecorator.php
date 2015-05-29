@@ -45,6 +45,10 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
      */
     public function decorate($subject)
     {
+        if (is_object($subject)) {
+            $subject = clone $subject;
+        }
+
         if ($subject instanceof Model) {
             $subject = $this->decorateRelations($subject);
         }
