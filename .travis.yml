@@ -12,8 +12,3 @@ sudo: false
 install: travis_retry composer install --no-interaction --prefer-source
 
 script: vendor/bin/phpunit
-
-matrix:
-  allow_failures:
-    - php: 7.0
-  fast_finish: true
