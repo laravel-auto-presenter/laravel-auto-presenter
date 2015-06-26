@@ -19,7 +19,7 @@ use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 
-class LaravelAutoPresenterServiceProvider extends ServiceProvider
+class AutoPresenterServiceProvider extends ServiceProvider
 {
     /**
      * Boot the service provider.

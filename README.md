@@ -32,7 +32,7 @@ You should install this package with [Composer](http://getcomposer.org/). Add th
 Then, in your `config/app.php` add this line to your 'providers' array.
 
 ```php
-'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
+'McCool\LaravelAutoPresenter\AutoPresenterServiceProvider',
 ```
 
 
