@@ -15,7 +15,7 @@ namespace McCool\LaravelAutoPresenter\Decorators;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\AutoPresenter;
-use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
+use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFoundException;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 class AtomDecorator implements DecoratorInterface
@@ -84,7 +84,7 @@ class AtomDecorator implements DecoratorInterface
         }
 
         if (!class_exists($presenterClass = $subject->getPresenterClass())) {
-            throw new PresenterNotFound($presenterClass);
+            throw new PresenterNotFoundException($presenterClass);
         }
 
         return $this->container->make($presenterClass, ['resource' => $subject]);

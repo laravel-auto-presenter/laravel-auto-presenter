@@ -12,7 +12,7 @@
 
 namespace McCool\LaravelAutoPresenter\Exceptions;
 
-class MethodNotFound extends NotFound
+class MethodNotFoundException extends NotFoundException
 {
     /**
      * The requested method.

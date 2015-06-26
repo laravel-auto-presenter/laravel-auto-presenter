@@ -16,7 +16,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\DecoratorInterface;
-use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
+use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFoundException;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use McCool\Tests\Stubs\DependencyDecoratedAtom;
@@ -97,14 +97,14 @@ class AutoPresenterTest extends AbstractTestCase
     }
 
     /**
-     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound
+     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\PresenterNotFoundException
      */
     public function testWronglyDecoratedClassThrowsException()
     {
         try {
             $atom = new WronglyDecoratedAtom();
             $this->autoPresenter->decorate($atom);
-        } catch (PresenterNotFound $e) {
+        } catch (PresenterNotFoundException $e) {
             $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
             $this->assertSame("The presenter class '$class' was not found.", $e->getMessage());
             $this->assertSame($class, $e->getClass());

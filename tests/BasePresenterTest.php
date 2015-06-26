@@ -12,7 +12,7 @@
 
 namespace McCool\Tests;
 
-use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;
+use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 
@@ -59,14 +59,14 @@ class BasePresenterTest extends AbstractTestCase
     }
 
     /**
-     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\MethodNotFound
+     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException
      */
-    public function testResourceMethodNotFoundThrowsException()
+    public function testResourceMethodNotFoundExceptionThrowsException()
     {
         try {
             $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
             $presenter->thisMethodDoesntExist();
-        } catch (MethodNotFound $e) {
+        } catch (MethodNotFoundException $e) {
             $method = 'thisMethodDoesntExist';
             $class = DecoratedAtomPresenter::class;
             $this->assertSame("The method '$method' was not found on the presenter class '$class'.", $e->getMessage());

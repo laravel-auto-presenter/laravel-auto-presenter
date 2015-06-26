@@ -13,7 +13,7 @@
 namespace McCool\LaravelAutoPresenter;
 
 use Exception;
-use McCool\LaravelAutoPresenter\Exceptions\MethodNotFound;
+use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
 
 abstract class BasePresenter
 {
@@ -70,7 +70,7 @@ abstract class BasePresenter
      * @param string $key
      * @param array  $args
      *
-     * @throws \McCool\LaravelAutoPresenter\Exceptions\MethodNotFound
+     * @throws \McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException
      *
      * @return mixed
      */
@@ -80,7 +80,7 @@ abstract class BasePresenter
             return call_user_func_array([$this->wrappedObject, $key], $args);
         }
 
-        throw new MethodNotFound(get_called_class(), $key);
+        throw new MethodNotFoundException(get_called_class(), $key);
     }
 
     /**

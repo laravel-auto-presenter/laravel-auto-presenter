@@ -14,7 +14,7 @@ namespace McCool\LaravelAutoPresenter\Exceptions;
 
 use Exception;
 
-class NotFound extends Exception
+class NotFoundException extends Exception
 {
     /**
      * The class name.

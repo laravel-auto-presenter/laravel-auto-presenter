@@ -1,4 +1,4 @@
-Laravel Auto Presenter 3
+Laravel Auto Presenter 4
 ========================
 
 [![StyleCI](https://styleci.io/repos/12034701/shield)](https://styleci.io/repos/12034701)
@@ -44,9 +44,9 @@ I'm using really basic code examples here, so just focus on how the auto-present
 
 ```php
 use Example\Accounts\User;
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Post extends Eloquent
+class Post extends Model
 {
     protected $table = 'posts';
     protected $fillable = ['author_id', 'title', 'content', 'published_at'];
@@ -113,9 +113,9 @@ We need the post class to implement the interface.
 use Example\Accounts\User;
 use Example\Blog\PostPresenter;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Post extends Eloquent implements HasPresenter
+class Post extends Model implements HasPresenter
 {
     protected $table = 'posts';
     protected $fillable = ['author_id', 'title', 'content', 'published_at'];

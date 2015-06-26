@@ -12,7 +12,7 @@
 
 namespace McCool\LaravelAutoPresenter\Exceptions;
 
-class PresenterNotFound extends NotFound
+class PresenterNotFoundException extends NotFoundException
 {
     /**
      * Create a new presenter not found exception.
