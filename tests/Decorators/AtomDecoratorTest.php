@@ -19,6 +19,8 @@ use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use McCool\Tests\Stubs\ModelStub;
+use McCool\Tests\Stubs\ModelPresenter;
 use Mockery;
 
 class AtomDecoratorTest extends AbstractTestCase
@@ -33,11 +35,6 @@ class AtomDecoratorTest extends AbstractTestCase
         $this->decorator = new AtomDecorator(Mockery::mock(AutoPresenter::class), Mockery::mock(Container::class));
     }
 
-    public function testCanDecorate()
-    {
-        $this->assertTrue($this->decorator->canDecorate(Mockery::mock(Model::class)));
-    }
-
     public function testCanDecoratePresenter()
     {
         $this->assertTrue($this->decorator->canDecorate(Mockery::mock(HasPresenter::class)));
@@ -50,30 +47,18 @@ class AtomDecoratorTest extends AbstractTestCase
         $this->assertFalse($this->decorator->canDecorate('garbage stuff yo'));
     }
 
-    public function testShouldHandleRelationsWhenSubjectIsAModel()
+    public function testShouldHandleRelations()
     {
-        $model = Mockery::mock(Model::class);
+        $model = Mockery::mock(ModelStub::class);
         $relations = ['blah'];
 
         $this->decorator->getAutoPresenter()->shouldReceive('decorate')->once()
             ->with($relations[0])->andReturn('foo');
 
-        $model->shouldReceive('getRelations')->andReturn($relations);
-        $model->shouldReceive('setRelation')->with(0, 'foo');
-
-        $this->decorator->decorate($model);
-    }
-
-    public function testShouldHandleRelationsWhenSubjectIsAModelWithACollection()
-    {
-        $model = Mockery::mock(Model::class);
-        $relations = [Mockery::mock(Collection::class)->makePartial()];
-
-        $this->decorator->getAutoPresenter()->shouldReceive('decorate')->once()
-            ->with($relations[0])->andReturn('bar');
-
-        $model->shouldReceive('getRelations')->andReturn($relations);
-        $model->shouldReceive('setRelation')->with(0, 'bar');
+        $model->shouldReceive('getRelations')->once()->andReturn($relations);
+        $model->shouldReceive('setRelation')->once()->with(0, 'foo');
+        $model->shouldReceive('getPresenterClass')->once()->andReturn(ModelPresenter::class);
+        $this->decorator->getContainer()->shouldReceive('make')->once()->andReturn(new ModelPresenter($model));
 
         $this->decorator->decorate($model);
     }
