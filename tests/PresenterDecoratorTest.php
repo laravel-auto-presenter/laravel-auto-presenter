@@ -27,7 +27,10 @@ class PresenterDecoratorTest extends AbstractTestCase
 {
     private $decorator;
 
-    protected function start()
+    /**
+     * @before
+     */
+    public function setUpProperties()
     {
         $this->decorator = $this->app->make(PresenterDecorator::class);
     }

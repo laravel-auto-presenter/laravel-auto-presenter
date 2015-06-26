@@ -20,7 +20,10 @@ class CollectionDecoratorTest extends AbstractTestCase
 {
     private $collectionDecorator;
 
-    protected function start()
+    /**
+     * @before
+     */
+    public function setUpProperties()
     {
         $container = m::mock('Illuminate\Contracts\Container\Container');
         $this->collectionDecorator = new CollectionDecorator($container);

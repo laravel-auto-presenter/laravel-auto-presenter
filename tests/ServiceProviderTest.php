@@ -12,29 +12,33 @@
 
 namespace McCool\Tests;
 
-use GrahamCampbell\TestBench\Traits\ServiceProviderTestCaseTrait;
+use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
+use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
+use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
+use McCool\LaravelAutoPresenter\PresenterDecorator;
 
 class ServiceProviderTest extends AbstractTestCase
 {
-    use ServiceProviderTestCaseTrait;
+    use ServiceProviderTrait;
 
     public function testAtomDecoratorIsInjectable()
     {
-        $this->assertIsInjectable('McCool\LaravelAutoPresenter\Decorators\AtomDecorator');
+        $this->assertIsInjectable(AtomDecorator::class);
     }
 
     public function testCollectionDecoratorIsInjectable()
     {
-        $this->assertIsInjectable('McCool\LaravelAutoPresenter\Decorators\CollectionDecorator');
+        $this->assertIsInjectable(CollectionDecorator::class);
     }
 
     public function testPaginatorDecoratorIsInjectable()
     {
-        $this->assertIsInjectable('McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator');
+        $this->assertIsInjectable(PaginatorDecorator::class);
     }
 
     public function testPresenterDecoratorIsInjectable()
     {
-        $this->assertIsInjectable('McCool\LaravelAutoPresenter\PresenterDecorator');
+        $this->assertIsInjectable(PresenterDecorator::class);
     }
 }

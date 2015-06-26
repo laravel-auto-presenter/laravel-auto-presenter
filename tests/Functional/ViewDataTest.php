@@ -19,9 +19,18 @@ use McCool\Tests\Stubs\ModelStub;
 
 class ViewDataTest extends AbstractTestCase
 {
-    protected function additionalSetup($app)
+    /**
+     * Setup the application environment.
+     *
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     *
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
     {
-        $app['view']->addNamespace('stubs', realpath(__DIR__.'/stubs'));
+        parent::getEnvironmentSetUp($app);
+
+        $app->view->addNamespace('stubs', realpath(__DIR__.'/stubs'));
     }
 
     public function testBasicSetup()

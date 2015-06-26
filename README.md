@@ -21,32 +21,10 @@ This package automatically decorates objects bound to views during the view rend
 
 You should install this package with [Composer](http://getcomposer.org/). Add the following "require" to your `composer.json` file and run the `composer install` command to install it.
 
-##### Laravel 5
-
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "~3.1"
-    }
-}
-```
-
-##### Laravel 4.2
-
-```json
-{
-    "require": {
-        "mccool/laravel-auto-presenter": "~2.2"
-    }
-}
-```
-
-##### Laravel 4.1
-
-```json
-{
-    "require": {
-        "mccool/laravel-auto-presenter": "~1.2"
+        "mccool/laravel-auto-presenter": "~4.0"
     }
 }
 ```

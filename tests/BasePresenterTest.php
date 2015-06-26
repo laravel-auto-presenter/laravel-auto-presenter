@@ -20,7 +20,10 @@ class BasePresenterTest extends AbstractTestCase
 {
     private $decoratedAtom;
 
-    protected function start()
+    /**
+     * @before
+     */
+    public function setUpProperties()
     {
         $this->decoratedAtom = $this->app->make(DecoratedAtom::class);
     }

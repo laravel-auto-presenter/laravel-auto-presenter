@@ -22,7 +22,10 @@ class BaseDecoratorTest extends AbstractTestCase
 {
     private $baseDecorator;
 
-    protected function start()
+    /**
+     * @before
+     */
+    public function setUpProperties()
     {
         $container = m::mock('Illuminate\Contracts\Container\Container');
         $this->baseDecorator = new BaseDecoratorStub($container);

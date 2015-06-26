@@ -13,6 +13,7 @@
 namespace McCool\Tests;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
+use McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider;
 
 abstract class AbstractTestCase extends AbstractPackageTestCase
 {
@@ -25,6 +26,6 @@ abstract class AbstractTestCase extends AbstractPackageTestCase
      */
     protected function getServiceProviderClass($app)
     {
-        return 'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider';
+        return LaravelAutoPresenterServiceProvider::class;
     }
 }

@@ -22,7 +22,10 @@ class PaginatorDecoratorTest extends AbstractTestCase
 {
     private $paginatorDecorator;
 
-    protected function start()
+    /**
+     * @before
+     */
+    public function setUpProperties()
     {
         $container = m::mock('Illuminate\Contracts\Container\Container');
         $this->paginatorDecorator = new PaginatorDecorator($container);
