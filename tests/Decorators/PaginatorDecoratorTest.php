@@ -15,7 +15,6 @@ namespace McCool\Tests\Decorators;
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Pagination\Paginator;
 use McCool\LaravelAutoPresenter\AutoPresenter;
-use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 use Mockery;
 

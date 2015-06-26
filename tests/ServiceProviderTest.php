@@ -13,9 +13,6 @@
 namespace McCool\Tests;
 
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
-use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
-use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
-use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 
 class ServiceProviderTest extends AbstractTestCase

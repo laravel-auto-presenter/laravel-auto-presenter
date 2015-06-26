@@ -14,9 +14,9 @@ namespace McCool\Tests;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\DecoratorInterface;
 use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
-use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use McCool\Tests\Stubs\DependencyDecoratedAtom;

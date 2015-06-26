@@ -14,7 +14,6 @@ namespace McCool\LaravelAutoPresenter\Decorators;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
 use McCool\LaravelAutoPresenter\HasPresenter;
