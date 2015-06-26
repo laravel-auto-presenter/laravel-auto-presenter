@@ -12,7 +12,6 @@
 
 namespace McCool\LaravelAutoPresenter;
 
-use Exception;
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
 
 abstract class BasePresenter
