@@ -14,13 +14,11 @@ namespace McCool\Tests\Decorators;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use McCool\Tests\Stubs\ModelStub;
 use McCool\Tests\Stubs\ModelPresenter;
+use McCool\Tests\Stubs\ModelStub;
 use Mockery;
 
 class AtomDecoratorTest extends AbstractTestCase
