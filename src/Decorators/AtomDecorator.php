@@ -30,7 +30,7 @@ class AtomDecorator implements DecoratorInterface
     /**
      * The container instance.
      *
-     * @var \McCool\LaravelAutoPresenter\AutoPresenter
+     * @var \Illuminate\Contracts\Container\Container
      */
     protected $container;
 

@@ -39,7 +39,7 @@ abstract class BasePresenter
     /**
      * Get the wrapped object.
      *
-     * @return mixed
+     * @return object|null
      */
     public function getWrappedObject()
     {
