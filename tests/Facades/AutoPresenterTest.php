@@ -13,9 +13,9 @@
 namespace McCool\Tests\Facades;
 
 use GrahamCampbell\TestBenchCore\FacadeTrait;
-use McCool\Tests\AbstractTestCase;
 use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
 use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\Tests\AbstractTestCase;
 
 class AutoPresenterTest extends AbstractTestCase
 {
