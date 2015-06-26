@@ -42,6 +42,8 @@ class CollectionDecorator extends BaseDecorator implements DecoratorInterface
         foreach ($subject as $key => $atom) {
             if (is_array($atom)) {
                 $subject[$key] = $this->decorate($atom);
+            } elseif ($this->canDecorate($atom)) {
+                $subject[$key] = $this->decorate($atom);
             } else {
                 $subject[$key] = $this->createDecorator('Atom')->decorate($atom);
             }
