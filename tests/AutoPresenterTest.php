@@ -14,31 +14,44 @@ namespace McCool\Tests;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\Decorators\DecoratorInterface;
 use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
-use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\Tests\Stubs\DecoratedAtom;
 use McCool\Tests\Stubs\DecoratedAtomPresenter;
 use McCool\Tests\Stubs\DependencyDecoratedAtom;
 use McCool\Tests\Stubs\DependencyDecoratedAtomPresenter;
 use McCool\Tests\Stubs\UndecoratedAtom;
 use McCool\Tests\Stubs\WronglyDecoratedAtom;
+use Mockery;
 
-class PresenterDecoratorTest extends AbstractTestCase
+class AutoPresenterTest extends AbstractTestCase
 {
-    private $decorator;
+    private $autoPresenter;
 
     /**
      * @before
      */
     public function setUpProperties()
     {
-        $this->decorator = $this->app->make(PresenterDecorator::class);
+        $this->autoPresenter = $this->app->make(AutoPresenter::class);
+    }
+
+    public function testRegistration()
+    {
+        $autoPresenter = new AutoPresenter();
+
+        $decorator = Mockery::mock(DecoratorInterface::class);
+
+        $autoPresenter->register($decorator);
+
+        $this->assertSame([$decorator], $autoPresenter->getDecorators());
     }
 
     public function testWontDecorateOtherObjects()
     {
         $atom = new UndecoratedAtom();
-        $decoratedAtom = $this->decorator->decorate($atom);
+        $decoratedAtom = $this->autoPresenter->decorate($atom);
 
         $this->assertInstanceOf(UndecoratedAtom::class, $decoratedAtom);
     }
@@ -46,7 +59,7 @@ class PresenterDecoratorTest extends AbstractTestCase
     public function testDecoratesAtom()
     {
         $atom = $this->getDecoratedAtom();
-        $decoratedAtom = $this->decorator->decorate($atom);
+        $decoratedAtom = $this->autoPresenter->decorate($atom);
 
         $this->assertInstanceOf(DecoratedAtomPresenter::class, $decoratedAtom);
     }
@@ -54,7 +67,7 @@ class PresenterDecoratorTest extends AbstractTestCase
     public function testDecoratesAtomWithDependencies()
     {
         $atom = $this->getDependencyDecoratedAtom();
-        $decoratedAtom = $this->decorator->decorate($atom);
+        $decoratedAtom = $this->autoPresenter->decorate($atom);
 
         $this->assertInstanceOf(DependencyDecoratedAtomPresenter::class, $decoratedAtom);
     }
@@ -62,7 +75,7 @@ class PresenterDecoratorTest extends AbstractTestCase
     public function testDecoratesPaginator()
     {
         $paginator = $this->getFilledPaginator();
-        $decoratedPaginator = $this->decorator->decorate($paginator);
+        $decoratedPaginator = $this->autoPresenter->decorate($paginator);
 
         $this->assertCount(5, $decoratedPaginator);
 
@@ -74,7 +87,7 @@ class PresenterDecoratorTest extends AbstractTestCase
     public function testDecorateCollection()
     {
         $collection = $this->getFilledCollection();
-        $decoratedCollection = $this->decorator->decorate($collection);
+        $decoratedCollection = $this->autoPresenter->decorate($collection);
 
         $this->assertCount(5, $decoratedCollection);
 
@@ -90,7 +103,7 @@ class PresenterDecoratorTest extends AbstractTestCase
     {
         try {
             $atom = new WronglyDecoratedAtom();
-            $this->decorator->decorate($atom);
+            $this->autoPresenter->decorate($atom);
         } catch (PresenterNotFound $e) {
             $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
             $this->assertSame("The presenter class '$class' was not found.", $e->getMessage());

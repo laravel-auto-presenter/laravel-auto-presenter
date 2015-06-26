@@ -12,11 +12,10 @@
 
 namespace McCool\LaravelAutoPresenter\Decorators;
 
-use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\AutoPresenter;
-use ReflectionObject;
 
-class PaginatorDecorator implements DecoratorInterface
+class ArrayDecorator implements DecoratorInterface
 {
     /**
      * The auto presenter instance.
@@ -26,7 +25,7 @@ class PaginatorDecorator implements DecoratorInterface
     protected $autoPresenter;
 
     /**
-     * Create a new paginator decorator.
+     * Create a new array decorator.
      *
      * @param \McCool\LaravelAutoPresenter\AutoPresenter $autoPresenter
      *
@@ -36,6 +35,7 @@ class PaginatorDecorator implements DecoratorInterface
     {
         $this->autoPresenter = $autoPresenter;
     }
+
     /**
      * Can the subject be decorated?
      *
@@ -45,7 +45,7 @@ class PaginatorDecorator implements DecoratorInterface
      */
     public function canDecorate($subject)
     {
-        return $subject instanceof Paginator;
+        return is_array($subject) || $subject instanceof Collection;
     }
 
     /**
@@ -57,32 +57,11 @@ class PaginatorDecorator implements DecoratorInterface
      */
     public function decorate($subject)
     {
-        $items = $this->getItems($subject);
-
-        foreach ($items->keys() as $key) {
-            $items->put($key, $this->autoPresenter->decorate($items->get($key)));
+        foreach ($subject as $key => $atom) {
+            $subject[$key] = $this->autoPresenter->decorate($atom);
         }
 
         return $subject;
-    }
-
-    /**
-     * Decorate a paginator instance.
-     *
-     * We're using hacky reflection for now because there is no public getter.
-     *
-     * @param \Illuminate\Contracts\Pagination\Paginator $subject
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    protected function getItems(Paginator $subject)
-    {
-        $object = new ReflectionObject($subject);
-
-        $items = $object->getProperty('items');
-        $items->setAccessible(true);
-
-        return $items->getValue($subject);
     }
 
     /**

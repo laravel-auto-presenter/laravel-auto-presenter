@@ -15,8 +15,8 @@ namespace McCool\LaravelAutoPresenter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
+use McCool\LaravelAutoPresenter\Decorators\ArrayDecorator;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
-use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
 
 class AutoPresenterServiceProvider extends ServiceProvider
@@ -79,59 +79,7 @@ class AutoPresenterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerAtomDecorator($this->app);
-        $this->registerCollectionDecorator($this->app);
-        $this->registerPaginatorDecorator($this->app);
-
-        $this->registerPresenterDecorator($this->app);
-    }
-
-    /**
-     * Register the atom decorator.
-     *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
-     * @return void
-     */
-    public function registerAtomDecorator(Application $app)
-    {
-        $app->singleton('autopresenter.atom', function (Application $app) {
-            return new AtomDecorator($app);
-        });
-
-        $app->alias('autopresenter.atom', 'McCool\LaravelAutoPresenter\Decorators\AtomDecorator');
-    }
-
-    /**
-     * Register the collection decorator.
-     *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
-     * @return void
-     */
-    public function registerCollectionDecorator(Application $app)
-    {
-        $app->singleton('autopresenter.collection', function (Application $app) {
-            return new CollectionDecorator($app);
-        });
-
-        $app->alias('autopresenter.collection', 'McCool\LaravelAutoPresenter\Decorators\CollectionDecorator');
-    }
-
-    /**
-     * Register the paginator decorator.
-     *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
-     * @return void
-     */
-    public function registerPaginatorDecorator(Application $app)
-    {
-        $app->singleton('autopresenter.paginator', function (Application $app) {
-            return new PaginatorDecorator($app);
-        });
-
-        $app->alias('autopresenter.paginator', 'McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator');
+        $this->registerAutoPresenter($this->app);
     }
 
     /**
@@ -141,17 +89,19 @@ class AutoPresenterServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerPresenterDecorator(Application $app)
+    public function registerAutoPresenter(Application $app)
     {
         $app->singleton('autopresenter', function (Application $app) {
-            $atom = $app['autopresenter.atom'];
-            $collection = $app['autopresenter.collection'];
-            $paginator = $app['autopresenter.paginator'];
+            $autoPresenter = new AutoPresenter();
 
-            return new PresenterDecorator($atom, $collection, $paginator);
+            $autoPresenter->register(new AtomDecorator($autoPresenter, $app));
+            $autoPresenter->register(new ArrayDecorator($autoPresenter));
+            $autoPresenter->register(new PaginatorDecorator($autoPresenter));
+
+            return $autoPresenter;
         });
 
-        $app->alias('autopresenter', 'McCool\LaravelAutoPresenter\PresenterDecorator');
+        $app->alias('autopresenter', AutoPresenter::class);
     }
 
     /**
@@ -163,9 +113,6 @@ class AutoPresenterServiceProvider extends ServiceProvider
     {
         return [
             'autopresenter',
-            'autopresenter.atom',
-            'autopresenter.collection',
-            'autopresenter.paginator',
         ];
     }
 }

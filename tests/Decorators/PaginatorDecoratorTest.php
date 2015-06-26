@@ -14,47 +14,45 @@ namespace McCool\Tests\Decorators;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Pagination\Paginator;
+use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
-use Mockery as m;
+use Mockery;
 
 class PaginatorDecoratorTest extends AbstractTestCase
 {
-    private $paginatorDecorator;
+    private $decorator;
 
     /**
      * @before
      */
     public function setUpProperties()
     {
-        $container = m::mock('Illuminate\Contracts\Container\Container');
-        $this->paginatorDecorator = new PaginatorDecorator($container);
+        $this->decorator = new PaginatorDecorator(Mockery::mock(AutoPresenter::class));
     }
 
     public function testCanDecoratePaginator()
     {
-        $paginator = m::mock('Illuminate\Contracts\Pagination\Paginator');
+        $this->assertTrue($this->decorator->canDecorate(Mockery::mock(Paginator::class)));
+    }
 
-        $this->assertTrue($this->paginatorDecorator->canDecorate($paginator));
-        $this->assertFalse($this->paginatorDecorator->canDecorate('garbage stuff yo'));
+    public function testCannotDecorateGarbage()
+    {
+        $this->assertFalse($this->decorator->canDecorate([]));
+        $this->assertFalse($this->decorator->canDecorate(null));
+        $this->assertFalse($this->decorator->canDecorate('garbage stuff yo'));
     }
 
     public function testDecorationOfPaginator()
     {
-        $this->resetPaginator();
-
-        $paginator = new Paginator(['an item'], 2);
-
-        $this->paginatorDecorator->getContainer()->shouldReceive('make')->once()
-            ->with(AtomDecorator::class)->andReturn(new AtomDecorator($this->paginatorDecorator->getContainer()));
-
-        $this->paginatorDecorator->decorate($paginator);
-    }
-
-    protected function resetPaginator()
-    {
         Paginator::currentPageResolver(function () {
             // do nothing
         });
+
+        $paginator = new Paginator(['an item'], 2);
+
+        $this->decorator->getAutoPresenter()->shouldReceive('decorate')->once()->with('an item');
+
+        $this->decorator->decorate($paginator);
     }
 }

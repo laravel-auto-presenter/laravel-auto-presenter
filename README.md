@@ -14,7 +14,7 @@ This package automatically decorates objects bound to views during the view rend
 
 - Automatically decorate objects bound to views
 - Automatically decorate objects within paginator instances
-- Automatically decorate objects within collection objects
+- Automatically decorate objects within arrays and collections
 
 
 ## Installing

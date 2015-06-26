@@ -16,29 +16,14 @@ use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\Decorators\PaginatorDecorator;
-use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\LaravelAutoPresenter\AutoPresenter;
 
 class ServiceProviderTest extends AbstractTestCase
 {
     use ServiceProviderTrait;
 
-    public function testAtomDecoratorIsInjectable()
+    public function testAutoPresenterIsInjectable()
     {
-        $this->assertIsInjectable(AtomDecorator::class);
-    }
-
-    public function testCollectionDecoratorIsInjectable()
-    {
-        $this->assertIsInjectable(CollectionDecorator::class);
-    }
-
-    public function testPaginatorDecoratorIsInjectable()
-    {
-        $this->assertIsInjectable(PaginatorDecorator::class);
-    }
-
-    public function testPresenterDecoratorIsInjectable()
-    {
-        $this->assertIsInjectable(PresenterDecorator::class);
+        $this->assertIsInjectable(AutoPresenter::class);
     }
 }

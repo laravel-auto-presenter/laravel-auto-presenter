@@ -12,18 +12,45 @@
 
 namespace McCool\LaravelAutoPresenter\Decorators;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-class AtomDecorator extends BaseDecorator implements DecoratorInterface
+class AtomDecorator implements DecoratorInterface
 {
     /**
-     * Can the subject be decorated?
+     * The auto presenter instance.
      *
-     * If the subject is an eloquent model, or implements has presenter, then
-     * it can be decorated.
+     * @var \McCool\LaravelAutoPresenter\AutoPresenter
+     */
+    protected $autoPresenter;
+
+    /**
+     * The container instance.
+     *
+     * @var \McCool\LaravelAutoPresenter\AutoPresenter
+     */
+    protected $container;
+
+    /**
+     * Create a new atom decorator.
+     *
+     * @param \McCool\LaravelAutoPresenter\AutoPresenter $autoPresenter
+     * @param \Illuminate\Contracts\Container\Container  $container
+     *
+     * @return void
+     */
+    public function __construct(AutoPresenter $autoPresenter, Container $container)
+    {
+        $this->autoPresenter = $autoPresenter;
+        $this->container = $container;
+    }
+
+    /**
+     * Can the subject be decorated?
      *
      * @param mixed $subject
      *
@@ -31,15 +58,13 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
      */
     public function canDecorate($subject)
     {
-        return ($subject instanceof HasPresenter || $subject instanceof Model);
+        return $subject instanceof HasPresenter || $subject instanceof Model;
     }
 
     /**
-     * Decorate a collection instance.
+     * Decorate a given subject.
      *
      * @param object $subject
-     *
-     * @throws \McCool\LaravelAutoPresenter\Exceptions\PresenterNotFound
      *
      * @return object
      */
@@ -50,16 +75,16 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
         }
 
         if ($subject instanceof Model) {
-            $subject = $this->decorateRelations($subject);
+            foreach ($subject->getRelations() as $relationName => $model) {
+                $subject->setRelation($relationName, $this->autoPresenter->decorate($model));
+            }
         }
 
         if (!$subject instanceof HasPresenter) {
             return $subject;
         }
 
-        $presenterClass = $subject->getPresenterClass();
-
-        if (!class_exists($presenterClass)) {
+        if (!class_exists($presenterClass = $subject->getPresenterClass())) {
             throw new PresenterNotFound($presenterClass);
         }
 
@@ -67,23 +92,26 @@ class AtomDecorator extends BaseDecorator implements DecoratorInterface
     }
 
     /**
-     * Decorate the relationships of an Eloquent object.
+     * Get the auto presenter instance.
      *
-     * @param \Illuminate\Database\Eloquent\Model $atom
+     * @codeCoverageIgnore
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \McCool\LaravelAutoPresenter\AutoPresenter
      */
-    protected function decorateRelations(Model $atom)
+    public function getAutoPresenter()
     {
-        foreach ($atom->getRelations() as $relationName => $model) {
-            if ($model instanceof Collection) {
-                $model = $this->createDecorator('Collection')->decorate($model);
-                $atom->setRelation($relationName, $model);
-            } else {
-                $atom->setRelation($relationName, $this->decorate($model));
-            }
-        }
+        return $this->autoPresenter;
+    }
 
-        return $atom;
+    /**
+     * Get the container instance.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return \Illuminate\Contracts\Container\Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }

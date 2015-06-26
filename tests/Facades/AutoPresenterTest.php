@@ -13,8 +13,8 @@
 namespace McCool\Tests\Facades;
 
 use GrahamCampbell\TestBenchCore\FacadeTrait;
-use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
-use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\LaravelAutoPresenter\AutoPresenter;
+use McCool\LaravelAutoPresenter\Facades\AutoPresenter as Facade;
 use McCool\Tests\AbstractTestCase;
 
 class AutoPresenterTest extends AbstractTestCase
@@ -38,7 +38,7 @@ class AutoPresenterTest extends AbstractTestCase
      */
     protected function getFacadeClass()
     {
-        return AutoPresenter::class;
+        return Facade::class;
     }
 
     /**
@@ -48,6 +48,6 @@ class AutoPresenterTest extends AbstractTestCase
      */
     protected function getFacadeRoot()
     {
-        return PresenterDecorator::class;
+        return AutoPresenter::class;
     }
 }

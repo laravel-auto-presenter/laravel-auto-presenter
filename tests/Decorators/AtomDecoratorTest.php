@@ -13,65 +13,68 @@
 namespace McCool\Tests\Decorators;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
-use McCool\LaravelAutoPresenter\Decorators\CollectionDecorator;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use Mockery as m;
+use Mockery;
 
 class AtomDecoratorTest extends AbstractTestCase
 {
-    private $atomDecorator;
+    private $decorator;
 
     /**
      * @before
      */
     public function setUpProperties()
     {
-        $container = m::mock('Illuminate\Contracts\Container\Container');
-        $this->atomDecorator = new AtomDecorator($container);
+        $this->decorator = new AtomDecorator(Mockery::mock(AutoPresenter::class), Mockery::mock(Container::class));
     }
 
-    public function testCanDecorateModel()
+    public function testCanDecorate()
     {
-        $model = m::mock('Illuminate\Database\Eloquent\Model');
-        $this->assertTrue($this->atomDecorator->canDecorate($model));
+        $this->assertTrue($this->decorator->canDecorate(Mockery::mock(Model::class)));
     }
 
-    public function testCanDecoratePresenterInterface()
+    public function testCanDecoratePresenter()
     {
-        $subject = m::mock(HasPresenter::class);
-        $this->assertTrue($this->atomDecorator->canDecorate($subject));
+        $this->assertTrue($this->decorator->canDecorate(Mockery::mock(HasPresenter::class)));
     }
 
     public function testCannotDecorateGarbage()
     {
-        $this->assertFalse($this->atomDecorator->canDecorate([]));
-        $this->assertFalse($this->atomDecorator->canDecorate(null));
+        $this->assertFalse($this->decorator->canDecorate([]));
+        $this->assertFalse($this->decorator->canDecorate(null));
+        $this->assertFalse($this->decorator->canDecorate('garbage stuff yo'));
     }
 
     public function testShouldHandleRelationsWhenSubjectIsAModel()
     {
-        $model = m::mock('Illuminate\Database\Eloquent\Model');
+        $model = Mockery::mock(Model::class);
         $relations = ['blah'];
 
-        $model->shouldReceive('getRelations')->andReturn($relations);
-        $model->shouldReceive('setRelation')->with(0, $relations[0]);
+        $this->decorator->getAutoPresenter()->shouldReceive('decorate')->once()
+            ->with($relations[0])->andReturn('foo');
 
-        $this->atomDecorator->decorate($model);
+        $model->shouldReceive('getRelations')->andReturn($relations);
+        $model->shouldReceive('setRelation')->with(0, 'foo');
+
+        $this->decorator->decorate($model);
     }
 
     public function testShouldHandleRelationsWhenSubjectIsAModelWithACollection()
     {
-        $model = m::mock('Illuminate\Database\Eloquent\Model');
-        $relations = [m::mock('Illuminate\Support\Collection')->makePartial()];
+        $model = Mockery::mock(Model::class);
+        $relations = [Mockery::mock(Collection::class)->makePartial()];
+
+        $this->decorator->getAutoPresenter()->shouldReceive('decorate')->once()
+            ->with($relations[0])->andReturn('bar');
 
         $model->shouldReceive('getRelations')->andReturn($relations);
-        $model->shouldReceive('setRelation')->with(0, $relations[0]);
+        $model->shouldReceive('setRelation')->with(0, 'bar');
 
-        $this->atomDecorator->getContainer()->shouldReceive('make')->once()
-            ->with('McCool\LaravelAutoPresenter\Decorators\CollectionDecorator')
-            ->andReturn(new CollectionDecorator($this->atomDecorator->getContainer()));
-
-        $this->atomDecorator->decorate($model);
+        $this->decorator->decorate($model);
     }
 }
