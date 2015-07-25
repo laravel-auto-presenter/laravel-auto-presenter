@@ -134,6 +134,55 @@ class Post extends Model implements HasPresenter
 
 Now, with no additional changes our view will show the date in the desired format.
 
+### Array Access
+
+If you want to access your presenter methods as array keys, add the `ArrayAccessTrait` to your *presenter* and make sure it implements the `ArrayAccess` interface.
+
+```php
+use Carbon\Carbon;
+use McCool\LaravelAutoPresenter\BasePresenter;
+
+use ArrayAccess;
+use McCool\LaravelAutoPresenter\Traits\ArrayAccessTrait;
+
+class PostPresenter extends BasePresenter implements ArrayAccess
+{
+       use ArrayAccessTrait;
+...
+```
+
+That will now let you access your `published_at` method as...
+
+```twig
+@foreach($posts as $post)
+    <li>{{ $post['title'] }} - {{ $post['published_at']' }}</li>
+@endforeach
+```
+
+### Serialization
+
+If you want your presenter values to be available when the object has been serialized, setup your presenter as outlined in Array Access above and add the `SerializesPresentedValuesTrait` to your *model* along with a protected array called `presented` with the name of the methods you want to be included.
+
+```php
+use Example\Accounts\User;
+use Example\Blog\PostPresenter;
+use McCool\LaravelAutoPresenter\HasPresenter;
+use Illuminate\Database\Eloquent\Model;
+
+use McCool\LaravelAutoPresenter\Traits\SerializesPresentedValuesTrait;
+
+class Post extends Model implements HasPresenter
+{
+
+    use SerializesPresentedValuesTrait;
+
+
+    protected presented = ['published_at'];
+...
+```
+
+Now you can use those decorated values in queued jobs, like `Mail::queue`. This setup adds the benefit of being able to use the same view for queued emails and rendering views for the browser.
+
 
 ## Troubleshooting
 
