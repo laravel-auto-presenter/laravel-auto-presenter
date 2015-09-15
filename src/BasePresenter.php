@@ -12,8 +12,8 @@
 
 namespace McCool\LaravelAutoPresenter;
 
-use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
 use Illuminate\Contracts\Routing\UrlRoutable;
+use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
 
 abstract class BasePresenter implements UrlRoutable
 {
