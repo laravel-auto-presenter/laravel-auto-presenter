@@ -13,8 +13,9 @@
 namespace McCool\LaravelAutoPresenter;
 
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
+use Illuminate\Contracts\Routing\UrlRoutable;
 
-abstract class BasePresenter
+abstract class BasePresenter implements UrlRoutable
 {
     /**
      * The resource that is the object that was decorated.
@@ -43,6 +44,26 @@ abstract class BasePresenter
     public function getWrappedObject()
     {
         return $this->wrappedObject;
+    }
+
+    /**
+     * Get the value of the model's route key.
+     *
+     * @return mixed
+     */
+    public function getRouteKey()
+    {
+        return $this->wrappedObject->getRouteKey();
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return $this->wrappedObject->getRouteKeyName();
     }
 
     /**
