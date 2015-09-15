@@ -36,7 +36,7 @@ class PaginatorDecorator implements DecoratorInterface
     {
         $this->autoPresenter = $autoPresenter;
     }
-    
+
     /**
      * Can the subject be decorated?
      *
