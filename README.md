@@ -140,6 +140,11 @@ Now, with no additional changes our view will show the date in the desired forma
 If an object isn't being decorated correctly in the view then there's a good chance that it's simply not in existence when the view begins to render. For example, lazily-loaded relationships won't be decorated. You can fix this by eager-loading them instead. Auth::user() will never be decorated. I prefer to bind $currentUser to my views, anyway.
 
 
+## Security
+
+If you discover a security vulnerability within this package, please send an e-mail to Graham Campbell at graham@alt-three.com. All security vulnerabilities will be promptly addressed.
+
+
 ## License
 
 Laravel Auto Presenter is licensed under [The MIT License (MIT)](LICENSE).
