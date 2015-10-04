@@ -24,7 +24,7 @@ You should install this package with [Composer](http://getcomposer.org/). Add th
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "~4.0"
+        "mccool/laravel-auto-presenter": "~4.1"
     }
 }
 ```
