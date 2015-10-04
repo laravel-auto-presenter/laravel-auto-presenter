@@ -19,9 +19,9 @@ abstract class BasePresenter
     /**
      * The resource that is the object that was decorated.
      *
-     * @var object|null
+     * @var object
      */
-    protected $wrappedObject = null;
+    protected $wrappedObject;
 
     /**
      * Create a new presenter.
@@ -38,7 +38,7 @@ abstract class BasePresenter
     /**
      * Get the wrapped object.
      *
-     * @return object|null
+     * @return object
      */
     public function getWrappedObject()
     {
