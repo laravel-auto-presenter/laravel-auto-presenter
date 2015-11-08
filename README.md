@@ -19,12 +19,20 @@ This package automatically decorates objects bound to views during the view rend
 
 ## Installing
 
-You should install this package with [Composer](http://getcomposer.org/). Add the following "require" to your `composer.json` file and run the `composer install` command to install it.
+Either [PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+ are required.
+
+To get the latest version of Laravel Auto Presenter, simply require the project using [Composer](https://getcomposer.org):
+
+```bash
+$ composer require mccool/laravel-auto-presenter
+```
+
+Instead, you may of course manually update your require block and run `composer update` if you so choose:
 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "~4.1"
+        "mccool/laravel-auto-presenter": "^4.0"
     }
 }
 ```
