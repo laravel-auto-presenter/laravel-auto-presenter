@@ -69,6 +69,7 @@ class Post extends Model
 Also, we'll need a controller..
 
 ```php
+use Example\Accounts\Post;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View;
 
@@ -94,6 +95,7 @@ In this example the published_at attribute is likely to be in the format: "Y-m-d
 
 ```php
 use Carbon\Carbon;
+use Example\Accounts\Post;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 class PostPresenter extends BasePresenter
