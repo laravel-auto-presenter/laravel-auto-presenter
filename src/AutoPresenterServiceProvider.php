@@ -12,7 +12,7 @@
 
 namespace McCool\LaravelAutoPresenter;
 
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
 use McCool\LaravelAutoPresenter\Decorators\ArrayDecorator;
@@ -29,7 +29,6 @@ class AutoPresenterServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->setupEventFiring($this->app);
-
         $this->setupEventListening($this->app);
     }
 
@@ -38,11 +37,11 @@ class AutoPresenterServiceProvider extends ServiceProvider
      *
      * Every time a view is rendered, fire a new event.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Container\Container $app
      *
      * @return void
      */
-    protected function setupEventFiring(Application $app)
+    protected function setupEventFiring(Container $app)
     {
         $app['view']->composer('*', function ($view) use ($app) {
             if ($view instanceof View) {
@@ -56,11 +55,11 @@ class AutoPresenterServiceProvider extends ServiceProvider
      *
      * Every time the event fires, decorate the bound data.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Container\Container $app
      *
      * @return void
      */
-    protected function setupEventListening(Application $app)
+    protected function setupEventListening(Container $app)
     {
         $app['events']->listen('content.rendering', function (View $view) use ($app) {
             if ($viewData = array_merge($view->getFactory()->getShared(), $view->getData())) {
@@ -85,13 +84,13 @@ class AutoPresenterServiceProvider extends ServiceProvider
     /**
      * Register the presenter decorator.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Container\Container $app
      *
      * @return void
      */
-    public function registerAutoPresenter(Application $app)
+    public function registerAutoPresenter(Container $app)
     {
-        $app->singleton('autopresenter', function (Application $app) {
+        $app->singleton('autopresenter', function (Container $app) {
             $autoPresenter = new AutoPresenter();
 
             $autoPresenter->register(new AtomDecorator($autoPresenter, $app));
