@@ -104,6 +104,17 @@ abstract class BasePresenter implements UrlRoutable
     }
 
     /**
+     * Magic method to be able to set properties to the decorated object.
+     *
+     * @param string $name
+     * @param mixed  $value
+     */
+    public function __set($name, $value)
+    {
+        $this->wrappedObject->{$name} = $value;
+    }
+
+    /**
      * Is the key set on either the presenter or the wrapped object?
      *
      * @param string $key
