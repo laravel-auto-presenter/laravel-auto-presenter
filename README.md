@@ -1,4 +1,4 @@
-Laravel Auto Presenter 4
+Laravel Auto Presenter 5
 ========================
 
 [![StyleCI Status](https://styleci.io/repos/12034701/shield)](https://styleci.io/repos/12034701)
@@ -17,6 +17,15 @@ This package automatically decorates objects bound to views during the view rend
 - Automatically decorate objects within arrays and collections
 
 
+## Upgrading
+
+If you're upgrading from Laravel Auto Presenter 4, to 5, note that:
+
+* The `BasePresenter` no longer has a constructor, so you cannot call `__parent::construct($resource)`.
+* The model is now injected using the `setWrappedObject` method, inherited from the `BasePresenter`.
+* V5 now supports Laravel 5.4 as well as 5.1, 5.2, and 5.3.
+
+
 ## Installing
 
 Either [PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+ are required.
@@ -32,7 +41,7 @@ Instead, you may of course manually update your require block and run `composer 
 ```json
 {
     "require": {
-        "mccool/laravel-auto-presenter": "^4.0"
+        "mccool/laravel-auto-presenter": "^5.0"
     }
 }
 ```
@@ -40,7 +49,7 @@ Instead, you may of course manually update your require block and run `composer 
 Then, in your `config/app.php` add this line to your 'providers' array.
 
 ```php
-'McCool\LaravelAutoPresenter\AutoPresenterServiceProvider',
+McCool\LaravelAutoPresenter\AutoPresenterServiceProvider::class,
 ```
 
 
@@ -100,11 +109,6 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 
 class PostPresenter extends BasePresenter
 {
-    public function __construct(Post $resource)
-    {
-        $this->wrappedObject = $resource;
-    }
-
     public function published_at()
     {
         $published = $this->wrappedObject->published_at;
@@ -115,7 +119,7 @@ class PostPresenter extends BasePresenter
 }
 ```
 
-Here, the automatic presenter decorator is injecting the Post model that is to be decorated. **Please be aware that the constructor parameter should always be named `$resource` to allow Laravel's IoC container to correctly resolve the dependency.**
+*Note that the model is injected by calling the `setWrappedObject` method, inherited from `BasePresenter`.*
 
 We need the post class to implement the interface.
 
