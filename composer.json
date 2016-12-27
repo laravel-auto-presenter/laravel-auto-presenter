@@ -23,7 +23,7 @@
         "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*"
     },
     "require-dev": {
-        "graham-campbell/testbench": "^3.3",
+        "graham-campbell/testbench": "^3.1",
         "mockery/mockery": "^0.9.4",
         "phpunit/phpunit": "^4.8|^5.0"
     },
@@ -44,5 +44,7 @@
         "branch-alias": {
             "dev-master": "4.4-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
