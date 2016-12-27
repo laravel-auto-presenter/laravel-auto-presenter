@@ -37,8 +37,8 @@ class ArrayDecoratorTest extends AbstractTestCase
 
     public function testCanDecorateCollection()
     {
-        if (version_compare(PHP_VERSION, '7.0.2') > -1) {
-            $this->markTestSkipped('Skipped due to mockery incompatibility on php 7.0.2 and newer.');
+        if (version_compare(PHP_VERSION, '7.0.2') > -1 && version_compare(PHP_VERSION, '7.1') < -1) {
+            $this->markTestSkipped('Skipped due to mockery incompatibility.');
         }
 
         $this->assertTrue($this->decorator->canDecorate(Mockery::mock(Collection::class)));
@@ -52,8 +52,8 @@ class ArrayDecoratorTest extends AbstractTestCase
 
     public function testDecorationOfCollection()
     {
-        if (version_compare(PHP_VERSION, '7.0.2') > -1) {
-            $this->markTestSkipped('Skipped due to mockery incompatibility on php 7.0.2 and newer.');
+        if (version_compare(PHP_VERSION, '7.0.2') > -1 && version_compare(PHP_VERSION, '7.1') < -1) {
+            $this->markTestSkipped('Skipped due to mockery incompatibility.');
         }
 
         $collection = Mockery::mock(Collection::class)->makePartial();
