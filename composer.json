@@ -23,7 +23,7 @@
         "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*"
     },
     "require-dev": {
-        "graham-campbell/testbench": "^3.1",
+        "graham-campbell/testbench": "^3.3",
         "mockery/mockery": "^0.9.4",
         "phpunit/phpunit": "^4.8|^5.0"
     },
