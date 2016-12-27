@@ -21,7 +21,7 @@ This package automatically decorates objects bound to views during the view rend
 
 If you're upgrading from Laravel Auto Presenter 4, to 5, note that:
 
-* The `BasePresenter` no longer has a constructor, so you cannot call `__parent::construct($resource)`.
+* The `BasePresenter` no longer has a constructor, so you cannot call `parent::__construct($resource)`.
 * The model is now injected using the `setWrappedObject` method, inherited from the `BasePresenter`.
 * V5 now supports Laravel 5.4 as well as 5.1, 5.2, and 5.3.
 
