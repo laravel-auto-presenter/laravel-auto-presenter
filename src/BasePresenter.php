@@ -25,15 +25,17 @@ abstract class BasePresenter implements UrlRoutable
     protected $wrappedObject;
 
     /**
-     * Create a new presenter.
+     * Get the wrapped object.
      *
      * @param object $resource
      *
-     * @return void
+     * @return $this
      */
-    public function __construct($resource)
+    public function setWrappedObject($resource)
     {
         $this->wrappedObject = $resource;
+
+        return $this;
     }
 
     /**

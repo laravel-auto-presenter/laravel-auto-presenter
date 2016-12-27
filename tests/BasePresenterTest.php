@@ -19,6 +19,7 @@ use McCool\Tests\Stubs\DecoratedAtomPresenter;
 class BasePresenterTest extends AbstractTestCase
 {
     private $decoratedAtom;
+    private $presenter;
 
     /**
      * @before
@@ -26,36 +27,32 @@ class BasePresenterTest extends AbstractTestCase
     public function setUpProperties()
     {
         $this->decoratedAtom = $this->app->make(DecoratedAtom::class);
+        $this->presenter = (new DecoratedAtomPresenter())->setWrappedObject($this->decoratedAtom);
     }
 
     public function testResourceIsReturned()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertSame($this->decoratedAtom, $presenter->getWrappedObject());
+        $this->assertSame($this->decoratedAtom, $this->presenter->getWrappedObject());
     }
 
     public function testResourceAttributeDeference()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertSame(DecoratedAtomPresenter::class, $presenter->getPresenterClass());
+        $this->assertSame(DecoratedAtomPresenter::class, $this->presenter->getPresenterClass());
     }
 
     public function testPresenterMethodDeference()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertSame('Primer', $presenter->favoriteMovie);
+        $this->assertSame('Primer', $this->presenter->favoriteMovie);
     }
 
     public function testResourcePropertyViaMagicMethod()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertSame('bazinga', $presenter->myProperty);
+        $this->assertSame('bazinga', $this->presenter->myProperty);
     }
 
     public function testMagicMethodProperty()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertSame('woop', $presenter->testProperty);
+        $this->assertSame('woop', $this->presenter->testProperty);
     }
 
     /**
@@ -64,8 +61,7 @@ class BasePresenterTest extends AbstractTestCase
     public function testResourceMethodNotFoundExceptionThrowsException()
     {
         try {
-            $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-            $presenter->thisMethodDoesntExist();
+            $this->presenter->thisMethodDoesntExist();
         } catch (MethodNotFoundException $e) {
             $method = 'thisMethodDoesntExist';
             $class = DecoratedAtomPresenter::class;
@@ -78,14 +74,12 @@ class BasePresenterTest extends AbstractTestCase
 
     public function testIsSet()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertTrue(isset($presenter->myProperty));
-        $this->assertTrue(isset($presenter->favoriteMovie));
+        $this->assertTrue(isset($this->presenter->myProperty));
+        $this->assertTrue(isset($this->presenter->favoriteMovie));
     }
 
     public function testToString()
     {
-        $presenter = new DecoratedAtomPresenter($this->decoratedAtom);
-        $this->assertSame('hello there', (string) $presenter);
+        $this->assertSame('hello there', (string) $this->presenter);
     }
 }

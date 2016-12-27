@@ -79,11 +79,11 @@ class AtomDecorator implements DecoratorInterface
             }
         }
 
-        if (!class_exists($presenterClass = $subject->getPresenterClass())) {
-            throw new PresenterNotFoundException($presenterClass);
+        if (!class_exists($presenter = $subject->getPresenterClass())) {
+            throw new PresenterNotFoundException($presenter);
         }
 
-        return $this->container->make($presenterClass, ['resource' => $subject]);
+        return $this->container->make($presenter)->setWrappedObject($subject);
     }
 
     /**
