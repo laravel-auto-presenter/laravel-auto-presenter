@@ -15,12 +15,12 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "illuminate/container": "5.1.*|5.2.*|5.3.*",
-        "illuminate/contracts": "5.1.*|5.2.*|5.3.*",
-        "illuminate/events": "5.1.*|5.2.*|5.3.*",
-        "illuminate/pagination": "5.1.*|5.2.*|5.3.*",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*",
-        "illuminate/view": "5.1.*|5.2.*|5.3.*"
+        "illuminate/container": "5.1.*|5.2.*|5.3.*|5.4.*",
+        "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*",
+        "illuminate/events": "5.1.*|5.2.*|5.3.*|5.4.*",
+        "illuminate/pagination": "5.1.*|5.2.*|5.3.*|5.4.*",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*",
+        "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*"
     },
     "require-dev": {
         "graham-campbell/testbench": "^3.1",
