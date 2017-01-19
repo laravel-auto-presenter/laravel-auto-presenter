@@ -79,7 +79,9 @@ abstract class BasePresenter implements UrlRoutable
     public function __get($key)
     {
         if (method_exists($this, $key)) {
-            return $this->{$key}();
+            $self = property_exists($this->wrappedObject, $key) ? $this->wrappedObject->$key : $this->wrappedObject;
+
+            return $this->{$key}($self);
         }
 
         return $this->wrappedObject->$key;
