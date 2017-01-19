@@ -93,9 +93,9 @@ class AutoPresenterServiceProvider extends ServiceProvider
         $app->singleton('autopresenter', function (Container $app) {
             $autoPresenter = new AutoPresenter();
 
-            $autoPresenter->register(new AtomDecorator($autoPresenter, $app));
-            $autoPresenter->register(new ArrayDecorator($autoPresenter));
-            $autoPresenter->register(new PaginatorDecorator($autoPresenter));
+            $autoPresenter->register($app->make(AtomDecorator::class, ['autoPresenter' => $autoPresenter, 'app' => $app]));
+            $autoPresenter->register($app->make(ArrayDecorator::class, ['autoPresenter' => $autoPresenter]));
+            $autoPresenter->register($app->make(PaginatorDecorator::class, ['autoPresenter' => $autoPresenter]));
 
             return $autoPresenter;
         });
