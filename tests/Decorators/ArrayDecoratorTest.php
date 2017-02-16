@@ -22,6 +22,12 @@ class ArrayDecoratorTest extends AbstractTestCase
 {
     private $decorator;
 
+    public function setUp()
+    {
+        parent::setUp();
+        app()->singleton('config', '\Illuminate\Config\Repository');
+    }
+
     /**
      * @before
      */
@@ -61,5 +67,15 @@ class ArrayDecoratorTest extends AbstractTestCase
         $collection->shouldReceive('put')->with(2, 'something');
 
         $this->decorator->decorate($collection);
+    }
+
+    public function testCanDecorateIgnoreClasses()
+    {
+        if (version_compare(PHP_VERSION, '7.0.2') > -1 && version_compare(PHP_VERSION, '7.1') < -1) {
+            $this->markTestSkipped('Skipped due to mockery incompatibility.');
+        }
+        config()->set('laravel-auto-presenter.ignore-class-decorate',[Collection::class]);
+
+        $this->assertFalse($this->decorator->canDecorate(Mockery::mock(Collection::class)));
     }
 }

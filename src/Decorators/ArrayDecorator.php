@@ -45,7 +45,23 @@ class ArrayDecorator implements DecoratorInterface
      */
     public function canDecorate($subject)
     {
-        return is_array($subject) || $subject instanceof Collection;
+        return (is_array($subject) || $subject instanceof Collection) && $this->isNotIgnoreClass($subject);
+    }
+
+    /**
+     * Ignore a class from decorate
+     *
+     * @param $subject
+     *
+     * @return bool
+     */
+    public function isNotIgnoreClass($subject)
+    {
+        foreach (config()->get('laravel-auto-presenter.ignore-class-decorate',[]) as $class)
+            if ($subject instanceof $class)
+                return false;
+
+        return true;
     }
 
     /**
