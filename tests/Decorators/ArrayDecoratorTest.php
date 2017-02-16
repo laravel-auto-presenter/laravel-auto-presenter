@@ -74,7 +74,7 @@ class ArrayDecoratorTest extends AbstractTestCase
         if (version_compare(PHP_VERSION, '7.0.2') > -1 && version_compare(PHP_VERSION, '7.1') < -1) {
             $this->markTestSkipped('Skipped due to mockery incompatibility.');
         }
-        config()->set('laravel-auto-presenter.ignore-class-decorate',[Collection::class]);
+        config()->set('laravel-auto-presenter.ignore-class-decorate', [Collection::class]);
 
         $this->assertFalse($this->decorator->canDecorate(Mockery::mock(Collection::class)));
     }

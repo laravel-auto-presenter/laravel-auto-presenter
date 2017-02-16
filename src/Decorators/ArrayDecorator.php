@@ -49,7 +49,7 @@ class ArrayDecorator implements DecoratorInterface
     }
 
     /**
-     * Ignore a class from decorate
+     * Ignore a class from decorate.
      *
      * @param $subject
      *
@@ -57,9 +57,11 @@ class ArrayDecorator implements DecoratorInterface
      */
     public function isNotIgnoreClass($subject)
     {
-        foreach (config()->get('laravel-auto-presenter.ignore-class-decorate',[]) as $class)
-            if ($subject instanceof $class)
+        foreach (config()->get('laravel-auto-presenter.ignore-class-decorate', []) as $class) {
+            if ($subject instanceof $class) {
                 return false;
+            }
+        }
 
         return true;
     }
