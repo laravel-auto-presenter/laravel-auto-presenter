@@ -79,7 +79,7 @@ class AtomDecorator implements DecoratorInterface
             }
         }
 
-        if (! $subject instanceof HasPresenter) {
+        if (!$subject instanceof HasPresenter) {
             return $subject;
         }
 
