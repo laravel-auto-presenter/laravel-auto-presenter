@@ -30,7 +30,7 @@ class AutoPresenterServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config/config.php' => config_path('laravel-auto-presenter.php'),
-        ], 'datatables');
+        ]);
 
         $this->setupEventFiring($this->app);
         $this->setupEventListening($this->app);
@@ -98,7 +98,7 @@ class AutoPresenterServiceProvider extends ServiceProvider
             $autoPresenter = new AutoPresenter();
 
             $autoPresenter->register(new AtomDecorator($autoPresenter, $app));
-            $autoPresenter->register(new ArrayDecorator($autoPresenter));
+            $autoPresenter->register(new ArrayDecorator($autoPresenter, $app));
             $autoPresenter->register(new PaginatorDecorator($autoPresenter));
 
             return $autoPresenter;

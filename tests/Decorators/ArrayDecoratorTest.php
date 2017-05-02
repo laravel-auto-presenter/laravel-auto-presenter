@@ -13,6 +13,7 @@
 namespace McCool\Tests\Decorators;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
+use Illuminate\Container\Container;
 use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\ArrayDecorator;
@@ -20,12 +21,14 @@ use Mockery;
 
 class ArrayDecoratorTest extends AbstractTestCase
 {
+    protected $app;
     private $decorator;
 
     public function setUp()
     {
         parent::setUp();
-        app()->singleton('config', '\Illuminate\Config\Repository');
+        $this->app = Container::getInstance();
+        $this->app->singleton('config', '\Illuminate\Config\Repository');
     }
 
     /**
@@ -33,7 +36,7 @@ class ArrayDecoratorTest extends AbstractTestCase
      */
     public function setUpProperties()
     {
-        $this->decorator = new ArrayDecorator(Mockery::mock(AutoPresenter::class));
+        $this->decorator = new ArrayDecorator(Mockery::mock(AutoPresenter::class), $this->app);
     }
 
     public function testCanDecorateArray()
@@ -74,7 +77,7 @@ class ArrayDecoratorTest extends AbstractTestCase
         if (version_compare(PHP_VERSION, '7.0.2') > -1 && version_compare(PHP_VERSION, '7.1') < -1) {
             $this->markTestSkipped('Skipped due to mockery incompatibility.');
         }
-        config()->set('laravel-auto-presenter.ignore-class-decorate', [Collection::class]);
+        $this->app->make('config')->set('laravel-auto-presenter.ignore-class-decorate', [Collection::class]);
 
         $this->assertFalse($this->decorator->canDecorate(Mockery::mock(Collection::class)));
     }
