@@ -12,7 +12,7 @@
 
 namespace McCool\LaravelAutoPresenter\Decorators;
 
-use \Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 
@@ -35,7 +35,7 @@ class ArrayDecorator implements DecoratorInterface
      * Create a new array decorator.
      *
      * @param \McCool\LaravelAutoPresenter\AutoPresenter $autoPresenter
-     * @param \Illuminate\Contracts\Container\Container $container
+     * @param \Illuminate\Contracts\Container\Container  $container
      *
      * @return void
      */
