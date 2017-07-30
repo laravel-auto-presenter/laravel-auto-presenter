@@ -12,12 +12,7 @@
 
 namespace McCool\LaravelAutoPresenter;
 
-interface HasPresenter extends Decoratable
+interface Decoratable
 {
-    /**
-     * Get the presenter class.
-     *
-     * @return string
-     */
-    public function getPresenterClass();
+    //
 }

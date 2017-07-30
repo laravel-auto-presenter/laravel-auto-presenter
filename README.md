@@ -148,6 +148,8 @@ class Post extends Model implements HasPresenter
 
 Now, with no additional changes our view will show the date in the desired format.
 
+**The `Decoratable` interface is used to allow the model's relations to be decorated, and the `HasPresenter` interface (which extends that one) is used to have the model itself decorated.**
+
 
 ## Troubleshooting
 

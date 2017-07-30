@@ -16,6 +16,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Exceptions\PresenterNotFoundException;
+use McCool\LaravelAutoPresenter\Decoratable;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 class AtomDecorator implements DecoratorInterface
@@ -57,7 +58,7 @@ class AtomDecorator implements DecoratorInterface
      */
     public function canDecorate($subject)
     {
-        return $subject instanceof HasPresenter || $subject instanceof Model;
+        return $subject instanceof Decoratable;
     }
 
     /**

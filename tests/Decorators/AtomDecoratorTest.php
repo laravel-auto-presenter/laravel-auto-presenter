@@ -17,6 +17,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
+use McCool\LaravelAutoPresenter\Decoratable;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use McCool\Tests\Stubs\ModelPresenter;
 use McCool\Tests\Stubs\ModelStub;
@@ -42,7 +43,7 @@ class AtomDecoratorTest extends AbstractTestCase
 
     public function testCanDecorateModelWithoutPresenter()
     {
-        $this->assertTrue($this->decorator->canDecorate(Mockery::mock(Model::class)));
+        $this->assertTrue($this->decorator->canDecorate(Mockery::mock(Decoratable::class)));
     }
 
     public function testCannotDecorateGarbage()
