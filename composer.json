@@ -14,18 +14,19 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "illuminate/container": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/events": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/pagination": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*",
-        "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*"
+        "php": "^7.0",
+        "illuminate/container": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/events": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/pagination": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+        "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
     },
     "require-dev": {
-        "graham-campbell/testbench": "^3.1",
+        "graham-campbell/analyzer": "^1.0",
+        "graham-campbell/testbench": "^4.0",
         "mockery/mockery": "^0.9.4",
-        "phpunit/phpunit": "^4.8|^5.0"
+        "phpunit/phpunit": "^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -42,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.0-dev"
+            "dev-master": "6.0-dev"
         }
     },
     "minimum-stability": "dev",
