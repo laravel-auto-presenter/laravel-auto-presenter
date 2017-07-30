@@ -33,7 +33,7 @@ class AutoPresenterTest extends AbstractTestCase
     {
         parent::getEnvironmentSetUp($app);
 
-        $this->autoPresenter = $this->app->make(AutoPresenter::class);
+        $this->autoPresenter = $app->make(AutoPresenter::class);
     }
 
     public function testRegistration()

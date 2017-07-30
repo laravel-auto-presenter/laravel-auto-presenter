@@ -25,7 +25,7 @@ class BasePresenterTest extends AbstractTestCase
     {
         parent::getEnvironmentSetUp($app);
 
-        $this->decoratedAtom = $this->app->make(DecoratedAtom::class);
+        $this->decoratedAtom = $app->make(DecoratedAtom::class);
         $this->presenter = (new DecoratedAtomPresenter())->setWrappedObject($this->decoratedAtom);
     }
 
