@@ -22,10 +22,11 @@ class ArrayDecoratorTest extends AbstractTestCase
 {
     private $decorator;
 
-    protected function getEnvironmentSetUp($app)
+    /**
+     * @before
+     */
+    public function setUpProperties()
     {
-        parent::getEnvironmentSetUp($app);
-
         $this->decorator = new ArrayDecorator(Mockery::mock(AutoPresenter::class));
     }
 

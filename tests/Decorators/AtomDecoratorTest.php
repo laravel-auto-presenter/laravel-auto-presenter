@@ -27,10 +27,11 @@ class AtomDecoratorTest extends AbstractTestCase
 {
     private $decorator;
 
-    protected function getEnvironmentSetUp($app)
+    /**
+     * @before
+     */
+    public function setUpProperties()
     {
-        parent::getEnvironmentSetUp($app);
-
         $this->decorator = new AtomDecorator(Mockery::mock(AutoPresenter::class), Mockery::mock(Container::class));
     }
 
