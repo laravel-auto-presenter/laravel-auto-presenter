@@ -29,11 +29,10 @@ class AutoPresenterTest extends AbstractTestCase
 {
     private $autoPresenter;
 
-    /**
-     * @before
-     */
-    public function setUpProperties()
+    protected function getEnvironmentSetUp($app)
     {
+        parent::getEnvironmentSetUp($app);
+
         $this->autoPresenter = $this->app->make(AutoPresenter::class);
     }
 
