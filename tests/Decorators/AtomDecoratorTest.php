@@ -14,11 +14,13 @@ namespace McCool\Tests\Decorators;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\AutoPresenter;
 use McCool\LaravelAutoPresenter\Decorators\AtomDecorator;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use McCool\Tests\Stubs\ModelPresenter;
 use McCool\Tests\Stubs\ModelStub;
+use McCool\Tests\Stubs\UndecoratedModelStub;
 use Mockery;
 
 class AtomDecoratorTest extends AbstractTestCase
@@ -36,6 +38,11 @@ class AtomDecoratorTest extends AbstractTestCase
     public function testCanDecoratePresenter()
     {
         $this->assertTrue($this->decorator->canDecorate(Mockery::mock(HasPresenter::class)));
+    }
+
+    public function testCanDecorateModelWithoutPresenter()
+    {
+        $this->assertTrue($this->decorator->canDecorate(Mockery::mock(Model::class)));
     }
 
     public function testCannotDecorateGarbage()
@@ -57,6 +64,25 @@ class AtomDecoratorTest extends AbstractTestCase
         $model->shouldReceive('setRelation')->once()->with(0, 'foo');
         $model->shouldReceive('getPresenterClass')->once()->andReturn(ModelPresenter::class);
         $this->decorator->getContainer()->shouldReceive('make')->once()->andReturn(new ModelPresenter($model));
+
+        $this->decorator->decorate($model);
+    }
+
+    public function testShouldHandleRelationsOfUndecoratedModel()
+    {
+        $child = Mockery::mock(ModelStub::class);
+        $child->shouldReceive('getRelations')->once()->andReturn([]);
+        $child->shouldReceive('getPresenterClass')->once()->andReturn(ModelPresenter::class);
+        $this->decorator->getContainer()->shouldReceive('make')->once()->andReturn(new ModelPresenter($child));
+
+        $model = Mockery::mock(UndecoratedModelStub::class);
+        $relations = ['blah'];
+
+        $this->decorator->getAutoPresenter()->shouldReceive('decorate')->once()
+            ->with($relations[0])->andReturn($child = $this->decorator->decorate($child));
+
+        $model->shouldReceive('getRelations')->once()->andReturn($relations);
+        $model->shouldReceive('setRelation')->once()->with(0, $child);
 
         $this->decorator->decorate($model);
     }

@@ -57,7 +57,7 @@ class AtomDecorator implements DecoratorInterface
      */
     public function canDecorate($subject)
     {
-        return $subject instanceof HasPresenter;
+        return $subject instanceof HasPresenter || $subject instanceof Model;
     }
 
     /**
@@ -77,6 +77,10 @@ class AtomDecorator implements DecoratorInterface
             foreach ($subject->getRelations() as $relationName => $model) {
                 $subject->setRelation($relationName, $this->autoPresenter->decorate($model));
             }
+        }
+
+        if (!$subject instanceof HasPresenter) {
+            return $subject;
         }
 
         if (!class_exists($presenter = $subject->getPresenterClass())) {
