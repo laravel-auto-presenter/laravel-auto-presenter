@@ -1,4 +1,4 @@
-Laravel Auto Presenter 5
+Laravel Auto Presenter 6
 ========================
 
 [![StyleCI Status](https://styleci.io/repos/12034701/shield)](https://styleci.io/repos/12034701)
@@ -25,31 +25,27 @@ If you're upgrading from Laravel Auto Presenter 4, to 5, note that:
 * The model is now injected using the `setWrappedObject` method, inherited from the `BasePresenter`.
 * V5 now supports Laravel 5.4 as well as 5.1, 5.2, and 5.3.
 
+Going from Laravel Auto Presenter 5, to 6, note that:
+
+* We have a new `Decoratable` interface to determine if relations can be decorated. While this is not a BC break, since `HasPresenter` extends it, it is defintely worth noting.
+* v6 supports Laravel 5.5 now, without dropping support for 5.1+.
+* Our new minimum PHP version requirement is 7.0.0, up from 5.5.9.
+
 
 ## Installing
 
-Either [PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+ are required.
+Laravel Auto Presenter 6 requires [PHP](https://php.net) 7. This particular version supports Laravel 5.1, 5.2, 5.3, 5.4, or 5.5 only. If you need support for older PHP versions, please see Laravel Auto Presenter 5.
 
-To get the latest version of Laravel Auto Presenter, simply require the project using [Composer](https://getcomposer.org):
+To get the latest version, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
 $ composer require mccool/laravel-auto-presenter
 ```
 
-Instead, you may of course manually update your require block and run `composer update` if you so choose:
-
-```json
-{
-    "require": {
-        "mccool/laravel-auto-presenter": "^5.0"
-    }
-}
-```
-
-Then, in your `config/app.php` add this line to your 'providers' array.
+Once installed, you need to register the `McCool\LaravelAutoPresenter\AutoPresenterServiceProvider` service provider in your `config/app.php`, and optionally alias our facade:
 
 ```php
-McCool\LaravelAutoPresenter\AutoPresenterServiceProvider::class,
+        'AutoPresenter' => McCool\LaravelAutoPresenter\Facades\AutoPresenter::class,
 ```
 
 
