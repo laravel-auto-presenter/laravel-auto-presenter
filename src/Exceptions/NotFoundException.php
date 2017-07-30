@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of Laravel Auto Presenter.
  *
@@ -31,7 +33,7 @@ class NotFoundException extends Exception
      *
      * @return void
      */
-    public function __construct($class, $message)
+    public function __construct(string $class, string $message)
     {
         $this->class = $class;
 

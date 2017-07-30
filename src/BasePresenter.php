@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of Laravel Auto Presenter.
  *
@@ -76,7 +78,7 @@ abstract class BasePresenter implements UrlRoutable
      *
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         if (method_exists($this, $key)) {
             return $this->{$key}();
@@ -96,7 +98,7 @@ abstract class BasePresenter implements UrlRoutable
      *
      * @return mixed
      */
-    public function __call($key, $args)
+    public function __call(string $key, array $args)
     {
         if (method_exists($this->wrappedObject, $key)) {
             return call_user_func_array([$this->wrappedObject, $key], $args);
@@ -112,7 +114,7 @@ abstract class BasePresenter implements UrlRoutable
      *
      * @return bool
      */
-    public function __isset($key)
+    public function __isset(string $key)
     {
         if (method_exists($this, $key)) {
             return true;

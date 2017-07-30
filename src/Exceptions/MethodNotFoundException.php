@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of Laravel Auto Presenter.
  *
@@ -30,7 +32,7 @@ class MethodNotFoundException extends NotFoundException
      *
      * @return void
      */
-    public function __construct($class, $method, $message = null)
+    public function __construct(string $class, string $method, string $message = null)
     {
         $this->method = $method;
 

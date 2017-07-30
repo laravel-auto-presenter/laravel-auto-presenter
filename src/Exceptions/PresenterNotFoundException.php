@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of Laravel Auto Presenter.
  *
@@ -22,7 +24,7 @@ class PresenterNotFoundException extends NotFoundException
      *
      * @return void
      */
-    public function __construct($class, $message = null)
+    public function __construct(string $class, string $message = null)
     {
         if (!$message) {
             $message = "The presenter class '$class' was not found.";
