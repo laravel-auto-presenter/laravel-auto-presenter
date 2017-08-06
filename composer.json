@@ -44,6 +44,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "6.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "McCool\\LaravelAutoPresenter\\AutoPresenterServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
