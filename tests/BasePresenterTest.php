@@ -69,6 +69,7 @@ class BasePresenterTest extends AbstractTestCase
             $this->assertSame("The method '$method' was not found on the presenter class '$class'.", $e->getMessage());
             $this->assertSame($method, $e->getMethod());
             $this->assertSame($class, $e->getClass());
+
             throw $e;
         }
     }
