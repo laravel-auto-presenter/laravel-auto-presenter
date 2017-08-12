@@ -109,6 +109,7 @@ class AutoPresenterTest extends AbstractTestCase
             $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
             $this->assertSame("The presenter class '$class' was not found.", $e->getMessage());
             $this->assertSame($class, $e->getClass());
+
             throw $e;
         }
     }
