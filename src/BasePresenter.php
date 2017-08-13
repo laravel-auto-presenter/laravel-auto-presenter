@@ -79,7 +79,11 @@ abstract class BasePresenter implements UrlRoutable
      */
     public function resolveRouteBinding($routeKey)
     {
-        return $this->wrappedObject->resolveRouteBinding($routeKey);
+        if (method_exists($this->wrappedObject, 'resolveRouteBinding')) {
+            return $this->wrappedObject->resolveRouteBinding($routeKey);
+        }
+
+        return $this->wrappedObject->where($this->wrappedObject->getRouteKeyName(), $routeKey)->first();
     }
 
     /**
