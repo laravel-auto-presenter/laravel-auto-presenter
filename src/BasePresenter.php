@@ -69,6 +69,17 @@ abstract class BasePresenter implements UrlRoutable
     {
         return $this->wrappedObject->getRouteKeyName();
     }
+    
+    /**
+     * Retrieve model for route model binding.
+     *
+     * @param  mixed  $routeKey
+     * @return mixed
+     */
+    public function resolveRouteBinding($routeKey)
+    {
+        return $this->wrappedObject->resolveRouteBinding($routeKey);
+    }
 
     /**
      * Magic method access initially tries for local fields, then defers to the
