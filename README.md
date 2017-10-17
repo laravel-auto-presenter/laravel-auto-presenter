@@ -153,6 +153,8 @@ Now, with no additional changes our view will show the date in the desired forma
 
 If an object isn't being decorated correctly in the view then there's a good chance that it's simply not in existence when the view begins to render. For example, lazily-loaded relationships won't be decorated. You can fix this by eager-loading them instead. Auth::user() will never be decorated. I prefer to bind $currentUser to my views, anyway.
 
+If an object is a relation of another object and it isn't being decorated in the view, you might not have added the `Decoratable` interface to the other object. To fix this, add the `Decoratable` interface to the other object.
+
 
 ## Security
 
