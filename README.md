@@ -1,4 +1,4 @@
-Laravel Auto Presenter 6
+Laravel Auto Presenter 7
 ========================
 
 [![StyleCI Status](https://styleci.io/repos/12034701/shield)](https://styleci.io/repos/12034701)
@@ -19,11 +19,14 @@ This package automatically decorates objects bound to views during the view rend
 
 ## Upgrading
 
-If you're upgrading from Laravel Auto Presenter 4, to 5, note that:
+### Version 6 to 7
 
-* The `BasePresenter` no longer has a constructor, so you cannot call `parent::__construct($resource)`.
-* The model is now injected using the `setWrappedObject` method, inherited from the `BasePresenter`.
-* V5 now supports Laravel 5.4 as well as 5.1, 5.2, and 5.3.
+In Laravel Auto Presenter 7, note that:
+
+* Only Laravel 5.5 and 5.6 are supported now. Use V6 if you need L5.1-5.4.
+* Our new minimum PHP version requirement is 7.1.3, up from 7.0.0.
+
+### Version 5 to 6
 
 Going from Laravel Auto Presenter 5, to 6, note that:
 
@@ -31,10 +34,18 @@ Going from Laravel Auto Presenter 5, to 6, note that:
 * v6 supports Laravel 5.5 now, without dropping support for 5.1+.
 * Our new minimum PHP version requirement is 7.0.0, up from 5.5.9.
 
+### Version 4 to 5
+
+If you're upgrading from Laravel Auto Presenter 4, to 5, note that:
+
+* The `BasePresenter` no longer has a constructor, so you cannot call `parent::__construct($resource)`.
+* The model is now injected using the `setWrappedObject` method, inherited from the `BasePresenter`.
+* V5 now supports Laravel 5.4 as well as 5.1, 5.2, and 5.3.
+
 
 ## Installing
 
-Laravel Auto Presenter 6 requires [PHP](https://php.net) 7. This particular version supports Laravel 5.1, 5.2, 5.3, 5.4, or 5.5 only. If you need support for older PHP versions, please see Laravel Auto Presenter 5.
+Laravel Auto Presenter 6 requires [PHP](https://php.net) 7.1 or 7.2. This particular version supports Laravel 5.5 or 5.6 only. If you need support for older PHP versions, please choose an older version of Laravel Auto Presenter.
 
 To get the latest version, simply require the project using [Composer](https://getcomposer.org):
 
@@ -42,7 +53,7 @@ To get the latest version, simply require the project using [Composer](https://g
 $ composer require mccool/laravel-auto-presenter
 ```
 
-Once installed, you need to register the `McCool\LaravelAutoPresenter\AutoPresenterServiceProvider` service provider in your `config/app.php`, or if you're using Laravel 5.5, this can be done via the automatic package discovery.
+Once installed, if you are not using automatic package discovery, then you need to register the `McCool\LaravelAutoPresenter\AutoPresenterServiceProvider` service provider in your `config/app.php`.
 
 You can also optionally alias our facade:
 
