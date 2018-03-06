@@ -30,7 +30,7 @@ In Laravel Auto Presenter 7, note that:
 
 Going from Laravel Auto Presenter 5, to 6, note that:
 
-* We have a new `Decoratable` interface to determine if relations can be decorated. While this is not a BC break, since `HasPresenter` extends it, it is defintely worth noting.
+* We have a new `Decoratable` interface to determine if relations can be decorated. While this is not a BC break, since `HasPresenter` extends it, it is definitely worth noting.
 * v6 supports Laravel 5.5 now, without dropping support for 5.1+.
 * Our new minimum PHP version requirement is 7.0.0, up from 5.5.9.
 
