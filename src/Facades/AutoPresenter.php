@@ -16,6 +16,11 @@ namespace McCool\LaravelAutoPresenter\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * @method mixed decorate(mixed $subject)
+ * @method void register(\McCool\LaravelAutoPresenter\Decorators\DecoratorInterface $decorator)
+ * @method \McCool\LaravelAutoPresenter\Decorators\DecoratorInterface[] getDecorators()
+ */
 class AutoPresenter extends Facade
 {
     /**
