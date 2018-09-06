@@ -23,7 +23,7 @@ This package automatically decorates objects bound to views during the view rend
 
 In Laravel Auto Presenter 7, note that:
 
-* Only Laravel 5.5 and 5.6 are supported now. Use V6 if you need L5.1-5.4.
+* Laravel 5.5-5.7 are supported now. Use V6 if you need L5.1-5.4.
 * Our new minimum PHP version requirement is 7.1.3, up from 7.0.0.
 
 ### Version 5 to 6
