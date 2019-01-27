@@ -47,7 +47,7 @@ class AutoPresenterServiceProvider extends ServiceProvider
     {
         $app['view']->composer('*', function ($view) use ($app) {
             if ($view instanceof View) {
-                $app['events']->fire('content.rendering', [$view]);
+                $app['events']->dispatch('content.rendering', [$view]);
             }
         });
     }
