@@ -97,17 +97,16 @@ class AutoPresenterTest extends AbstractTestCase
         }
     }
 
-    /**
-     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\PresenterNotFoundException
-     */
     public function testWronglyDecoratedClassThrowsException()
     {
+        $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
+        $this->expectException(PresenterNotFoundException:class);
+        $this->expectExceptionMessage("The presenter class '$class' was not found.");
+
         try {
             $atom = new WronglyDecoratedAtom();
             $this->autoPresenter->decorate($atom);
         } catch (PresenterNotFoundException $e) {
-            $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
-            $this->assertSame("The presenter class '$class' was not found.", $e->getMessage());
             $this->assertSame($class, $e->getClass());
 
             throw $e;
