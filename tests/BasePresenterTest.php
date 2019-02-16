@@ -56,17 +56,16 @@ class BasePresenterTest extends AbstractTestCase
         $this->assertSame('woop', $this->presenter->testProperty);
     }
 
-    /**
-     * @expectedException \McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException
-     */
     public function testResourceMethodNotFoundExceptionThrowsException()
     {
+        $method = 'thisMethodDoesntExist';
+        $class = DecoratedAtomPresenter::class;
+        $this->expectException(MethodNotFoundException::class);
+        $this->expectExceptionMessage("The method '$method' was not found on the presenter class '$class'.");
+
         try {
             $this->presenter->thisMethodDoesntExist();
         } catch (MethodNotFoundException $e) {
-            $method = 'thisMethodDoesntExist';
-            $class = DecoratedAtomPresenter::class;
-            $this->assertSame("The method '$method' was not found on the presenter class '$class'.", $e->getMessage());
             $this->assertSame($method, $e->getMethod());
             $this->assertSame($class, $e->getClass());
 
