@@ -100,7 +100,7 @@ class AutoPresenterTest extends AbstractTestCase
     public function testWronglyDecoratedClassThrowsException()
     {
         $class = 'ThisClassDoesntExistAnywhereInTheKnownUniverse';
-        $this->expectException(PresenterNotFoundException:class);
+        $this->expectException(PresenterNotFoundException::class);
         $this->expectExceptionMessage("The presenter class '$class' was not found.");
 
         try {
