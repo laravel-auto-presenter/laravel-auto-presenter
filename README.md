@@ -169,7 +169,7 @@ If an object is a relation of another object and it isn't being decorated in the
 
 ## Security
 
-If you discover a security vulnerability within this package, please send an e-mail to Graham Campbell at graham@alt-three.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this package, please send an email to Graham Campbell at graham@alt-three.com. All security vulnerabilities will be promptly addressed. You may view our full security policy [here](https://github.com/laravel-auto-presenter/laravel-auto-presenter/security/policy).
 
 
 ## License
