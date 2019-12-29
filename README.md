@@ -1,13 +1,17 @@
 Laravel Auto Presenter 7
 ========================
 
-[![StyleCI Status](https://styleci.io/repos/12034701/shield)](https://styleci.io/repos/12034701)
-[![Build Status](https://img.shields.io/travis/laravel-auto-presenter/laravel-auto-presenter/master.svg?style=flat-square)](https://travis-ci.org/laravel-auto-presenter/laravel-auto-presenter)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/mccool/laravel-auto-presenter.svg?style=flat-square)](https://packagist.org/packages/mccool/laravel-auto-presenter)
-[![Latest Version](https://img.shields.io/github/release/laravel-auto-presenter/laravel-auto-presenter.svg?style=flat-square)](https://github.com/laravel-auto-presenter/laravel-auto-presenter/releases)
-
 This package automatically decorates objects bound to views during the view render process.
+
+![Banner](https://user-images.githubusercontent.com/2829600/71563899-63b94e80-2a8f-11ea-9c5a-18e5484405a9.png)
+
+<p align="center">
+<a href="https://github.styleci.io/repos/12034701"><img src="https://github.styleci.io/repos/12034701/shield" alt="StyleCI Status"></img></a>
+<a href="https://travis-ci.org/laravel-auto-presenter/laravel-auto-presenter"><img src="https://img.shields.io/travis/laravel-auto-presenter/laravel-auto-presenter/master.svg?style=flat-square" alt="Build Status"></img></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></img></a>
+<a href="https://packagist.org/packages/mccool/laravel-auto-presenter"><img src="https://img.shields.io/packagist/dt/mccool/laravel-auto-presenter.svg?style=flat-square" alt="Total Downloads"></img></a>
+<a href="https://github.com/laravel-auto-presenter/laravel-auto-presenter/releases"><img src="https://img.shields.io/github/release/laravel-auto-presenter/laravel-auto-presenter.svg?style=flat-square" alt="Latest Version"></img></a>
+</p>
 
 
 ## Features
