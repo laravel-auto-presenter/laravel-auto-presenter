@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace McCool\LaravelAutoPresenter;
 
 use Illuminate\Contracts\Routing\UrlRoutable;
+use Illuminate\Support\Str;
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
 
 abstract class BasePresenter implements UrlRoutable
@@ -73,17 +74,35 @@ abstract class BasePresenter implements UrlRoutable
     /**
      * Retrieve model for route model binding.
      *
-     * @param mixed $routeKey
+     * @param mixed       $routeKey
+     * @param string|null $field
      *
      * @return mixed
      */
-    public function resolveRouteBinding($routeKey)
+    public function resolveRouteBinding($routeKey, $field = null)
     {
         if (method_exists($this->wrappedObject, 'resolveRouteBinding') && is_callable([$this->wrappedObject, 'resolveRouteBinding'])) {
-            return $this->wrappedObject->resolveRouteBinding($routeKey);
+            return $this->wrappedObject->resolveRouteBinding($routeKey, $field);
         }
 
-        return $this->wrappedObject->where($this->wrappedObject->getRouteKeyName(), $routeKey)->first();
+        return $this->wrappedObject->where($field ?? $this->wrappedObject->getRouteKeyName(), $routeKey)->first();
+    }
+
+    /**
+     * Retrieve the child model for a bound value.
+     *
+     * @param  string      $childType
+     * @param  mixed       $value
+     * @param  string|null $field
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveChildRouteBinding($childType, $value, $field)
+    {
+        if (method_exists($this->wrappedObject, 'resolveChildRouteBinding') && is_callable([$this->wrappedObject, 'resolveChildRouteBinding'])) {
+            return $this->wrappedObject->resolveChildRouteBinding($childType, $value, $field);
+        }
+
+        return $this->wrappedObject->{Str::plural($childType)}()->where($field, $value)->first();
     }
 
     /**
