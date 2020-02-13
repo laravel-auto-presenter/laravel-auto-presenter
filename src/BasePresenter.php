@@ -175,12 +175,12 @@ abstract class BasePresenter implements UrlRoutable, JsonSerializable
     */
     public function jsonSerialize()
     {
-        $serialized = [];
+        $attributes = [];
 
         foreach($this->wrappedObject->getAttributes() as $attribute => $value) {
-            $serialized[$attribute] = $this->$attribute;
+            $attributes[$attribute] = $this->$attribute;
 	}
 
-	return json_encode($serialized);
+	return $attributes;
     }
 }
