@@ -169,7 +169,7 @@ abstract class BasePresenter implements UrlRoutable, JsonSerializable
     }
 	
     /**
-     * Ensures the presenter will keep its behavior when json_encode is called on it
+     * Ensures the presenter will keep its behavior when json_encode is called on it.
      *
      * @return false|mixed|string
      */
@@ -181,6 +181,6 @@ abstract class BasePresenter implements UrlRoutable, JsonSerializable
             $attributes[$attribute] = $this->$attribute;
 	}
 
-	return $attributes;
+        return $attributes;
     }
 }
