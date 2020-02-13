@@ -17,8 +17,9 @@ namespace McCool\LaravelAutoPresenter;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Support\Str;
 use McCool\LaravelAutoPresenter\Exceptions\MethodNotFoundException;
+use JsonSerializable;
 
-abstract class BasePresenter implements UrlRoutable
+abstract class BasePresenter implements UrlRoutable, JsonSerializable
 {
     /**
      * The resource that is the object that was decorated.
@@ -166,4 +167,20 @@ abstract class BasePresenter implements UrlRoutable
     {
         return (string) $this->wrappedObject;
     }
+    
+    /**
+	 * Ensures the presenter will keep its behavior when json_encode is called on it
+	 *
+	 * @return false|mixed|string
+	 */
+	public function jsonSerialize()
+	{
+		$serialized = [];
+
+		foreach($this->wrappedObject->getAttributes() as $attribute => $value) {
+			$serialized[$attribute] = $this->$attribute;
+		}
+
+		return json_encode($serialized);
+	}
 }
