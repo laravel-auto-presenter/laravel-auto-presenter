@@ -167,7 +167,7 @@ abstract class BasePresenter implements UrlRoutable, JsonSerializable
     {
         return (string) $this->wrappedObject;
     }
-	
+
     /**
      * Ensures the presenter will keep its behavior when json_encode is called on it.
      *
@@ -179,7 +179,7 @@ abstract class BasePresenter implements UrlRoutable, JsonSerializable
 
         foreach ($this->wrappedObject->getAttributes() as $attribute => $value) {
             $attributes[$attribute] = $this->$attribute;
-	}
+        }
 
         return $attributes;
     }
