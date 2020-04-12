@@ -189,14 +189,8 @@ If you discover a security vulnerability within this package, please send an ema
 Laravel Auto Presenter is licensed under [The MIT License (MIT)](LICENSE).
 
 
----
+## For Enterprise
 
-<div align="center">
-	<b>
-		<a href="https://tidelift.com/subscription/pkg/packagist-mccool-laravel-auto-presenter?utm_source=packagist-mccool-laravel-auto-presenter&utm_medium=referral&utm_campaign=readme">Get professional support for Laravel Auto Presenter with a Tidelift subscription</a>
-	</b>
-	<br>
-	<sub>
-		Tidelift helps make open source sustainable for maintainers while giving companies<br>assurances about security, maintenance, and licensing for their dependencies.
-	</sub>
-</div>
+Available as part of the Tidelift Subscription
+
+The maintainers of `mccool/laravel-auto-presenter` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/packagist-mccool-laravel-auto-presenter?utm_source=packagist-mccool-laravel-auto-presenter&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
