@@ -7,7 +7,7 @@ on:
     - cron: '0 4 * * 1'
 
 jobs:
-  example:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -43,7 +43,7 @@ jobs:
       run: docker run --rm -w /data -v ${{ github.workspace }}:/data --entrypoint composer registry.gitlab.com/grahamcampbell/php:${{ matrix.php }} require "laravel/framework:${{ matrix.laravel }}.*" "phpunit/phpunit:^8.5|^9.0" --no-update -n
       if: "matrix.laravel >= 6"
     - name: Run Composer
-      run: docker run --rm -w /data -v ${{ github.workspace }}:/data --entrypoint composer registry.gitlab.com/grahamcampbell/php:${{ matrix.php }} install --no-suggest --prefer-dist -n -o
+      run: docker run --rm -w /data -v ${{ github.workspace }}:/data --entrypoint composer registry.gitlab.com/grahamcampbell/php:${{ matrix.php }} install --prefer-dist -n -o
     - name: Run PHPUnit
       run: docker run --rm -w /data -v ${{ github.workspace }}:/data --entrypoint vendor/bin/phpunit registry.gitlab.com/grahamcampbell/php:${{ matrix.php }} --coverage-clover build/logs/clover.xml
     - name: Upload Coverage
