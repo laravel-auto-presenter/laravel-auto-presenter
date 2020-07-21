@@ -27,6 +27,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          extensions: pdo, pdo_sqlite 
           tools: composer:v2
           coverage: none
 
