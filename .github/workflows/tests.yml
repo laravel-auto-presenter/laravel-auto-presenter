@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        php: ['7.1', '7.2', '7.3', '7.4', '8.0']
+        php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
         laravel: ['5.5', '5.6', '5.7', '5.8', '6', '7', '8']
         exclude:
           - php: '7.1'
@@ -30,6 +30,18 @@ jobs:
             laravel: '5.7'
           - php: '8.0'
             laravel: '5.8'
+          - php: '8.1'
+            laravel: '5.5'
+          - php: '8.1'
+            laravel: '5.6'
+          - php: '8.1'
+            laravel: '5.7'
+          - php: '8.1'
+            laravel: '5.8'
+          - php: '8.1'
+            laravel: '6'
+          - php: '8.1'
+            laravel: '7'
 
     steps:
       - name: Checkout Code
@@ -102,21 +114,12 @@ jobs:
           command: composer require "laravel/framework:8.*" "phpunit/phpunit:^9.3.7" --no-update --no-interaction
         if: "matrix.laravel == '8'"
 
-      - name: Install PHP 7 Dependencies
+      - name: Install PHP Dependencies
         uses: nick-invision/retry@v1
         with:
           timeout_minutes: 5
           max_attempts: 5
           command: composer update --no-interaction --no-progress
-        if: "matrix.php < 8"
-
-      - name: Install PHP 8 Dependencies
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 5
-          max_attempts: 5
-          command: composer update --no-interaction --no-progress --ignore-platform-req=php
-        if: "matrix.php >= 8"
 
       - name: Execute PHPUnit
         run: vendor/bin/phpunit
