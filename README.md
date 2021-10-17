@@ -23,7 +23,7 @@ This package automatically decorates objects bound to views during the view rend
 
 ## Installing
 
-Laravel Auto Presenter requires [PHP](https://php.net) 7.1-8.0 and supports Laravel 5.5-8. If you need support for older Laravel or PHP versions, please choose an older version of Laravel Auto Presenter.
+Laravel Auto Presenter requires [PHP](https://php.net) 7.1-8.1 and supports Laravel 5.5-8. If you need support for older Laravel or PHP versions, please choose an older version of Laravel Auto Presenter.
 
 | Auto Presenter | L5.1               | L5.2               | L5.3               | L5.4               | L5.5               | L5.6               | L5.7               | L5.8               | L6                 | L7                 | L8                 |
 |----------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
@@ -180,7 +180,7 @@ If an object is a relation of another object and it isn't being decorated in the
 
 ## Security
 
-If you discover a security vulnerability within this package, please send an email to Graham Campbell at graham@alt-three.com. All security vulnerabilities will be promptly addressed. You may view our full security policy [here](https://github.com/laravel-auto-presenter/laravel-auto-presenter/security/policy).
+If you discover a security vulnerability within this package, please send an email to security@tidelift.com. All security vulnerabilities will be promptly addressed. You may view our full security policy [here](https://github.com/laravel-auto-presenter/laravel-auto-presenter/security/policy).
 
 
 ## License
